@@ -14,7 +14,11 @@
 ### [1.2 let和const](#1.2) 
 ### [1.3 顶层对象](#1.3) 
 ### [1.4 数组的解构](#1.4)
-
+## [二、类class](#2)
+### [2.1 简介](#2.1)
+### [2.2 let和const](#2.2) 
+### [2.3 顶层对象](#2.3) 
+### [2.4 数组的解构](#2.4)
 ------ 		
         
 
@@ -195,3 +199,460 @@
                 11:08:05.995 VM1923:2 true
                 11:08:05.995 VM1923:5 true
                 11:08:05.995 VM1923:8 true
+
+        
+------      
+        
+
+<h2 id='2'>二、类class</h2>
+<h3 id='2.1'>2.1 继承 详细看<a href="https://www.cnblogs.com/humin/p/4556820.html">幻天芒的博客</a></h3>  
+
+#### 1) 原型链继承 
+> - 原型链继承 核心： 将父类的实例作为子类的原型
+> - 特点：
+>> - 非常纯粹的继承关系，实例是子类的实例，也是父类的实例
+>> - 父类新增原型方法/原型属性，子类都能访问到
+>> - 简单，易于实现
+> - 缺点
+>> - 要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中
+>> - 无法实现多继承
+>> - 来自原型对象的引用属性是所有实例共享的（详细请看附录代码： 示例1）
+>> - 创建子类实例时，无法向父类构造函数传参
+        
+                var _prototype_ = {
+                    constructor: _construct_,
+                    toString: function() {
+                        console.log("name: " + this.name + "id: " + this.id);
+                    },
+                };
+                var _construct_ = function(name, id) {
+                    this.name = name;
+                    this.id = id;
+
+                    // Static method
+                    this.sing = function() {
+                        console.log(this.name + " sing a song!");
+                    };
+                }
+                _construct_.prototype = _prototype_;
+                
+                // 原型链继承 核心： 将父类的实例作为子类的原型
+                var boy = new _construct_("lvhongbin", 116020910160);
+                boy.toString();
+                boy.sing();
+
+                var son = function(sex) {
+                    this.sex = sex;
+                    //static method
+                    this.mySex = function() {
+                        console.log( "My sex is " + this.sex);
+                    }
+                }
+
+                son.prototype = new _construct_("lvhongchao", 10);
+                var jack = new son("male");
+                jack.toString();
+                jack.sing();
+                jack.mySex();
+                son.prototype = new _construct_("lvhongbin", 10);
+                var lily = new son("female");
+                lily.toString();
+                lily.sing();
+                lily.mySex();
+
+                //结果
+                14:50:50.932 VM97:4 name: lvhongbinid: 116020910160
+                14:50:50.932 VM97:13 lvhongbin sing a song!
+                14:50:50.932 VM97:4 name: lvhongchaoid: 10
+                14:50:50.933 VM97:13 lvhongchao sing a song!
+                14:50:50.933 VM97:26 My sex is male
+                14:50:50.944 undefined
+                14:53:46.569 jack instanceof son;
+                14:53:46.571 true
+                14:54:18.001 jack instanceof _construct_;
+                14:54:18.004 true
+                14:54:39.756 jack instanceof Array;
+                14:54:39.757 false
+                jack instanceof _prototype_;
+                14:55:13.831 VM122:1 Uncaught TypeError: Right-hand side of 'instanceof' is not callable
+                    at <anonymous>:1:6              
+                16:43:08.160 VM149:4 name: lvhongbinid: 10
+                16:43:08.160 VM149:13 lvhongbin sing a song!
+                16:43:08.160 VM149:27 My sex is female
+                console.log(jack.sing() == lily.sing());
+                16:45:14.047 VM149:13 lvhongchao sing a song!
+                16:45:14.047 VM149:13 lvhongbin sing a song!
+                16:45:14.047 VM163:1 true
+                16:45:14.053 undefined
+                16:46:32.184 console.log(jack.sing == lily.sing);
+                16:46:32.184 VM169:1 false
+                16:46:32.189 undefined
+                16:46:43.463 console.log(jack.toString == lily.toString);
+                16:46:43.463 VM175:1 true
+#### 2) 类继承/构造继承 
+> - 用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）
+> - 特点：
+>> - 解决了1中，子类实例共享父类引用属性的问题
+>> - 创建子类实例时，可以向父类传递参数
+>> - 可以实现多继承（call多个父类对象）
+> - 缺点：
+>> - 实例并不是父类的实例，只是子类的实例
+>> - 只能继承父类的实例属性和方法，不能继承原型属性/方法
+>> - 无法实现函数复用，每个子类都有父类实例函数的副本，影响性能
+        
+                var _prototype_ = {
+                    constructor: _construct_,
+                    toString: function() {
+                        console.log("name: " + this.name + "id: " + this.id);
+                    },
+                };
+                var _construct_ = function(name, id) {
+                    this.name = name;
+                    this.id = id;
+
+                    // Static method
+                    this.sing = function() {
+                        console.log(this.name + " sing a song!");
+                    };
+                }
+                _construct_.prototype = _prototype_;
+                
+                // 构造继承
+                var boy = new _construct_("lvhongbin", 116020910160);
+                boy.toString();
+                boy.sing();
+
+                var son = function(name, id, sex) {
+                    _construct_.call(this, name, id);
+                    this.sex = sex;
+                    //static method
+                    this.mySex = function() {
+                        console.log( "My sex is " + this.sex);
+                    }
+                }
+
+                var jack = new son("lvhongchao", 10,"male");
+                jack.toString();
+                jack.sing();
+                jack.mySex();
+
+                15:26:06.952 VM129:13 name: lvhongbinid: 116020910160
+                15:26:06.952 VM129:13 lvhongbin sing a song!
+                15:28:24.199 "[object Object]" //父类原型的方法无法继承
+                15:26:06.952 VM129:13 lvhongchao sing a song!
+                15:26:06.952 VM129:28 My sex is male
+                15:26:06.968 undefined
+                15:26:46.851 jack instanceof son;
+                15:26:46.853 true
+                15:27:01.446 jack instanceof _construct_;
+                15:27:01.448 false
+                15:27:09.249 jack instanceof _prototype_;
+                15:27:09.250 VM135:1 Uncaught TypeError: Right-hand side of 'instanceof' is not callable
+                    at <anonymous>:1:6
+#### 3) 实例继承 
+> - 为父类实例添加新特性，作为子类实例返回
+> - 特点：
+>> - 不限制调用方式，不管是new 子类()还是子类(),返回的对象具有相同的效果
+> - 缺点：
+>> - 实例是父类的实例，不是子类的实例
+>> - 不支持多继承
+        
+                var _prototype_ = {
+                    constructor: _construct_,
+                    toString: function() {
+                        console.log("name: " + this.name + "id: " + this.id);
+                    },
+                };
+                var _construct_ = function(name, id) {
+                    this.name = name;
+                    this.id = id;
+
+                    // Static method
+                    this.sing = function() {
+                        console.log(this.name + " sing a song!");
+                    };
+                }
+                _construct_.prototype = _prototype_;
+                
+                var boy = new _construct_("lvhongbin", 116020910160);
+                boy.toString();
+                boy.sing();
+                
+                // 实例继承
+                var boy = function(name, id, sex) {
+                    var instance = new _construct_(name, id); 
+                    instance.sex = sex;
+                    //static method
+                    instance.mySex = function() {
+                        console.log( "My sex is " + this.sex);
+                    }
+                    return instance;
+                }
+
+                var jack = new boy("lvhongchao", 10,"male");
+                jack.toString();
+                jack.sing();
+                jack.mySex();
+
+                //结果
+                name: lvhongbinid: 116020910160
+                15:42:59.082 VM139:13 lvhongbin sing a song!
+                15:42:59.082 VM139:4 name: lvhongchaoid: 10
+                15:42:59.082 VM139:13 lvhongchao sing a song!
+                15:42:59.083 VM139:28 My sex is male
+                15:42:59.093 undefined
+                15:43:27.109 jack instanceof son;
+                15:43:27.111 false
+                15:43:58.535 jack instanceof _construct_;
+                15:43:58.538 true
+                15:44:07.190 jack instanceof _prototype_;
+                15:44:07.193 VM145:1 Uncaught TypeError: Right-hand side of 'instanceof' is not callable
+                    at <anonymous>:1:6
+#### 4) 拷贝继承 
+> - 特点：
+>> - 支持多继承
+> - 缺点：
+>> - 效率较低，内存占用高（因为要拷贝父类的属性）
+>> - 无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）
+        
+                function Cat(name){
+                  var animal = new Animal();
+                  for(var p in animal){
+                    Cat.prototype[p] = animal[p];
+                  }
+                  Cat.prototype.name = name || 'Tom';
+                }
+
+                // Test Code
+                var cat = new Cat();
+                console.log(cat.name);
+                console.log(cat.sleep());
+                console.log(cat instanceof Animal); // false
+                console.log(cat instanceof Cat); // true
+#### 5) 组合继承 
+> - 通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
+> - 特点：
+>> - 弥补了方式2的缺陷，可以继承实例属性/方法，也可以继承原型属性/方法
+>> - 既是子类的实例，也是父类的实例
+>> - 不存在引用属性共享问题
+>> - 可传参
+>> - 函数可复用
+> - 缺点：
+>> - 调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）会比较好性能
+        
+                function Cat(name){
+                  Animal.call(this);
+                  this.name = name || 'Tom';
+                }
+
+                // 参数为空 代表 父类的实例和父类的原型对象的关系了  
+                Cat.prototype = new Animal();
+
+                // 感谢 @学无止境c 的提醒，组合继承也是需要修复构造函数指向的。
+
+                Cat.prototype.constructor = Cat;
+
+                // Test Code
+                var cat = new Cat();
+                console.log(cat.name);
+                console.log(cat.sleep());
+                console.log(cat instanceof Animal); // true
+                console.log(cat instanceof Cat); // true
+#### 6) 寄生组合继承 
+> - 通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点
+        
+                function Cat(name){
+                  Animal.call(this);
+                  this.name = name || 'Tom';
+                }
+                (function(){
+                  // 创建一个没有实例方法的类
+                  var Super = function(){};
+                  Super.prototype = Animal.prototype;
+                  //将实例作为子类的原型
+                  Cat.prototype = new Super();
+                })();
+
+                // Test Code
+                var cat = new Cat();
+                console.log(cat.name);
+                console.log(cat.sleep());
+                console.log(cat instanceof Animal); // true
+                console.log(cat instanceof Cat); //true
+
+        
+<h3 id='2.2'>2.2 class的使用</h3>  
+        
+#### 1) class模板 
+> - toString方法是Point类内部定义的方法，它是不可枚举
+        class Person {
+            constructor(name, id) {
+                this.name = name;
+                this.id = id;
+            }
+
+            toString() {
+                console.log("name: " + this.name + "id: " + this.id);
+            }
+
+            sing() {
+                console.log(this.name + " sing a song!");
+            }
+        }
+
+        var boy = new Person("lvhongbin", 116020910160);
+        boy.toString();
+        boy.sing();
+        16:58:31.072 VM177:8 name: lvhongbinid: 116020910160
+        16:58:31.072 VM177:12 lvhongbin sing a song!
+        16:58:31.085 undefined
+        16:59:07.335 boy instanceof Person;
+        16:59:07.337 true
+        Object.keys(Person.prototype)
+        // []
+        17:03:09.890 []
+        17:03:15.278 Object.getOwnPropertyNames(Person.prototype)
+        // ["constructor","toString"]
+        17:03:15.282 (3) ["constructor", "toString", "sing"]
+#### 2) 关于Object的相关用法 
+> - Object.getOwnPropertyNames(Person.prototype) 自家的所有属性
+> - Object.keys(Person.prototype) 自家的不可配置属性
+> - Object.getPrototypeOf 获取实例对象的原型
+#### 3) class关键字 
+> - 需要注意的是，这个类的名字是MyClass而不是Me，Me只在 Class 的内部代码可用，指代当前类。
+        
+                const Person = class Me {
+                  getClassName() {
+                    return Me.name;
+                  }
+                };
+                let Lv = new Person();
+                Lv.getClassName();
+                20:31:17.631 "Me"
+#### 4) 不存在变量提升 
+> -  字类必须在父类后面进行定义
+        
+                new Foo(); // ReferenceError
+                class Foo {}
+                20:35:11.688 VM193:1 Uncaught ReferenceError: Foo is not defined
+                    at <anonymous>:1:1
+#### 5) 私有方法和私有属性  
+> - 第一种方法：从命名上，私有方法或者属性名字前面加上下划线。但是，这种命名是不保险的，在类的外部，还是可以调用到这个方法。
+> - 第二种方法：把私有方法移出模块，采用call,apply或者bind等方法进行调用
+> - 引入一个新的前缀#表示私有属性和私有方法
+#### 6) get和set 
+> - 属性有对应的存值函数和取值函数，因此赋值和读取行为都被自定义了。
+        
+                class MyClass {
+                    constructor() {
+                        // ...
+                    }
+                    get prop() {
+                        return 'getter';
+                    }
+                    set prop(value) {
+                        console.log('setter: '+value);
+                    }
+                }
+
+                let inst = new MyClass();
+
+                inst.prop = 123;
+                // setter: 123
+
+                inst.prop
+                // 'getter'     
+#### 7) Symbol
+> - ES5 的对象属性名都是字符串，这容易造成属性名的冲突，Symbol可以用来避免名字的冲突
+> - symbol是基本类型，实现唯一标识
+> - 通过调用symbol(name)创建symbol，Symbol函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分。
+> - 我们创建一个字段，仅为知道对应symbol的人能访问，使用symbol很有用
+> - symbol不会出现在for..in结果中
+> - 使用symbol(name）创建的symbol，总是不同，即使name相同。如果希望相同名称的symbol相等，则使用全局注册
+> - symbol.for(name)返回给定名称的全局symbol，多次调用返回相同symbol
+> - Javascript有系统symbol，通过Symbol.*访问。我们能使用他们去修改一些内置行为。
+        
+                let s = Symbol();
+                typeof s;
+                21:52:41.244 "symbol"
+
+                let s1 = Symbol('foo');
+                let s2 = Symbol('bar');
+                s1 // Symbol(foo)
+
+                21:55:05.722 Symbol(foo)
+                21:55:12.370 s2 // Symbol(bar)
+                21:55:12.372 Symbol(bar)
+                21:55:22.628 s1.toString() // "Symbol(foo)"
+                21:55:22.630 "Symbol(foo)"
+                21:55:25.162 s2.toString() // "Symbol(bar)"
+                21:55:25.164 "Symbol(bar)"
+> - Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
+        
+                // 没有参数的情况
+                let s1 = Symbol();
+                let s2 = Symbol();
+                s1 === s2 // false
+                // 有参数的情况
+                let s1 = Symbol('foo');
+                let s2 = Symbol('foo');
+                s1 === s2 // false
+> - 作为属性名的Symbol 大多需要用到方括号。保证不会出现同名的属性，防止某一个键被不小心改写或覆盖。因为点运算符后面总是字符串，所以不会读取mySymbol作为标识名所指代的那个值，导致a的属性名实际上是一个字符串，而不是一个 Symbol 值。所以不能使用.号运算符
+        
+                let mySymbol = Symbol();
+
+                // 第一种写法
+                let a = {};
+                a[mySymbol] = 'Hello!';
+
+                // 第二种写法
+                let a = {
+                  [mySymbol]: 'Hello!'
+                };
+
+                // 第三种写法
+                let a = {};
+                Object.defineProperty(a, mySymbol, { value: 'Hello!' });
+
+                // 以上写法都得到同样结果
+                a[mySymbol] // "Hello!"
+
+                let s = Symbol();
+                let obj = {
+                  [s]: function (arg) {console.log(arg);}
+                };
+                obj[s](123);
+                22:09:15.222 VM626:4 123
+> - 魔术字符串 多次出现，与代码形成“强耦合”，不利于将来的修改和维护。常用的消除魔术字符串的方法，就是把它写成一个变量。
+> - 
+#### 8) Generator 方法 [MDN web docs](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/yield)
+> - [rv] = yield [expression];
+> - expression 定义通过迭代器协议从生成器函数返回的值。如果省略，则返回undefined。
+> - rv 返回传递给生成器的next()方法的可选值，以恢复其执行。
+> - yield关键字使生成器函数执行暂停，yield关键字后面的表达式的值返回给生成器的调用者。它可以被认为是一个基于生成器的版本的return关键字。
+> - yield关键字实际返回一个IteratorResult对象，它有两个属性，value和done。value属性是对yield表达式求值的结果，而done是false，表示生成器函数尚未完全完成。
+> - 一旦在 yield 表达式处暂停，除非外部调用生成器的 next() 方法，否则生成器的代码将不能继续执行。每次调用生成器的next()方法时，生成器都会恢复执行，直到达到以下某个值：
+> - 某个方法之前加上星号（*），就表示该方法是一个 Generator 函数。
+        
+                function* countAppleSales () {
+                    var saleList = [3, 7, 5];
+                    for (var i = 0; i < saleList.length; i++) {
+                        yield saleList[i];
+                    }
+                }
+                21:19:07.675 undefined
+                21:19:27.967 var appleStore = countAppleSales(); // Generator { }
+                21:19:27.973 undefined
+                21:19:54.048 console.log(appleStore.next()); // { value: 3, done: false }
+                21:19:54.048 VM199:1 {value: 3, done: false}
+                21:19:54.053 undefined
+                21:20:43.808 console.log(appleStore.next()); // { value: 7, done: false }
+                21:20:43.808 VM201:1 {value: 7, done: false}
+                21:20:43.811 undefined
+                21:20:50.062 console.log(appleStore.next()); // { value: 5, done: false }
+                21:20:50.062 VM203:1 {value: 5, done: false}
+                21:20:50.064 undefined
+                21:21:12.515 console.log(appleStore.next()); // { value: undefined, done: true }
+                21:21:12.514 VM205:1 {value: undefined, done: true}
+                21:21:12.516 undefined
+> - 
