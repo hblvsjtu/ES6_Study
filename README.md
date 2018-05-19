@@ -25,21 +25,24 @@
 ### [3.1 Set](#3.1)
 ### [3.2 Map](#3.2) 
 ### [3.3 数据结构的互相转换](#3.3) 
-## [四、遍历器Iterator](#4)
-### [4.1 概念](#4.1)
-### [4.2 部署Iterator接口](#4.2) 
-### [4.3 默认的Iterator接口](#4.3)
-## [五、异步编程与Generator 函数](#5)
-### [5.1 Promise 对象](#5.1)
-### [5.2 async 函数](#5.2) 
-### [5.3 Generator 函数](#5.3)  
-## [六、类class](#6)
-### [6.1 继承](#6.1)
-### [6.2 class的使用](#6.2) 
-## [七、Module](#7)
-### [7.1 概念](#7.1)
-### [7.2 部署Iterator接口](#7.2) 
-### [7.3 默认的Iterator接口](#7.3) 
+## [四、Proxy和Reflect](#4)
+### [4.1 Proxy](#4.1)
+### [4.2 Reflect](#4.2) 
+## [五、遍历器Iterator](#5)
+### [5.1 概念](#5.1)
+### [5.2 部署Iterator接口](#5.2) 
+### [5.3 默认的Iterator接口](#5.3)
+## [六、异步编程与Generator 函数](#6)
+### [6.1 Promise对象](#6.1)
+### [6.2 async函数](#6.2) 
+### [6.3 Generator 函数](#6.3)  
+## [七、类class](#7)
+### [7.1 继承](#7.1)
+### [7.2 class的使用](#7.2) 
+## [八、Module](#8)
+### [8.1 概念](#8.1)
+### [8.2 部署Iterator接口](#8.2) 
+### [8.3 默认的Iterator接口](#8.3) 
 ------ 		
         
 
@@ -75,9 +78,9 @@
 > - 变量声明也不提升，存在暂时性死区
 > - const保证的不是值的不变，而是引用地址的不变
 > - 所以不能通过把一个数组赋值给一个常量数组，但是赋值给一个普通数组则是可以的
-
+        
 <h3 id='1.3'>1.3 顶层对象</h3>  
-
+        
 #### 1) window对象和global对象
 > - window对象是浏览器等用户代理的顶层对象，而global对象则是像Node等客户端的顶层对象
 > - 顶层变量无法在编译时报出变量未声明的错误，理论上window对象是不应该跟global对象挂钩的
@@ -107,8 +110,10 @@
                   if (typeof global !== 'undefined') { return global; }
                   throw new Error('unable to locate global object');
                 }; 
-<h3 id='1.4'>1.4 数组的解构</h3>  
 
+        
+<h3 id='1.4'>1.4 数组的解构</h3>  
+        
 #### 1) 简介与注意事项
 > - 解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。
 > - 变量声明语句过程中避免使用圆括号，否则会报错 
@@ -135,7 +140,6 @@
                 [(b)] = [3]; // 正确
                 ({ p: (d) } = {}); // 正确
                 [(parseInt.prop)] = [3]; // 正确
-> - 
 #### 2) 解构数组
 > -  其实是一种遍历的变量赋值，默认值是undefined，如果赋值的是null，则默认值就不会生效
         
@@ -400,40 +404,103 @@
                         __proto__:Array(0)
 #### 2) 数组转为Map
 > - 将数组传入 Map 构造函数，就可以转为 Map。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 ------      
         
+        
+<h2 id='4'>四、Proxy和Reflect</h2>
+<h3 id='4.1'>4.1 Proxy</h3>  
+        
+#### 1) 概述
+> - 修改编程语言某些操作的默认行为，所以属于一种“元编程”（meta programming），即对编程语言进行编程。
+> - var proxy = new Proxy(target, handler);
+> - 相当于过滤器，他是一个构造函数，其中空对象是默认过滤的目标对象，get代表访问请求时进行过滤，同样是一个函数对象，参数分别是实际过滤的目标对象和属性
+        
+                var a ={time: 40, times:41,};
+                var proxy = new Proxy(a, {
+                  get: function(target, property) {
+                    if(property !== "time") {
+                        return target[property]+1;  
+                    }else {
+                        return target[property]+2;
+                    }
+                  }
+                });
 
-<h2 id='3'>三、遍历器Iterator</h2>
-<h3 id='3.1'>3.1 概念</h3>  
+                proxy.time;
+                21:34:29.455 42
+                21:34:40.384 proxy.times;
+                21:34:40.386 42
+> - 要使proxy起作用，必须针对Proxy实例，而不是针对目标对象进行操作
+> - 如果handler没有设置任何拦截，那就等同于直接通向原对象。
+> - receiver指代拦截的实例对象，可选
+        
+                var target = {};
+                var handler = {};
+                var proxy = new Proxy(target, handler, receiver);
+                proxy.a = 'b';
+                target.a // "b"
+> - proxy对象是obj对象的原型，obj对象本身并没有time属性，所以根据原型链，会在proxy对象上读取该属性，导致被拦截。
+        
+                var proxy = new Proxy({}, {
+                  get: function(target, property) {
+                    return 35;
+                  }
+                });
 
+                let obj = Object.create(proxy);
+                obj.time // 35
+#### 2) 拦截种类
+> - get(target, propKey, receiver)：拦截对象属性的读取，比如proxy.foo和proxy['foo']。
+> - set(target, propKey, value, receiver)：拦截对象属性的设置，比如proxy.foo = v或proxy['foo'] = v，返回一个布尔值。
+> - has(target, propKey)：拦截propKey in proxy的操作，返回一个布尔值。
+> - deleteProperty(target, propKey)：拦截delete proxy[propKey]的操作，返回一个布尔值。
+> - ownKeys(target)：拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。
+> - getOwnPropertyDescriptor(target, propKey)：拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。
+> - defineProperty(target, propKey, propDesc)：拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。
+> - preventExtensions(target)：拦截Object.preventExtensions(proxy)，返回一个布尔值。
+> - getPrototypeOf(target)：拦截Object.getPrototypeOf(proxy)，返回一个对象。
+> - isExtensible(target)：拦截Object.isExtensible(proxy)，返回一个布尔值。
+> - setPrototypeOf(target, proto)：拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。
+> - apply(target, object, args)：拦截 Proxy 实例作为函数调用的操作，比如proxy(...args)、proxy.call(object, ...args)、proxy.apply(...)。
+> - construct(target, args)：拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(...args)。
+        
+<h3 id='4.2'>4.2 Reflect</h3>  
+        
+#### 1) 概述
+> - 主要用来将一些明显属于语言内部的方法，如Object.defineProperty，放到Reflect对象中，目前来讲还没有完全转移，在Object对象和Reflect对象上共同存在，后面将完全转移到Reflect上
+> - Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。这就让Proxy对象可以方便地调用对应的Reflect方法，完成默认行为，作为修改行为的基础。
+        
+                Proxy(target, {
+                  set: function(target, name, value, receiver) {
+                    var success = Reflect.set(target,name, value, receiver);
+                    if (success) {
+                      log('property ' + name + ' on ' + target + ' set to ' + value);
+                    }
+                    return success;
+                  }
+                });        
+#### 2) 静态方法
+> - Reflect.apply(target, thisArg, args)
+> - Reflect.construct(target, args)
+> - Reflect.get(target, name, receiver)
+> - Reflect.set(target, name, value, receiver)
+> - Reflect.defineProperty(target, name, desc)
+> - Reflect.deleteProperty(target, name)
+> - Reflect.has(target, name)
+> - Reflect.ownKeys(target)
+> - Reflect.isExtensible(target)
+> - Reflect.preventExtensions(target)
+> - Reflect.getOwnPropertyDescriptor(target, name)
+> - Reflect.getPrototypeOf(target)
+> - Reflect.setPrototypeOf(target, prototype) 
+        
+------      
+        
+        
+<h2 id='5'>五、遍历器Iterator</h2>
+<h3 id='5.1'>5.1 概念</h3>  
+        
 #### 1) 作用
 > - 为数据结构提供访问接口
 > - 为数据结构的成员排序
@@ -462,8 +529,9 @@
                   };
                 }
 
-<h3 id='3.2'>3.2 部署Iterator接口</h3>
-
+        
+<h3 id='5.2'>5.2 部署Iterator接口</h3>
+        
 #### 1) 为类部署Iterator接口
 > - 一个对象如果要具备可被for...of循环调用的 Iterator 接口，就必须在Symbol.iterator的属性上部署遍历器生成方法（原型链上的对象具有该方法也可）
         
@@ -599,9 +667,9 @@
 >> - Map(), Set(), WeakMap(), WeakSet()（比如new Map([['a',1],['b',2]])）
 >> - Promise.all()
 >> - Promise.race()
-
-<h3 id='3.3'>3.3 默认的Iterator接口</h3>  
-
+        
+<h3 id='5.3'>5.3 默认的Iterator接口</h3>  
+        
 #### 1) 数组的Iterator接口
         
                 var arr = ['a', 'b', 'c'];
@@ -644,11 +712,19 @@
                 15:56:03.643 {value: "o", done: false}
                 15:56:08.099 iterator.next();
                 15:56:08.102 {value: undefined, done: true}
+        
 ------      
         
+        
+<h2 id='4'>六、异步编程与Generator 函数</h2>
+<h3 id='4.1'>6.1 Promise对象</h3>  
+        
+#### 1) 概述
+> -     
+        
     
-<h2 id='6'>六、类class</h2>
-<h3 id='6.1'>6.1 继承 详细看<a href="https://www.cnblogs.com/humin/p/4556820.html">幻天芒的博客</a></h3>  
+<h2 id='7'>七、类class</h2>
+<h3 id='7.1'>7.1 继承 详细看<a href="https://www.cnblogs.com/humin/p/4556820.html">幻天芒的博客</a></h3>  
 
 #### 1) 原型链继承 
 > - 原型链继承 核心： 将父类的实例作为子类的原型
@@ -924,7 +1000,7 @@
                 console.log(cat instanceof Cat); //true
 
         
-<h3 id='6.2'>6.2 class的使用</h3>  
+<h3 id='7.2'>7.2 class的使用</h3>  
         
 #### 1) class模板 
 > - toString方法是Point类内部定义的方法，它是不可枚举
