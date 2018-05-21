@@ -34,8 +34,9 @@
 ### [5.3 默认的Iterator接口](#5.3)
 ## [六、异步编程与Generator 函数](#6)
 ### [6.1 Promise对象](#6.1)
-### [6.2 async函数](#6.2) 
-### [6.3 Generator 函数](#6.3)  
+### [6.2 Generator 函数](#6.2)  
+### [6.3 Generator 与协程](#6.3) 
+### [6.4 async函数](#6.4) 
 ## [七、类class](#7)
 ### [7.1 继承](#7.1)
 ### [7.2 class的使用](#7.2) 
@@ -716,13 +717,542 @@
 ------      
         
         
-<h2 id='4'>六、异步编程与Generator 函数</h2>
-<h3 id='4.1'>6.1 Promise对象</h3>  
+<h2 id='6'>六、异步编程与Generator 函数</h2>
+<h3 id='6.1'>6.1 Promise对象</h3>  
         
 #### 1) 概述
-> -     
+> - Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。
+> - Promise对象不受外界的影响。它代表的是一个异步操作，包括三种状态：pending进行中，fulfilled已成功和rejected已失败。只有异步操作的结果可以决定或者改变当前的状态，其他的操作都不能改变
+> - 状态的变换只有两种情况：
+> - pending进行中 -> fulfilled已成功 或者 pending进行中 -> fulfilled已成功
+> - 一旦状态改变后就不会再改变了，此时就称为resolved已定型
+> - 如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。
+> - 这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
+#### 2) 优缺点
+> - 有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。
+> - 无法取消Promise，一旦新建它就会立即执行，无法中途取消。
+> - 其次，如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。
+> - 第三，当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
+#### 3) 基本用法
+> -  then方法的第一个参数是resolved状态的回调函数，第二个参数（可选）是rejected状态的回调函数。
         
+                // 这Promise的新建主要用来存放执行条件和传递参数的
+                const promise = new Promise(function(resolve, reject) {
+                    // ... some code
+                    if (/* 异步操作成功 */){
+                        resolve(value);
+                    } else {
+                        reject(error);
+                    }
+                });  
     
+                // 具体定义resolve和reject函数
+                promise.then(function(value) {
+                  // success
+                }, function(error) {
+                  // failure
+                });     
+> - Promise 新建后立即执行，所以首先输出的是Promise。然后，then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以resolved最后输出
+        
+                var findGF = function(name, height) {
+                    return new Promise(function(resolve, reject) {
+                                            console.log(`I want to find a GF...`);  
+                                            if(height >= 155 && height <= 165) {
+                                                resolve(name);
+                                            }else {
+                                                reject(name);
+                                            }
+                                        }) 
+                };
+
+                var resolve = function(name) {
+                    console.log(`I have found a GF ${name} !`);
+                };
+
+                var reject = function(name) {
+                    console.log(`I have refused ${name} !`);
+                };
+
+                findGF("Lily", 160).then(resolve, reject);
+                findGF("Belly", 168).then(resolve, reject);
+                console.log(`I am looking for a GF...`);
+                10:24:50.539 VM2507:3 I want to find a GF...
+                10:24:50.539 VM2507:3 I want to find a GF...
+                10:24:50.539 VM2507:22 I am looking for a GF...
+                10:24:50.539 VM2507:13 I have found a GF Lily !
+                10:24:50.539 VM2507:17 I have refused Belly !
+> - then方法返回的是一个新的Promise实例（注意，不是原来那个Promise实例）。因此可以采用链式写法，即then方法后面再调用另一个then方法。 
+        
+                getJSON("/posts.json").then(function(json) {
+                  return json.post;
+                }).then(function(post) {
+                  // ...
+                });                                                            
+#### 3) Promise.prototype.catch()
+> - Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数。
+> - 一般来说，不要在then方法里面定义 Reject 状态的回调函数（即then的第二个参数），总是使用catch方法。
+> - 第二种写法要好于第一种写法，理由是第二种写法可以捕获前面then方法执行中的错误，也更接近同步的写法（try/catch）。因此，建议总是使用catch方法，而不使用then方法的第二个参数。
+        
+                // bad
+                promise
+                  .then(function(data) {
+                    // success
+                  }, function(err) {
+                    // error
+                  });
+
+                // good
+                promise
+                  .then(function(data) { //cb
+                    // success
+                  })
+                  .catch(function(err) {
+                    // error
+                  });                        
+> - 跟传统的try/catch代码块不同的是，如果没有使用catch方法指定错误处理的回调函数，Promise 对象抛出的错误不会传递到外层代码，即不会有任何反应。
+> - 一般总是建议，Promise 对象后面要跟catch方法，这样可以处理 Promise 内部发生的错误。catch方法返回的还是一个 Promise 对象，因此后面还可以接着调用then方法。
+        
+                const someAsyncThing = function() {
+                  return new Promise(function(resolve, reject) {
+                    // 下面一行会报错，因为x没有声明
+                    resolve(x + 2);
+                  });
+                };
+
+                someAsyncThing()
+                .catch(function(error) {
+                  console.log('oh no', error);
+                })
+                .then(function() {
+                  console.log('carry on');
+                });
+                // oh no [ReferenceError: x is not defined]
+                // carry on
+#### 4) Promise.prototype.finally() 
+> - finally方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。该方法是 ES2018 引入标准的。
+#### 5) Promise.all()
+> - const p = Promise.all([p1, p2, p3]);
+> - 只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。
+> - 只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。
+> - 相当于并运算
+#### 6) Promise.race()
+> - const p = Promise.race([p1, p2, p3]);
+> - 相当于或运算
+#### 7) Promise.resolve()
+> - 如果参数是 Promise 实例，那么Promise.resolve将不做任何修改、原封不动地返回这个实例。
+> - 如果参数是一个数是一个thenable对象（thenable对象指的是具有then方法的对象），Promise.resolve方法会将这个对象转为 Promise 对象，然后就立即执行thenable对象的then方法。 
+        
+                let thenable = {
+                  then: function(resolve, reject) {
+                    resolve(42);
+                  }
+                };
+
+                let p1 = Promise.resolve(thenable);
+                p1.then(function(value) {
+                  console.log(value);  // 42
+                });
+> - 如果参数不是具有then方法的对象，或根本就不是对象。则Promise.resolve方法返回一个新的 Promise 对象，状态为resolved。由于字符串Hello不属于异步操作（判断方法是字符串对象不具有 then 方法），返回 Promise 实例的状态从一生成就是resolved，所以回调函数会立即执行
+#### 8) Promise.reject() 
+        
+                const p = Promise.reject('出错了');
+                // 等同于
+                const p = new Promise((resolve, reject) => reject('出错了'))
+
+                p.then(null, function (s) {
+                  console.log(s)
+                });
+                // 出错了
+
+        
+<h3 id='6.2'>6.2 Generator 函数</h3>
+        
+#### 1) 简介
+> - Generator 函数是 ES6 提供的一种异步编程解决方案
+> - Generator 函数是一个状态机，封装了多个内部状态。
+> - 执行 Generator 函数会返回一个遍历器对象，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。
+> - 形式上，Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。
+> - 然后，Generator 函数的调用方法与普通函数一样，也是在函数名后面加上一对圆括号。不同的是，调用 Generator 函数后，该函数并不执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象
+> - 必须调用遍历器对象的next方法，使得指针移向下一个状态（这个状态是由value和done两个属性组成的对象）。Generator 函数是分段执行的，yield表达式是暂停执行的标记，而next方法可以恢复执行，到return的时，函数返回结束；
+#### 2）用法
+> - 每次调用的时候，要确保迭代器对象的引用地址一致，否则会重新开始状态
+> - 但是，函数f是一个 Generator 函数，就变成只有调用next方法时，函数f才会执行。
+> - 另外需要注意，yield表达式只能用在 Generator 函数里面，用在其他地方都会报错。
+        
+                function* findGF() {
+                    yield "Beautiful";
+                    yield "Heignt > 155";
+                    yield "Female";
+                    return "Done!"
+                }
+                16:10:55.090 undefined
+                16:12:39.543 findGF().next();
+                16:12:39.555 {value: "Beautiful", done: false}
+                16:12:42.730 findGF().next();
+                16:12:42.745 {value: "Beautiful", done: false}
+                16:12:49.044 findGF().next();
+                16:12:49.058 {value: "Beautiful", done: false}
+                16:17:01.231 var f = findGF();
+                16:17:01.238 undefined
+                16:17:10.390 f.next();
+                16:17:10.399 {value: "Beautiful", done: false}
+                16:17:12.153 f.next();
+                16:17:12.162 {value: "Heignt > 155", done: false}
+                16:17:13.927 f.next();
+                16:17:13.934 {value: "Female", done: false}
+                16:17:15.789 f.next();
+                16:17:15.797 {value: "Done!", done: true}
+> - yield表达式如果用在另一个表达式之中，必须放在圆括号里面。
+        
+                function* demo() {
+                    console.log('Hello' + yield); // SyntaxError
+                    console.log('Hello' + yield 123); // SyntaxError
+
+                    console.log('Hello' + (yield)); // OK
+                    console.log('Hello' + (yield 123)); // OK
+                }
+> - yield表达式用作函数参数或放在赋值表达式的右边，可以不加括号。
+        
+                function* demo() {
+                    foo(yield 'a', yield 'b'); // OK
+                    let input = yield; // OK
+                }
+#### 3）next()方法
+> - next()方法是有参数的，它的参数是对应于上一个yield的值，然后给出对应yield的值
+> - 由于第一个next()方法没有对应于上一个yield的值，那么上一个yield的值则由generator的实例构建时所放进的参数；
+> - next()方法加入不带参数，那么对应于上一个yield的值为undefined
+> - yield的值最好不要跟上一个yield的值产生依赖，连锁依赖不能超过1个
+> - 最好参数先求出来，然后在再用yield产生断点
+        
+                function fibonacci(n) {
+                        return n<2 ? n: fibonacci(n-1) + fibonacci(n-2);
+                }
+
+                var f = fibonacci(10);
+#### 4）for...of方法
+> - 直接忽略return返回的值，因为return语句对应的是{value: , done: true}
+> - 如果要在迭代保留yield的值，一个必要的条件是yield的参数保持不变
+        
+                // 由于a[0]和a[1]需要依赖yield，然而next()方法并没有给出参数数，所以会出现NaNcy
+                function* fibonacci(n) {
+                    var a = [];
+                    a[0] = yield 0;
+                    a[1] = yield 1;
+                    for(let i = 2; i < n; i++ ) {
+                        a[i] = (a[i-1] + a[i-2]);
+                        yield a[i];
+                    }
+                }
+
+                for(let i of fibonacci(10)) {
+                    console.log(i);
+                }
+                10:56:12.692 VM2685:2 0
+                10:56:12.693 VM2685:2 1
+                10:56:12.693 VM2685:2 NaN
+                10:56:12.693 VM2685:2 NaN
+                10:56:12.694 VM2685:2 NaN
+                10:56:12.694 VM2685:2 NaN
+                10:56:12.694 VM2685:2 NaN
+                10:56:12.694 VM2685:2 NaN
+                10:56:12.694 VM2685:2 NaN
+                10:56:12.695 VM2685:2 NaN
+    
+                // yield的参数不产生依赖
+                function* fibonacci(n) {
+                    var a = [];
+                    for(let i = 0; i < n; i++ ) {
+                        a[i] = i<2 ? i: (a[i-1] + a[i-2]);
+                        yield a[i];
+                    }
+                }
+                11:35:59.323 undefined
+                11:36:03.639 for(let i of fibonacci(10)) {
+                    console.log(i);
+                }
+                11:36:03.640 VM2738:2 0
+                11:36:03.640 VM2738:2 1
+                11:36:03.640 VM2738:2 1
+                11:36:03.640 VM2738:2 2
+                11:36:03.640 VM2738:2 3
+                11:36:03.640 VM2738:2 5
+                11:36:03.640 VM2738:2 8
+                11:36:03.640 VM2738:2 13
+                11:36:03.640 VM2738:2 21
+                11:36:03.640 VM2738:2 34
+
+                // 把for循环解开后得到
+                function* fibonacci(n) {
+                    let a = [];
+                    a[0] = 0;
+                    console.log(`Now a[${0}] = ${a[0]}`);
+                    yield a[0];
+                    a[1] = 1;
+                    console.log(`Now a[${1}] = ${a[1]}`);
+                    yield a[1];
+                    a[2] = a[1] + a[0];
+                    console.log(`Now a[${2}] = ${a[2]}`);
+                    yield a[2];
+                }
+                12:22:27.859 undefined
+                12:22:30.248 var f = fibonacci(10);
+                12:22:30.258 undefined
+                12:22:39.418 f.next();
+                12:22:39.420 VM3002:4 Now a[0] = 0
+                12:22:39.434 {value: 0, done: false}
+                12:22:58.604 f.next();
+                12:22:58.606 VM3002:7 Now a[1] = 1
+                12:22:58.619 {value: 1, done: false}
+                12:23:00.630 f.next();
+                12:23:00.631 VM3002:10 Now a[2] = 1
+                12:23:00.647 {value: 1, done: false}
+#### 5）Generator.prototype.throw() 
+> - throw方法可以接受一个参数，该参数会被catch语句接收，建议抛出Error对象的实例。
+> - catch错误后可以继续执行下一个yield
+        
+               var g = function* () {
+                  try {
+                    yield;
+                  } catch (e) {
+                    console.log(e);
+                  }
+                };
+
+                var i = g();
+                i.next();
+                i.throw(new Error('出错了！'));
+        
+                function* g() {
+                    yield 1;
+                    console.log('throwing an exception');
+                    throw new Error('generator broke!');
+                    yield 2;
+                    yield 3;
+                }
+
+                // Find a perfect GF 体内捕获错误
+                function* findGF(height, color) {
+                    yield "start to find a GF!";
+                    try {
+                        console.log("Check the girl's height");
+                        yield height;   
+                    }catch(e) {
+                        if(height < 155) {
+                            console.log("The girl is too short!");
+                        }
+                        if(height > 165) {
+                            console.log("The girl is too high!");
+                        }
+                        yield "The girl's height is not Good";
+                    }
+
+                    try {
+                        console.log("Check the girl's color");
+                        yield color;   
+                    }catch(e) {
+                        console.log("The girl is too black!");
+                        yield "The girl's color is not Good";
+                    }
+                    
+                    return height > 155 && height < 165 && color !== "black" ? "The GF is perfect!" : "The girl is not perfect!"
+                }
+
+                var isGFPerfect = function(f) {
+                    
+                    // start to find a GF!
+                    console.log(f.next());
+
+                    let height = f.next().value;
+
+                    // Check the girl's height
+                    if(height < 155 || height > 165) {
+                        f.throw(new Error());
+                    }else {
+                        console.log("The girl's height is Good");
+                    }
+
+                    // Check the girl's color
+                    if(f.next().value == "black") {
+                        f.throw(new Error());
+                    }else {
+                        console.log("The girl's color is Good");
+                    }
+
+                    // Finish the check
+                    console.log(f.next());
+                }
+                15:55:56.605 undefined
+                15:56:40.495 var Lily = findGF(153, "black");
+                var Belly = findGF(156, "black");
+                var Lisa = findGF(156, "white");
+                15:56:40.514 undefined
+                15:57:18.226 isGFPerfect(Lily);
+
+                15:57:18.227 VM3145:30 {value: "start to find a GF!", done: false}
+                15:57:18.228 VM3145:4 Check the girl's height
+                15:57:18.228 VM3145:8 The girl is too short!
+                15:57:18.228 VM3145:17 Check the girl's color
+                15:57:18.228 VM3145:20 The girl is too black!
+                15:57:18.228 VM3145:49 {value: "The girl is not perfect!", done: true}
+                15:57:18.266 undefined
+                15:57:25.889 isGFPerfect(Belly);
+                15:57:25.890 VM3145:30 {value: "start to find a GF!", done: false}
+                15:57:25.891 VM3145:4 Check the girl's height
+                15:57:25.891 VM3145:38 The girl's height is Good
+                15:57:25.892 VM3145:17 Check the girl's color
+                15:57:25.893 VM3145:20 The girl is too black!
+                15:57:25.893 VM3145:49 {value: "The girl is not perfect!", done: true}
+                15:57:25.950 undefined
+                15:57:30.004 isGFPerfect(Lisa);
+                15:57:30.005 VM3145:30 {value: "start to find a GF!", done: false}
+                15:57:30.006 VM3145:4 Check the girl's height
+                15:57:30.006 VM3145:38 The girl's height is Good
+                15:57:30.006 VM3145:17 Check the girl's color
+                15:57:30.007 VM3145:45 The girl's color is Good
+                15:57:30.007 VM3145:49 {value: "The GF is perfect!", done: true}
+                15:57:30.084 undefined
+                
+> - 除了体内捕获错误，还可以体外捕获错误，但是一旦 Generator 执行过程中抛出错误，且没有被内部捕获，就不会再执行下去了。如果此后还调用next方法，将返回一个value属性等于undefined、done属性等于true的对象，即 JavaScript 引擎认为这个 Generator 已经运行结束了。
+        
+                // Find a perfect GF 体内捕获错误
+                function* findGF(height, color) {
+                    yield "start to find a GF!";
+                    yield "Check the girl's height"; 
+                    if(height < 155) {
+                        throw("The girl is too short!");
+                    }
+                    if(height > 165) {
+                        throw("The girl is too high!");
+                    }
+
+                    yield "Check the girl's color"; 
+                    if(height > 165) {
+                         throw("The girl is too black!");
+                    }     
+
+                    return height > 155 && height < 165 && color !== "black" ? "The GF is perfect!" : "The girl is not perfect!"
+                }
+
+                var isGFPerfect = function(f) {
+
+                    // start to find a GF!
+                    console.log(f.next());
+                    
+                    // Check the girl's height
+                    console.log(f.next());
+                    try {
+                        f.next()
+                    }catch(e) {
+                         console.log(e);
+                    }
+
+                    // Check the girl's color
+                    console.log(f.next());
+                    try {
+                        f.next()
+                    }catch(e) {
+                         console.log(e);
+                    }
+
+                    // Finish the check
+                    console.log(f.next());
+                }
+                16:22:20.642 undefined
+                16:22:40.485 var Lily = findGF(153, "black");
+
+                16:22:40.492 undefined
+                16:22:51.811 isGFPerfect(Lily);
+                16:22:51.813 VM3163:23 {value: "start to find a GF!", done: false}
+                16:22:51.814 VM3163:26 {value: "Check the girl's height", done: false}
+                16:22:51.814 VM3163:30 The girl is too short!
+                16:22:51.815 VM3163:34 {value: undefined, done: true}
+                16:22:51.815 VM3163:42 {value: undefined, done: true}done: truevalue: undefined__proto__: Object
+                16:22:51.867 undefined              
+#### 6）Generator.prototype.return() 
+> - Generator 函数返回的遍历器对象，还有一个return方法，可以返回给定的值，并且终结遍历 Generator 函数。
+> - 如果return方法调用时，不提供参数，则返回值的value属性为undefined。
+        
+                function* gen() {
+                    yield 1;
+                    yield 2;
+                    yield 3;
+                }
+
+                var g = gen();
+
+                g.next()        // { value: 1, done: false }
+                g.return('foo') // { value: "foo", done: true }
+                g.next()        // { value: undefined, done: true } 
+
+#### 7）yield* 表达式
+> - 如果在 Generator 函数内部，调用另一个 Generator 函数，默认情况下是没有效果的。
+> - 如果你想在一个Generator函数里面执行另一个Generator函数
+        
+                function* inner() {
+                  yield 'hello!';
+                }
+
+                function* outer1() {
+                  yield 'open';
+                  yield inner();
+                  yield 'close';
+                }
+
+                var gen = outer1()
+                gen.next().value // "open"
+                gen.next().value // 返回一个遍历器对象
+                gen.next().value // "close"
+
+                function* outer2() {
+                  yield 'open'
+                  yield* inner()
+                  yield 'close'
+                }
+
+                var gen = outer2()
+                gen.next().value // "open"
+                gen.next().value // "hello!"
+                gen.next().value // "close"
+> - 实际上，任何数据结构只要有 Iterator 接口，就可以被yield*遍历
+        
+                var read = (function* () {
+                    yield 'hello';
+                    yield* 'hello';
+                })();
+
+                read.next().value // "hello"
+                16:43:43.955 "hello"
+                16:43:49.434 read.next().value // "h"
+                16:43:49.439 "h"
+                16:43:52.899 read.next().value 
+                16:43:52.911 "e"
+                16:43:54.450 read.next().value 
+                16:43:54.460 "l"
+                16:43:55.747 read.next().value 
+                16:43:55.751 "l"
+                16:43:56.634 read.next().value 
+                16:43:56.650 "o"
+                16:43:58.177 read.next().value 
+                16:43:58.184 undefined
+#### 8）Generator 与状态机
+        
+                var clock = function* () {
+                  while (true) {
+                    console.log('Tick!');
+                    yield;
+                    console.log('Tock!');
+                    yield;
+                  }
+                };                                                               
+
+        
+<h3 id='6.3'>6.3 Generator 与协程</h3>  
+        
+#### 1) 简介 
+> -                                                                                               
+------      
+        
+
 <h2 id='7'>七、类class</h2>
 <h3 id='7.1'>7.1 继承 详细看<a href="https://www.cnblogs.com/humin/p/4556820.html">幻天芒的博客</a></h3>  
 
