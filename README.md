@@ -32,11 +32,12 @@
 ### [5.1 概念](#5.1)
 ### [5.2 部署Iterator接口](#5.2) 
 ### [5.3 默认的Iterator接口](#5.3)
-## [六、异步编程与Generator 函数](#6)
+## [六、Promise对象与Generator 函数与async函数](#6)
 ### [6.1 Promise对象](#6.1)
 ### [6.2 Generator 函数](#6.2)  
-### [6.3 Generator 与协程](#6.3) 
-### [6.4 async函数](#6.4) 
+### [6.3 Generator 与协程与控制流管理](#6.3) 
+### [6.4 Generator 异步应用](#6.4) 
+### [6.5 async函数](#6.5) 
 ## [七、类class](#7)
 ### [7.1 继承](#7.1)
 ### [7.2 class的使用](#7.2) 
@@ -717,7 +718,7 @@
 ------      
         
         
-<h2 id='6'>六、异步编程与Generator 函数</h2>
+<h2 id='6'>六、Promise对象与Generator 函数与async函数</h2>
 <h3 id='6.1'>6.1 Promise对象</h3>  
         
 #### 1) 概述
@@ -1324,7 +1325,7 @@
                 };                                                               
 
         
-<h3 id='6.3'>6.3 Generator 与协程</h3>  
+<h3 id='6.3'>6.3 Generator 与协程与控制流管理</h3>  
         
 #### 1) 协程与子例程的区别 
 > - 传统的“子例程”（subroutine）采用堆栈式“后进先出”的执行方式，只有当调用的子函数完全执行完毕，才会结束执行父函数。
@@ -1335,11 +1336,50 @@
 > - 它们的不同之处在于，同一时间可以有多个线程处于运行状态，但是运行的协程只能有一个，其他协程都处于暂停状态。此外，普通的线程是抢先式的，到底哪个线程优先得到资源，必须由运行环境决定，但是协程是合作式的，执行权由协程自己分配。
 #### 3) Generator 与上下文 
 > - Generator执行产生的上下文环境，一旦遇到yield命令，就会暂时退出堆栈，但是并不消失，里面的所有变量和对象会冻结在当前状态。等到对它执行next命令时，这个上下文环境又会重新加入调用栈，冻结的变量和对象恢复执行。
-#### 4) 应用
+#### 4) 控制流管理
 > - 异步操作的同步化表达
 > - 这种写法的好处是所有findGF过程的逻辑，都被封装在一个函数，按部就班非常清晰，而且可以隐藏细节；
 > - 
-        
+                // 返回Promise实例版本
+                var findBeadtiful = new Promise(function(resolve, error) {
+                    resolve("Beadtiful ");
+                });
+                /*
+                    var findCute = new Promise(function(resolve, error) {
+                        resolve();
+                    });
+                    var findWarm = new Promise(function(resolve, error) {
+                        resolve();
+                    });
+                */
+
+                var girlType = function(str) {
+                    console.log(str);
+                }
+
+                var findGF = function() {
+
+                    console.log("I want to find a girl who is ");
+                    findBeadtiful.then(function(str) {
+                                            console.log(str);
+                                            return "Cute ";
+                                        })
+                                 .then(function(str) {
+                                            console.log(str);
+                                            return ["Warm", "Sunny"];
+                                        })
+                                 .then(function(str) {
+                                            console.log(`${str[0]} and ${str[1]}`);
+                                        });
+                }
+
+                findGF();
+                21:09:11.529 VM3453:19 I want to find a girl who is 
+                21:09:11.529 VM3453:21 Beadtiful 
+                21:09:11.530 VM3453:25 Cute 
+                21:09:11.531 VM3453:29 Warm and Sunny
+
+                // Generator版本
                 var findGF =function* () {
                     console.log("Start!");
                     yield "Looking for a girl in a park!"
@@ -1357,9 +1397,227 @@
                 18:01:14.506 Lily.next();
                 18:01:14.508 VM3310:5 I have found a girl!
                 18:01:14.531 {value: undefined, done: true}
-> - 
-> - 
-                                                                             
+
+                                                          
+<h3 id='6.4'>6.4 Generator 异步应用</h3>  
+        
+#### 1) 异步编程简介与的传统方法 
+> - 所谓"异步"，简单说就是一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备，再回过头执行第二段。
+> - 传统方法
+>> - 回调函数
+>> - 事件监听
+>> - 发布/订阅
+>> - Promise对象 
+#### 2) 回调函数
+> - 上面代码中，readFile函数的第三个参数，就是回调函数，也就是任务的第二段。等到操作系统返回了/etc/passwd这个文件以后，回调函数才会执行。
+> - 一个有趣的问题是，为什么 Node 约定，回调函数的第一个参数，必须是错误对象err（如果没有错误，该参数就是null）？
+> - 原因是执行分成两段，第一段执行完以后，任务所在的上下文环境就已经结束了。在这以后抛出的错误，原来的上下文环境已经无法捕捉，只能当作参数，传入第二段。
+        
+                fs.readFile('/etc/passwd', 'utf-8', function (err, data) {
+                    if (err) throw err;
+                    console.log(data);
+                });
+#### 3) Promise对象
+> - 链式结构避免多重嵌套
+> - Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆then，原来的语义变得很不清楚。
+        
+                var readFile = require('fs-readfile-promise');
+                readFile(fileA)
+                .then(function (data) {
+                  console.log(data.toString());
+                })
+                .then(function () {
+                  return readFile(fileB);
+                })
+                .then(function (data) {
+                  console.log(data.toString());
+                })
+                .catch(function (err) {
+                  console.log(err);
+                });
+> - Generator的同步编程
+        
+                var readFile = function* () {
+
+                    // read fileA
+                    try {
+                        yield fs.readFile(fileA, 'utf-8', function (err, data) {});
+                    }catch(e) {
+                        yield e;
+                    }
+
+                    // read fileB
+                    try {
+                        yield fs.readFile(fileB, 'utf-8', function (err, data) {});
+                    }catch(e) {
+                        yield e;
+                    }    
+                }
+
+                21:59:35.897 undefined
+                21:59:39.451 var f = readFile(); 
+                21:59:39.465 undefined
+                21:59:53.765 console.log(f.next());  
+                21:59:53.766 VM3498:1 {value: ReferenceError: fs is not defined
+                    at readFile (<anonymous>:5:3)
+                    at readFile.next (<anonymous…, done: false}
+                21:59:53.781 undefined
+                21:59:59.052 console.log(f.next());
+                21:59:59.053 VM3499:1 {value: ReferenceError: fs is not defined
+                    at readFile (<anonymous>:12:3)
+                    at readFile.next (<anonymou…, done: false}
+                21:59:59.059 undefined
+                22:00:07.273 console.log(f.next()); 
+                22:00:07.274 VM3501:1 {value: undefined, done: true}
+#### 4) Thunk函数转换器
+> - 参数的求职策略
+>> - 传值调用（call by value） 参数传入函数之前已经求出结果 C语言便采用这种策略，JavaScript 语言是也是传值调用
+>> - 传名调用（call by name） 参数传入函数之后已经求出结果，即只在执行时求值，这样做的好处是不在一些不需要用到参数的情况下消耗性能，比如著名的Thunk函数
+> - Array.prototype.slice.call(arguments)能将具有length属性的对象转成数组
+        
+                var a={length:2,0:'first',1:'second'};
+                Array.prototype.slice.call(a);//  ["first", "second"]
+                  
+                var a={length:2};
+                Array.prototype.slice.call(a);//  [undefined, undefined]
+> - 目的是将一个大函数中的参数以及回调函数分离开来    
+        
+                // ES5版本
+                var Thunk = function(fn){
+                    
+                    // 分离参数
+                    return function (){
+                        var args = Array.prototype.slice.call(arguments);
+
+                        // 分离回调函数
+                        return function (callback){
+                            args.push(callback);
+
+                            //执行操作
+                            return fn.apply(this, args);
+                        }
+                    };
+                };
+
+                // ES6版本
+                const Thunk = function(fn) {
+
+                    // 分离参数
+                    return function (...args) {
+
+                        // 分离回调函数
+                        return function (callback) {
+
+                            //执行操作
+                            return fn.call(this, ...args, callback);
+                        }
+                    };
+                };
+
+                //检测
+                function f(a, cb) {
+                  cb(a);
+                }
+                const ft = Thunk(f);
+
+                ft(1)(console.log) // 1
+#### 5) Generator 函数的流程管理
+> - Generator 函数gen会自动执行
+        
+                function* gen() {
+                    // ...
+                }
+
+                var g = gen();
+                var res = g.next();
+
+                // 假如没有完成的话done的值为flase；
+                while(!res.done){
+                    console.log(res.value);
+                    res = g.next();
+                }
+#### 5) Thunk 函数的自动流程管理
+> - 上面代码的run函数，就是一个 Generator 函数的自动执行器。内部的next函数就是 Thunk 的回调函数。next函数先将指针移到 Generator 函数的下一步（gen.next方法），然后判断 Generator 函数是否结束（result.done属性），如果没结束，就将next函数再传入 Thunk 函数（result.value属性），否则就直接退出。 
+> - 前提是每一个异步操作，都要是 Thunk 函数，也就是说，跟在yield命令后面的必须是 Thunk 函数。     
+                function run(fn) {
+                    var gen = fn();
+
+                    function next(err, data) {
+                        var result = gen.next(data);
+                        if (result.done) return;
+                        result.value(next);
+                    }
+
+                    next();
+                }
+
+                var g = function* (){
+
+                    // var readFileThunk = Thunk(fs.readFile);
+                    // readFileThunk(fileA)(callback);
+                    // 读完函数之后就执行callback函数
+                    var f1 = yield readFileThunk('fileA');
+                    var f2 = yield readFileThunk('fileB');
+                    // ...
+                    var fn = yield readFileThunk('fileN');
+                };
+
+                run(g);
+#### 6) co处理并发的异步操作
+> - co 支持并发的异步操作，即允许某些操作同时进行，等到它们全部完成，才进行下一步。这时，要把并发的操作都放在数组或对象里面，跟在yield语句后面。 
+> - 需要generator和promise的配合
+> - 需要用到Promise.race(）或者Promise.all()的方法
+> - co的源码：
+        
+                function co(gen) {
+                    var ctx = this;
+
+                    return new Promise(function(resolve, reject) {
+                        if (typeof gen === 'function') gen = gen.call(ctx);
+                        if (!gen || typeof gen.next !== 'function') return resolve(gen);
+
+                        onFulfilled();
+                        function onFulfilled(res) {
+                            var ret;
+                              try {
+                                ret = gen.next(res);
+                              } catch (e) {
+                                return reject(e);
+                              }
+                              next(ret);
+                        }
+                    });
+                }
+
+                // toPromise到底是什么鬼？
+                function next(ret) {
+
+                    // 检查当前是否为 Generator 函数的最后一步，如果是就返回。
+                    if (ret.done) return resolve(ret.value);
+
+                    //确保每一步的返回值，是 Promise 对象。
+                    var value = toPromise.call(ctx, ret.value);
+
+                    // 使用then方法，为返回值加上回调函数，然后通过onFulfilled函数再次调用next函数。
+                    if (value && isPromise(value)) return value.then(onFulfilled, onRejected);
+
+                    // 在参数不符合要求的情况下（参数非 Thunk 函数和 Promise 对象），将 Promise 对象的状态改为rejected，从而终止执行。
+                    return onRejected(
+                        new TypeError(
+                              'You may only yield a function, promise, generator, array, or object, '
+                              + 'but the following object was passed: "'
+                              + String(ret.value)
+                              + '"'
+                            )
+                        );
+                }
+
+        
+<h3 id='6.5'>6.5 async函数</h3>
+        
+#### 1) 简介
+> -
+
 ------      
         
 
