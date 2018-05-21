@@ -787,7 +787,85 @@
                   return json.post;
                 }).then(function(post) {
                   // ...
-                });                                                            
+                });
+> - then方法的链式操作
+> - 奇怪的是链式操作只能返回一个参数，加入你要返回多个参数的话，需要传递一个数组或者一个对象
+                
+                // 返回Promise实例版本
+                var findBeadtiful = new Promise(function(resolve, error) {
+                    resolve("Beadtiful ");
+                });
+                var findCute = new Promise(function(resolve, error) {
+                    resolve("Cute ");
+                });
+                var findWarm = new Promise(function(resolve, error) {
+                    resolve(["Warm", "Sunny"]);
+                });
+
+                var girlType = function(str) {
+                    console.log(str);
+                }
+
+                var findGF = function() {
+
+                    console.log("I want to find a girl who is ");
+                    findBeadtiful.then(function(str) {
+                                            console.log(str);
+                                            return findCute;
+                                        })
+                                 .then(function(str) {
+                                            console.log(str);
+                                            return findWarm;
+                                        })
+                                 .then(function(str) {
+                                            console.log(`${str[0]} and ${str[1]}`);
+                                        });
+                }
+
+                findGF();
+                21:03:41.207 VM3451:17 I want to find a girl who is 
+                21:03:41.208 VM3451:19 Beadtiful 
+                21:03:41.208 VM3451:23 Cute 
+                21:03:41.209 VM3451:27 Warm and Sunny  
+
+                // 返回参数版本
+                var findBeadtiful = new Promise(function(resolve, error) {
+                    resolve("Beadtiful ");
+                });
+                /*
+                    var findCute = new Promise(function(resolve, error) {
+                        resolve();
+                    });
+                    var findWarm = new Promise(function(resolve, error) {
+                        resolve();
+                    });
+                */
+
+                var girlType = function(str) {
+                    console.log(str);
+                }
+
+                var findGF = function() {
+
+                    console.log("I want to find a girl who is ");
+                    findBeadtiful.then(function(str) {
+                                            console.log(str);
+                                            return "Cute ";
+                                        })
+                                 .then(function(str) {
+                                            console.log(str);
+                                            return ["Warm", "Sunny"];
+                                        })
+                                 .then(function(str) {
+                                            console.log(`${str[0]} and ${str[1]}`);
+                                        });
+                }
+
+                findGF();
+                21:09:11.529 VM3453:19 I want to find a girl who is 
+                21:09:11.529 VM3453:21 Beadtiful 
+                21:09:11.530 VM3453:25 Cute 
+                21:09:11.531 VM3453:29 Warm and Sunny                                                         
 #### 3) Promise.prototype.catch()
 > - Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数。
 > - 一般来说，不要在then方法里面定义 Reject 状态的回调函数（即then的第二个参数），总是使用catch方法。
@@ -1248,8 +1326,40 @@
         
 <h3 id='6.3'>6.3 Generator 与协程</h3>  
         
-#### 1) 简介 
-> -                                                                                               
+#### 1) 协程与子例程的区别 
+> - 传统的“子例程”（subroutine）采用堆栈式“后进先出”的执行方式，只有当调用的子函数完全执行完毕，才会结束执行父函数。
+> - 协程则更偏向于类似进程和线程的管理，则单核的情况下，一个线程执行到一半后暂停，然后另外一个线程接着运行一段时间后暂停，类似这样的相互运行一段时间后交出控制权，营造一种多线程执行的假象。这种可以并行执行、交换执行权的线程（或函数），就称为协程。
+> - 从实现上看，在内存中，子例程只使用一个栈（stack），而协程是同时存在多个栈，但只有一个栈是在运行状态，也就是说，协程是以多占用内存为代价，实现多任务的并行。
+#### 2) 协程与普通线程的区别 
+> - 协程与普通的线程很相似，都有自己的执行上下文、可以分享全局变量。
+> - 它们的不同之处在于，同一时间可以有多个线程处于运行状态，但是运行的协程只能有一个，其他协程都处于暂停状态。此外，普通的线程是抢先式的，到底哪个线程优先得到资源，必须由运行环境决定，但是协程是合作式的，执行权由协程自己分配。
+#### 3) Generator 与上下文 
+> - Generator执行产生的上下文环境，一旦遇到yield命令，就会暂时退出堆栈，但是并不消失，里面的所有变量和对象会冻结在当前状态。等到对它执行next命令时，这个上下文环境又会重新加入调用栈，冻结的变量和对象恢复执行。
+#### 4) 应用
+> - 异步操作的同步化表达
+> - 这种写法的好处是所有findGF过程的逻辑，都被封装在一个函数，按部就班非常清晰，而且可以隐藏细节；
+> - 
+        
+                var findGF =function* () {
+                    console.log("Start!");
+                    yield "Looking for a girl in a park!"
+                    yield "Looking for a girl in a garden!"
+                    console.log("I have found a girl!");
+                }
+                18:00:18.700 undefined
+                18:00:41.939 var Lily =  findGF();
+                18:00:41.947 undefined
+                18:00:58.674 Lily.next();
+                18:00:58.678 VM3310:2 Start!
+                18:00:58.697 {value: "Looking for a girl in a park!", done: false}
+                18:01:11.184 Lily.next();
+                18:01:11.200 {value: "Looking for a girl in a garden!", done: false}
+                18:01:14.506 Lily.next();
+                18:01:14.508 VM3310:5 I have found a girl!
+                18:01:14.531 {value: undefined, done: true}
+> - 
+> - 
+                                                                             
 ------      
         
 
