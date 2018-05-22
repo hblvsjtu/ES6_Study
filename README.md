@@ -1563,6 +1563,131 @@
                 };
 
                 run(g);
+
+
+
+> - generator版本执行器executor
+                // 原始函数
+                var findGF = function* (args, callback) {
+                    yield "Start speaking my girl's name!";
+                    console.log(`My girl's name is ${args};`);
+                    yield "End!";
+                    yield callback;
+                }
+
+                // Trump转换器
+                var translator = function() {
+                    return function(args) {
+                        return function(callback) {
+                            return findGF(args, callback);
+                        }
+                    }
+                }
+
+
+                // generator版本执行器executor
+                var execute = function(generator) {
+                    let Generator = generator();
+                    let result = Generator.next();
+                    while(!result.done) {
+
+                        // 把构造器放进回调函数中
+                        let findGFGenerator = result.value(Generator);
+                        findGFGenerator.next();
+                        findGFGenerator.next();
+
+                        //回调 g函数构造器
+                        result = findGFGenerator.next().value;
+
+                        //g函数构造器指针向下一格
+                        result = result.next();
+                    }
+                }
+
+                //定义generator
+                var changeGF = function*() {
+                    let t = translator();
+                    yield t("Lily");
+                    yield t("Belly");
+                    yield t("Lisa");
+                    yield t("Amy");
+                }
+
+                //执行操作
+                execute(changeGF);
+                11:40:44.659 VM268:4 My girl's name is Lily;
+                11:40:44.660 VM268:4 My girl's name is Belly;
+                11:40:44.660 VM268:4 My girl's name is Lisa;
+                11:40:44.660 VM268:4 My girl's name is Amy;
+
+
+                // 原始函数
+                var findGF = function* (args, callback) {
+                    yield "Start speaking my girl's name!";
+                    console.log(`My girl's name is ${args};`);
+                    yield "End!";
+                    yield callback;
+                }
+
+                // Trump转换器
+                var translator = function() {
+                    return function(args) {
+                        return function(callback) {
+                            return findGF(args, callback);
+                        }
+                    }
+                }
+
+> - Promise版本执行器executor，关键在于把resolveF和promise.then()方法互相耦合
+                
+                // Promise版本执行器executor
+                var execute = function(generator) {
+
+                    let g = generator();
+                    let result = g.next();
+                    let resolveF = function(Generator) {
+                         // 把构造器放进回调函数中
+                        let findGFGenerator = result.value(Generator);
+                        findGFGenerator.next();
+                        findGFGenerator.next();
+
+                        //回调 g函数构造器
+                        result = findGFGenerator.next().value;
+
+                        //g函数构造器指针向下一格
+                        result = result.next();
+                        if(result.done) {
+                            throw "done";
+                        }else {
+                            next();
+                        }
+                        return Generator;
+                    }
+                    let promise = new Promise(function(resolve, error) {resolve(g);});
+
+                    let next = function() {
+                        promise = promise.then(resolveF).catch(function(e) {console.log("done!");});        
+                    };
+                    resolveF(g);
+                }
+
+                //定义generator
+                var changeGF = function*() {
+                    let t = translator();
+                    yield t("Lily");
+                    yield t("Belly");
+                    yield t("Lisa");
+                    yield t("Amy");
+                    yield t("Janny");
+                }
+
+                execute(changeGF);
+                18:20:52.959 VM42759:4 My girl's name is Lily;
+                18:20:52.959 VM42759:4 My girl's name is Belly;
+                18:20:52.959 VM42759:4 My girl's name is Lisa;
+                18:20:52.960 VM42759:4 My girl's name is Amy;
+                18:20:52.960 VM42759:4 My girl's name is Janny;
+                18:20:52.960 VM42791:27 done!
 #### 6) co处理并发的异步操作
 > - co 支持并发的异步操作，即允许某些操作同时进行，等到它们全部完成，才进行下一步。这时，要把并发的操作都放在数组或对象里面，跟在yield语句后面。 
 > - 需要generator和promise的配合
