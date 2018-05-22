@@ -1692,7 +1692,7 @@
 > - co 支持并发的异步操作，即允许某些操作同时进行，等到它们全部完成，才进行下一步。这时，要把并发的操作都放在数组或对象里面，跟在yield语句后面。 
 > - 需要generator和promise的配合
 > - 需要用到Promise.race(）或者Promise.all()的方法
-> - co的源码：
+> - co模块其实就是一个执行器，以下co的源码：
         
                 function co(gen) {
                     var ctx = this;
@@ -1741,7 +1741,190 @@
 <h3 id='6.5'>6.5 async函数</h3>
         
 #### 1) 简介
-> -
+> - ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
+> - 实质上是Generator 函数的语法糖。
+#### 2) 基本用法
+> - async函数返回一个 Promise 对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。
+> - 其实async函数返回的是一个promise对象，然后async函数的返回值就是then()方法里面函数的参数； 
+> - async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。
+> - 正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个 Promise 对象，然后立即执行resolve()方法 ，也就是说await命令后面的命令就成为了resolve()方法并被立即执行；
+> - await命令后面的 Promise 对象如果变为reject状态，则reject的参数会被catch方法的回调函数接收到。如果是里面的catch接收到，那么就会继续运行，如果是被外面的catch捕捉到，那么就会停止运行，
+> - await命令后面的 Promise 对象如果变为resolve状态，但是单纯的resolve状态并不能被接收到，需要与return配合。
+> - 如果是单纯的出错，throw 前不需要await，抛出的错误将由then()方法的reject回调函数接收，此时异步操作会被中断，如果不想被中断，需要用到try...catch结构
+        
+                var findGF = async function(wealth) {
+                    let a = await (function() {console.log("The girl is beautiful;");})();
+                    let b = await (function() {console.log("The girl is cute;");})();
+                    let c = await (function() {console.log("The girl is warm;");})();
+                    
+                    if(wealth < 0) {
+                        try{
+                            throw new Error("Oh no! 小伙子你是负资产啊，滚粗！");
+                        }catch(e) {
+                            console.log(e.toString());
+                            return "问世间情为何物，直教人生死相许";
+                        }
+                    }else if(wealth < 100) {
+                        console.log("awkward！小伙子太穷了，被拒绝！");
+                        let d = await Promise.reject("问世间情为何物，直教人生死相许");
+                    }else {
+                        let f = await Promise.resolve("窈窕淑女，君子好逑！愿有情人终成眷属");
+                        return f;
+                    }
+                }
+
+                var resolve = function(str) {
+                    console.log(str);
+                }
+
+                var reject = function(str) {
+                    console.log(str);
+                }
+
+                findGF(101).then(resolve,reject).catch(function(str) {console.log(str);});
+                21:50:34.282 VM42960:2 The girl is beautiful;
+                21:50:34.283 VM42960:3 The girl is cute;
+                21:50:34.283 VM42960:4 The girl is warm;
+                21:50:34.283 VM42960:23 窈窕淑女，君子好逑！愿有情人终成眷属
+                21:50:34.299 Promise {<resolved>: undefined}
+                21:50:48.651 findGF(99).then(resolve,reject).catch(function(str) {console.log(str);});
+                21:50:48.651 VM42960:2 The girl is beautiful;
+                21:50:48.651 VM42960:3 The girl is cute;
+                21:50:48.651 VM42960:4 The girl is warm;
+                21:50:48.651 VM42960:14 awkward！小伙子太穷了，被拒绝！
+                21:50:48.652 VM42960:27 问世间情为何物，直教人生死相许
+                21:50:48.663 Promise {<resolved>: undefined}
+                21:50:53.571 findGF(-100).then(resolve,reject).catch(function(str) {console.log(str);});
+                21:50:53.571 VM42960:2 The girl is beautiful;
+                21:50:53.572 VM42960:3 The girl is cute;
+                21:50:53.572 VM42960:4 The girl is warm;
+                21:50:53.572 VM42960:10 Error: Oh no! 小伙子你是负资产啊，滚粗！
+                21:50:53.572 VM42960:23 问世间情为何物，直教人生死相许
+                21:50:53.583 Promise {<resolved>: undefined}
+#### 3) 并发异步执行
+> - Promise.all([{}, {}, {}])版本 
+        
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                var studyJS = function() {
+                    let a = fib(10);
+                    console.log("I am learning JS!");
+                    return a;
+                }
+
+                var kitFit = function() {
+                    let a = fib(20);
+                    console.log("I am doing some exercise!");
+                    return a;
+                }
+
+                var makeMoney = function() {
+                    let a = fib(30);
+                    console.log("I am earning money!");
+                    return a;
+                }
+
+                var findGF = async function(name) {
+                    let a = await Promise.all([ kitFit(), makeMoney(), studyJS()]);
+                    await console.log("finghting~" + " " + a[0] + " " + a[1] + " " + a[2]);
+                    return Promise.resolve(`${name} I love you!`);
+                }
+
+                findGF("Lily").then(function(str) {console.log(str);});
+                22:44:01.174 VM94:13 I am doing some exercise!
+                22:44:01.187 VM94:19 I am earning money!
+                22:44:01.187 VM94:7 I am learning JS!
+                22:44:01.187 VM94:25 finghting~ 6765 832040 55
+                22:44:01.188 VM94:29 Lily I love you!
+                22:44:01.192 Promise {<resolved>: undefined}
+
+> - for...of版本，本质上跟Promise.all([{}, {}, {}])版本相同，for...of是进行一部异步的通用方法；
+        
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                var studyJS = function() {
+                    let a = fib(10);
+                    console.log("I am learning JS!");
+                    return a;
+                }
+
+                var kitFit = function() {
+                    let a = fib(20);
+                    console.log("I am doing some exercise!");
+                    return a;
+                }
+
+                var makeMoney = function() {
+                    let a = fib(30);
+                    console.log("I am earning money!");
+                    return a;
+                }
+
+                var findGF = async function(name) {
+                    let func = [kitFit, makeMoney, studyJS];
+                    let a = [];
+                    for(let f of func) {
+                        a.push(await f());
+                    }
+                    await console.log("finghting~" + " " + a[0] + " " + a[1] + " " + a[2]);
+                    return Promise.resolve(`${name} I love you!`);
+                }
+
+                findGF("Lily").then(function(str) {console.log(str);});
+                22:57:23.839 VM136:13 I am doing some exercise!
+                22:57:23.853 VM136:19 I am earning money!
+                22:57:23.853 VM136:7 I am learning JS!
+                22:57:23.854 VM136:29 finghting~ 6765 832040 55
+                22:57:23.854 VM136:33 Lily I love you!
+
+> - Promise.race()版本
+        
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                var studyJS = function() {
+                    let a = fib(1);
+                    console.log("I am learning JS!");
+                    return a;
+                }
+
+                var kitFit = function() {
+                    let a = fib(20);
+                    console.log("I am doing some exercise!");
+                    return a;
+                }
+
+                var makeMoney = function() {
+                    let a = fib(30);
+                    console.log("I am earning money!");
+                    return a;
+                }
+
+                var findGF = async function(name) {
+                    let a = await Promise.race([makeMoney(), kitFit(), studyJS()]);
+                    await console.log("finghting~" + " " + a);
+                    return Promise.resolve(`${name} I love you!`);
+                }
+
+                findGF("Lily").then(function(str) {console.log(str);});
+                22:48:54.183 VM108:19 I am earning money!
+                22:48:54.183 VM108:13 I am doing some exercise!
+                22:48:54.184 VM108:7 I am learning JS!
+                22:48:54.184 VM108:25 finghting~ 832040
+                22:48:54.184 VM108:29 Lily I love you!
+
+     
+#### 4) 异步遍历器
+> - 一般来讲，generator的next方法必须是同步的，只要调用就必须立刻返回值。也就是说，一旦执行next方法，就必须同步地得到value和done这两个属性。
+> - 如果遍历指针正好指向同步操作当然没有问题，但对于异步操作，就不太合适了。
+> - 目前的解决方法是，Generator 函数里面的异步操作，返回一个 Thunk 函数或者 Promise 对象，即value属性是一个 Thunk 函数或者 Promise 对象，等待以后返回真正的值，而done属性则还是同步产生的。
+> - 为了做到这一点，关键是让next()方法返回Promise对象
+> - 
 
 ------      
         
