@@ -1564,9 +1564,7 @@
 
                 run(g);
 
-
-
-> - generator版本执行器executor
+> - generator版本执行器executor 同步执行
                 // 原始函数
                 var findGF = function* (args, callback) {
                     yield "Start speaking my girl's name!";
@@ -1615,12 +1613,40 @@
 
                 //执行操作
                 execute(changeGF);
-                11:40:44.659 VM268:4 My girl's name is Lily;
-                11:40:44.660 VM268:4 My girl's name is Belly;
-                11:40:44.660 VM268:4 My girl's name is Lisa;
-                11:40:44.660 VM268:4 My girl's name is Amy;
 
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
 
+                console.log(`fib(18) = ${fib(18)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                11:13:50.949 VM464:4 My girl's name is Lily;
+                11:13:50.949 VM464:4 My girl's name is Belly;
+                11:13:50.949 VM464:4 My girl's name is Lisa;
+                11:13:50.949 VM464:4 My girl's name is Amy;
+                11:13:50.949 VM464:54 fib(18) = 2584
+                11:13:50.950 VM464:55 随便写点什么东西，看看是不是提前运行了
+                11:13:50.950 VM464:56 fib(5) = 5
+                11:13:50.950 VM464:57 fib(5) = 5
+                11:13:50.950 VM464:58 fib(5) = 5
+                11:13:50.950 VM464:59 fib(5) = 5
+                11:13:50.950 VM464:60 fib(5) = 5
+                11:13:50.950 VM464:61 fib(5) = 5
+                11:13:50.950 VM464:62 fib(5) = 5
+                11:13:50.950 VM464:63 fib(5) = 5
+                11:13:50.950 VM464:64 fib(5) = 5
+
+> - Promise版本执行器executor，关键在于把resolveF和promise.then()方法互相耦合 异步执行 
+                
                 // 原始函数
                 var findGF = function* (args, callback) {
                     yield "Start speaking my girl's name!";
@@ -1638,8 +1664,6 @@
                     }
                 }
 
-> - Promise版本执行器executor，关键在于把resolveF和promise.then()方法互相耦合
-                
                 // Promise版本执行器executor
                 var execute = function(generator) {
 
@@ -1682,12 +1706,41 @@
                 }
 
                 execute(changeGF);
-                18:20:52.959 VM42759:4 My girl's name is Lily;
-                18:20:52.959 VM42759:4 My girl's name is Belly;
-                18:20:52.959 VM42759:4 My girl's name is Lisa;
-                18:20:52.960 VM42759:4 My girl's name is Amy;
-                18:20:52.960 VM42759:4 My girl's name is Janny;
-                18:20:52.960 VM42791:27 done!
+
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                console.log(`fib(18) = ${fib(18)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+
+                11:11:27.685 VM462:4 My girl's name is Lily;
+                11:11:27.686 VM462:65 fib(18) = 2584
+                11:11:27.686 VM462:66 随便写点什么东西，看看是不是提前运行了
+                11:11:27.686 VM462:67 fib(5) = 5
+                11:11:27.686 VM462:68 fib(5) = 5
+                11:11:27.686 VM462:69 fib(5) = 5
+                11:11:27.686 VM462:70 fib(5) = 5
+                11:11:27.686 VM462:71 fib(5) = 5
+                11:11:27.686 VM462:72 fib(5) = 5
+                11:11:27.686 VM462:73 fib(5) = 5
+                11:11:27.686 VM462:74 fib(5) = 5
+                11:11:27.687 VM462:75 fib(5) = 5
+                11:11:27.687 VM462:4 My girl's name is Belly;
+                11:11:27.687 VM462:4 My girl's name is Lisa;
+                11:11:27.687 VM462:4 My girl's name is Amy;
+                11:11:27.687 VM462:4 My girl's name is Janny;
+                11:11:27.688 VM462:44 done!
 #### 6) co处理并发的异步操作
 > - co 支持并发的异步操作，即允许某些操作同时进行，等到它们全部完成，才进行下一步。这时，要把并发的操作都放在数组或对象里面，跟在yield语句后面。 
 > - 需要generator和promise的配合
@@ -1747,7 +1800,7 @@
 > - async函数返回一个 Promise 对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。
 > - 其实async函数返回的是一个promise对象，然后async函数的返回值就是then()方法里面函数的参数； 
 > - async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。
-> - 正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个 Promise 对象，然后立即执行resolve()方法 ，也就是说await命令后面的命令就成为了resolve()方法并被立即执行；
+> - 正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个 Promise 对象，然后立即执行resolve()方法 ，也就是说await命令后面的命令就成为了resolve()方法并被立即执行，相当于then()方法
 > - await命令后面的 Promise 对象如果变为reject状态，则reject的参数会被catch方法的回调函数接收到。如果是里面的catch接收到，那么就会继续运行，如果是被外面的catch捕捉到，那么就会停止运行，
 > - await命令后面的 Promise 对象如果变为resolve状态，但是单纯的resolve状态并不能被接收到，需要与return配合。
 > - 如果是单纯的出错，throw 前不需要await，抛出的错误将由then()方法的reject回调函数接收，此时异步操作会被中断，如果不想被中断，需要用到try...catch结构
@@ -1772,6 +1825,7 @@
                         return f;
                     }
                 }
+                findGF(101).then(resolve,reject).catch(function(str) {console.log(str);}); 
 
                 var resolve = function(str) {
                     console.log(str);
@@ -1781,7 +1835,6 @@
                     console.log(str);
                 }
 
-                findGF(101).then(resolve,reject).catch(function(str) {console.log(str);});
                 21:50:34.282 VM42960:2 The girl is beautiful;
                 21:50:34.283 VM42960:3 The girl is cute;
                 21:50:34.283 VM42960:4 The girl is warm;
@@ -1801,6 +1854,180 @@
                 21:50:53.572 VM42960:10 Error: Oh no! 小伙子你是负资产啊，滚粗！
                 21:50:53.572 VM42960:23 问世间情为何物，直教人生死相许
                 21:50:53.583 Promise {<resolved>: undefined}
+> - 复杂的版本
+        
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                var findGF = async function(wealth) {
+                    let a = await (function() {let a = fib(10); console.log("The girl is beautiful;");return a;})();
+                    let b = await (function() {let a = fib(20); console.log("The girl is cute;");return a;})();
+                    let c = await (function() {let a = fib(30); console.log("The girl is warm;");return a;})();
+
+                    if(wealth < 0) {
+                        try{
+                            throw new Error("Oh no! 小伙子你是负资产啊，滚粗！"+ a + b + c);
+                        }catch(e) {
+                            console.log(e.toString());
+                            return "问世间情为何物，直教人生死相许"+ a + b + c;
+                        }
+                    }else if(wealth < 100) {
+                        console.log("awkward！小伙子太穷了，被拒绝！");
+                        let d = await Promise.reject("问世间情为何物，直教人生死相许"+ a + b + c);
+                    }else {
+                        let f = await Promise.resolve("窈窕淑女，君子好逑！愿有情人终成眷属"+ a + b + c);
+                        return f;
+                    }
+                }
+
+                var resolve = function(str) {
+                    console.log(str);
+                }
+
+                var reject = function(str) {
+                    console.log(str);
+                }
+
+                findGF(101).then(resolve,reject).catch(function(str) {console.log(str);});
+
+                      
+                // 第一组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(10) = ${fib(10)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+                findGF(99).then(resolve,reject).catch(function(str) {console.log(str);});
+
+
+                // 第二组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(20) = ${fib(20)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+                findGF(-100).then(resolve,reject).catch(function(str) {console.log(str);});
+                12:51:41.783 VM647:6 The girl is beautiful;
+                12:51:41.783 VM647:38 fib(10) = 55
+                12:51:41.783 VM647:39 随便写点什么东西，看看是不是提前运行了
+                12:51:41.783 VM647:40 fib(5) = 5
+                12:51:41.784 VM647:41 fib(5) = 5
+                12:51:41.784 VM647:42 fib(5) = 5
+                12:51:41.784 VM647:43 fib(5) = 5
+                12:51:41.784 VM647:44 fib(5) = 5
+                12:51:41.784 VM647:45 fib(5) = 5
+                12:51:41.784 VM647:46 fib(5) = 5
+                12:51:41.784 VM647:47 fib(5) = 5
+                12:51:41.784 VM647:48 fib(5) = 5
+                12:51:41.784 VM647:6 The girl is beautiful;
+                12:51:41.786 VM647:54 fib(20) = 6765
+                12:51:41.786 VM647:55 随便写点什么东西，看看是不是提前运行了
+                12:51:41.786 VM647:56 fib(5) = 5
+                12:51:41.786 VM647:57 fib(5) = 5
+                12:51:41.786 VM647:58 fib(5) = 5
+                12:51:41.786 VM647:59 fib(5) = 5
+                12:51:41.786 VM647:60 fib(5) = 5
+                12:51:41.786 VM647:61 fib(5) = 5
+                12:51:41.786 VM647:62 fib(5) = 5
+                12:51:41.786 VM647:63 fib(5) = 5
+                12:51:41.786 VM647:64 fib(5) = 5
+                12:51:41.786 VM647:6 The girl is beautiful;
+                12:51:41.787 VM647:7 The girl is cute;
+                12:51:41.787 VM647:7 The girl is cute;
+                12:51:41.787 VM647:7 The girl is cute;
+                12:51:41.801 VM647:8 The girl is warm;
+                12:51:41.815 VM647:8 The girl is warm;
+                12:51:41.829 VM647:8 The girl is warm;
+                12:51:41.829 VM647:18 awkward！小伙子太穷了，被拒绝！
+                12:51:41.829 VM647:14 Error: Oh no! 小伙子你是负资产啊，滚粗！556765832040
+                12:51:41.829 VM647:27 问世间情为何物，直教人生死相许556765832040
+                12:51:41.830 VM647:27 窈窕淑女，君子好逑！愿有情人终成眷属556765832040
+                12:51:41.830 VM647:31 
+> - 体现异步的版本
+        
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                var studyJS = function() {
+                    let a = fib(3);
+                    console.log("I am learning JS!");
+                    return a;
+                }
+
+                var kitFit = function() {
+                    let a = fib(2);
+                    console.log("I am doing some exercise!");
+                    return a;
+                }
+
+                var makeMoney = function() {
+                    let a = fib(1);
+                    console.log("I am earning money!");
+                    return a;
+                }
+
+                var fight = function* () {
+                    yield makeMoney;
+                    yield kitFit;
+                    yield studyJS;
+                }
+
+                var findGF = async function(name) {
+
+                    var f = fight();
+                    await f.next().value();
+                    await f.next().value();
+                    await f.next().value();
+                    return `I love ${name}!`;
+                }
+
+                findGF("Lily").then(function(str) {console.log(str);});
+
+                console.log(`fib(18) = ${fib(18)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+
+                11:08:25.087 VM460:19 I am earning money!
+                11:08:25.087 VM460:40 fib(18) = 2584
+                11:08:25.088 VM460:41 随便写点什么东西，看看是不是提前运行了
+                11:08:25.088 VM460:42 fib(5) = 5
+                11:08:25.088 VM460:43 fib(5) = 5
+                11:08:25.088 VM460:44 fib(5) = 5
+                11:08:25.088 VM460:45 fib(5) = 5
+                11:08:25.088 VM460:46 fib(5) = 5
+                11:08:25.088 VM460:47 fib(5) = 5
+                11:08:25.088 VM460:48 fib(5) = 5
+                11:08:25.088 VM460:49 fib(5) = 5
+                11:08:25.088 VM460:50 fib(5) = 5
+                11:08:25.088 VM460:13 I am doing some exercise!
+                11:08:25.088 VM460:7 I am learning JS!
+                11:08:25.088 VM460:38 I love Lily!
+> - 
 #### 3) 并发异步执行
 > - Promise.all([{}, {}, {}])版本 
         
@@ -1833,12 +2060,68 @@
                 }
 
                 findGF("Lily").then(function(str) {console.log(str);});
-                22:44:01.174 VM94:13 I am doing some exercise!
-                22:44:01.187 VM94:19 I am earning money!
-                22:44:01.187 VM94:7 I am learning JS!
-                22:44:01.187 VM94:25 finghting~ 6765 832040 55
-                22:44:01.188 VM94:29 Lily I love you!
-                22:44:01.192 Promise {<resolved>: undefined}
+
+                // 第一组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(10) = ${fib(10)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+                findGF("Llsa").then(function(str) {console.log(str);});
+
+                // 第二组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(20) = ${fib(20)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+
+                12:07:11.467 VM620:13 I am doing some exercise!
+                12:07:11.481 VM620:19 I am earning money!
+                12:07:11.481 VM620:7 I am learning JS!
+                12:07:11.481 VM620:32 fib(10) = 55
+                12:07:11.481 VM620:33 随便写点什么东西，看看是不是提前运行了
+                12:07:11.481 VM620:34 fib(5) = 5
+                12:07:11.482 VM620:35 fib(5) = 5
+                12:07:11.482 VM620:36 fib(5) = 5
+                12:07:11.482 VM620:37 fib(5) = 5
+                12:07:11.482 VM620:38 fib(5) = 5
+                12:07:11.482 VM620:39 fib(5) = 5
+                12:07:11.482 VM620:40 fib(5) = 5
+                12:07:11.482 VM620:41 fib(5) = 5
+                12:07:11.482 VM620:42 fib(5) = 5
+                12:07:11.482 VM620:13 I am doing some exercise!
+                12:07:11.497 VM620:19 I am earning money!
+                12:07:11.497 VM620:7 I am learning JS!
+                12:07:11.498 VM620:47 fib(20) = 6765
+                12:07:11.498 VM620:48 随便写点什么东西，看看是不是提前运行了
+                12:07:11.498 VM620:49 fib(5) = 5
+                12:07:11.498 VM620:50 fib(5) = 5
+                12:07:11.498 VM620:51 fib(5) = 5
+                12:07:11.498 VM620:52 fib(5) = 5
+                12:07:11.498 VM620:53 fib(5) = 5
+                12:07:11.498 VM620:54 fib(5) = 5
+                12:07:11.498 VM620:55 fib(5) = 5
+                12:07:11.498 VM620:56 fib(5) = 5
+                12:07:11.498 VM620:57 fib(5) = 5
+                12:07:11.498 VM620:25 finghting~ 6765 832040 55
+                12:07:11.498 VM620:25 finghting~ 6765 832040 55
+                12:07:11.499 VM620:29 Lily I love you!
+                12:07:11.499 VM620:44 Llsa I love you!
 
 > - for...of版本，本质上跟Promise.all([{}, {}, {}])版本相同，for...of是进行一部异步的通用方法；
         
@@ -1875,11 +2158,68 @@
                 }
 
                 findGF("Lily").then(function(str) {console.log(str);});
-                22:57:23.839 VM136:13 I am doing some exercise!
-                22:57:23.853 VM136:19 I am earning money!
-                22:57:23.853 VM136:7 I am learning JS!
-                22:57:23.854 VM136:29 finghting~ 6765 832040 55
-                22:57:23.854 VM136:33 Lily I love you!
+
+                // 第一组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(10) = ${fib(10)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+                findGF("Llsa").then(function(str) {console.log(str);});
+
+                // 第二组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(20) = ${fib(20)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+
+                12:09:28.366 VM621:13 I am doing some exercise!
+                12:09:28.366 VM621:36 fib(10) = 55
+                12:09:28.366 VM621:37 随便写点什么东西，看看是不是提前运行了
+                12:09:28.366 VM621:38 fib(5) = 5
+                12:09:28.366 VM621:39 fib(5) = 5
+                12:09:28.366 VM621:40 fib(5) = 5
+                12:09:28.366 VM621:41 fib(5) = 5
+                12:09:28.366 VM621:42 fib(5) = 5
+                12:09:28.366 VM621:43 fib(5) = 5
+                12:09:28.366 VM621:44 fib(5) = 5
+                12:09:28.366 VM621:45 fib(5) = 5
+                12:09:28.366 VM621:46 fib(5) = 5
+                12:09:28.367 VM621:13 I am doing some exercise!
+                12:09:28.367 VM621:51 fib(20) = 6765
+                12:09:28.367 VM621:52 随便写点什么东西，看看是不是提前运行了
+                12:09:28.367 VM621:53 fib(5) = 5
+                12:09:28.367 VM621:54 fib(5) = 5
+                12:09:28.367 VM621:55 fib(5) = 5
+                12:09:28.367 VM621:56 fib(5) = 5
+                12:09:28.367 VM621:57 fib(5) = 5
+                12:09:28.367 VM621:58 fib(5) = 5
+                12:09:28.367 VM621:59 fib(5) = 5
+                12:09:28.367 VM621:60 fib(5) = 5
+                12:09:28.367 VM621:61 fib(5) = 5
+                12:09:28.381 VM621:19 I am earning money!
+                12:09:28.397 VM621:19 I am earning money!
+                12:09:28.397 VM621:7 I am learning JS!
+                12:09:28.397 VM621:7 I am learning JS!
+                12:09:28.397 VM621:29 finghting~ 6765 832040 55
+                12:09:28.397 VM621:29 finghting~ 6765 832040 55
+                12:09:28.397 VM621:33 Lily I love you!
+                12:09:28.397 VM621:48 Llsa I love you!
 
 > - Promise.race()版本
         
@@ -1888,7 +2228,7 @@
                 }
 
                 var studyJS = function() {
-                    let a = fib(1);
+                    let a = fib(10);
                     console.log("I am learning JS!");
                     return a;
                 }
@@ -1912,19 +2252,278 @@
                 }
 
                 findGF("Lily").then(function(str) {console.log(str);});
-                22:48:54.183 VM108:19 I am earning money!
-                22:48:54.183 VM108:13 I am doing some exercise!
-                22:48:54.184 VM108:7 I am learning JS!
-                22:48:54.184 VM108:25 finghting~ 832040
-                22:48:54.184 VM108:29 Lily I love you!
+
+                // 第一组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(10) = ${fib(10)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+                findGF("Llsa").then(function(str) {console.log(str);});
+
+                // 第二组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(20) = ${fib(20)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+
+                12:11:10.941 VM622:19 I am earning money!
+                12:11:10.942 VM622:13 I am doing some exercise!
+                12:11:10.942 VM622:7 I am learning JS!
+                12:11:10.942 VM622:32 fib(10) = 55
+                12:11:10.942 VM622:33 随便写点什么东西，看看是不是提前运行了
+                12:11:10.942 VM622:34 fib(5) = 5
+                12:11:10.942 VM622:35 fib(5) = 5
+                12:11:10.942 VM622:36 fib(5) = 5
+                12:11:10.942 VM622:37 fib(5) = 5
+                12:11:10.942 VM622:38 fib(5) = 5
+                12:11:10.942 VM622:39 fib(5) = 5
+                12:11:10.942 VM622:40 fib(5) = 5
+                12:11:10.942 VM622:41 fib(5) = 5
+                12:11:10.942 VM622:42 fib(5) = 5
+                12:11:10.956 VM622:19 I am earning money!
+                12:11:10.956 VM622:13 I am doing some exercise!
+                12:11:10.956 VM622:7 I am learning JS!
+                12:11:10.956 VM622:47 fib(20) = 6765
+                12:11:10.956 VM622:48 随便写点什么东西，看看是不是提前运行了
+                12:11:10.957 VM622:49 fib(5) = 5
+                12:11:10.957 VM622:50 fib(5) = 5
+                12:11:10.957 VM622:51 fib(5) = 5
+                12:11:10.957 VM622:52 fib(5) = 5
+                12:11:10.957 VM622:53 fib(5) = 5
+                12:11:10.957 VM622:54 fib(5) = 5
+                12:11:10.957 VM622:55 fib(5) = 5
+                12:11:10.957 VM622:56 fib(5) = 5
+                12:11:10.957 VM622:57 fib(5) = 5
+                12:11:10.957 VM622:25 finghting~ 832040
+                12:11:10.957 VM622:25 finghting~ 832040
+                12:11:10.957 VM622:29 Lily I love you!
+                12:11:10.957 VM622:44 Llsa I love you!
 
      
 #### 4) 异步遍历器
 > - 一般来讲，generator的next方法必须是同步的，只要调用就必须立刻返回值。也就是说，一旦执行next方法，就必须同步地得到value和done这两个属性。
 > - 如果遍历指针正好指向同步操作当然没有问题，但对于异步操作，就不太合适了。
 > - 目前的解决方法是，Generator 函数里面的异步操作，返回一个 Thunk 函数或者 Promise 对象，即value属性是一个 Thunk 函数或者 Promise 对象，等待以后返回真正的值，而done属性则还是同步产生的。
-> - 为了做到这一点，关键是让next()方法返回Promise对象
-> - 
+> - 为了做到这一点，关键是让next()方法返回Promise对象，并把它放在await命令后面。
+> - 由于next方法用await处理，就不必使用then方法了，整个流程已经很接近同步处理了。
+> - 同步遍历器是部署在Symbol.iterator属性上的
+        
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                var studyJS = new Promise(function(resolve, reject) {
+                                            let a = fib(30);
+                                            console.log("I am learning JS!");
+                                            resolve(`fib(30) = ${a} and I am learning JS!`)} );
+                var kitFit = new Promise(function(resolve, reject) {
+                                            let a = fib(20);
+                                            console.log("I am doing some exercise!");
+                                            resolve(`fib(20) = ${a} and I am doing some exercise!`)} );
+                var makeMoney = new Promise(function(resolve, reject) {
+                                            let a = fib(10);
+                                            console.log("I am earning money!");
+                                            resolve(`fib(10) = ${a} and I am earning money!`)} );
+
+                var fight = function* () {
+                    yield makeMoney;
+                    yield kitFit;
+                    yield studyJS;
+                }
+
+                var findGF = async function(name) {
+
+                    var f = fight();
+                    //for await (const x of f) {
+                    //  console.log(x);
+                    //}
+                    await f.next().value.then(function(val) {console.log(val);});
+                    await f.next().value.then(function(val) {console.log(val);});
+                    await f.next().value.then(function(val) {console.log(val);});
+                    return `I love ${name}!`;
+                }
+
+                findGF("Lily").then(function(str) {console.log(str);});
+
+                // 第一组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(10) = ${fib(10)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+                findGF("Llsa").then(function(str) {console.log(str);});
+
+                // 第二组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(20) = ${fib(20)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                12:18:54.884 VM629:7 I am learning JS!
+                12:18:54.884 VM629:11 I am doing some exercise!
+                12:18:54.884 VM629:15 I am earning money!
+                12:18:54.884 VM629:39 fib(10) = 55
+                12:18:54.885 VM629:40 随便写点什么东西，看看是不是提前运行了
+                12:18:54.885 VM629:41 fib(5) = 5
+                12:18:54.885 VM629:42 fib(5) = 5
+                12:18:54.885 VM629:43 fib(5) = 5
+                12:18:54.885 VM629:44 fib(5) = 5
+                12:18:54.885 VM629:45 fib(5) = 5
+                12:18:54.885 VM629:46 fib(5) = 5
+                12:18:54.885 VM629:47 fib(5) = 5
+                12:18:54.885 VM629:48 fib(5) = 5
+                12:18:54.885 VM629:49 fib(5) = 5
+                12:18:54.885 VM629:54 fib(20) = 6765
+                12:18:54.885 VM629:55 随便写点什么东西，看看是不是提前运行了
+                12:18:54.885 VM629:56 fib(5) = 5
+                12:18:54.885 VM629:57 fib(5) = 5
+                12:18:54.885 VM629:58 fib(5) = 5
+                12:18:54.885 VM629:59 fib(5) = 5
+                12:18:54.886 VM629:60 fib(5) = 5
+                12:18:54.886 VM629:61 fib(5) = 5
+                12:18:54.886 VM629:62 fib(5) = 5
+                12:18:54.886 VM629:63 fib(5) = 5
+                12:18:54.886 VM629:64 fib(5) = 5
+                12:18:54.886 VM629:30 fib(10) = 55 and I am earning money!
+                12:18:54.886 VM629:30 fib(10) = 55 and I am earning money!
+                12:18:54.886 VM629:31 fib(20) = 6765 and I am doing some exercise!
+                12:18:54.886 VM629:31 fib(20) = 6765 and I am doing some exercise!
+                12:18:54.886 VM629:32 fib(30) = 832040 and I am learning JS!
+                12:18:54.886 VM629:32 fib(30) = 832040 and I am learning JS!
+                12:18:54.886 VM629:36 I love Lily!
+                12:18:54.887 VM629:51 I love Llsa!
+#### 5) for await...of 
+> - for...of循环用于遍历同步的 Iterator 接口。新引入的for await...of循环，则是用于遍历异步的 Iterator 接口。
+> - 每个子值代表的是迭代器的值实现方法后返回参数，如果没有方法直接返回该数值；
+        
+                var fib = function(n) {
+                    return n<2 ? n : fib(n-1)+fib(n-2);
+                }
+
+                var studyJS = new Promise(function(resolve, reject) {
+                                            let a = fib(30);
+                                            console.log("I am learning JS!");
+                                            resolve(`fib(30) = ${a} and I am learning JS!`)} );
+                var kitFit = new Promise(function(resolve, reject) {
+                                            let a = fib(20);
+                                            console.log("I am doing some exercise!");
+                                            resolve(`fib(20) = ${a} and I am doing some exercise!`)} );
+                var makeMoney = new Promise(function(resolve, reject) {
+                                            let a = fib(10);
+                                            console.log("I am earning money!");
+                                            resolve(`fib(10) = ${a} and I am earning money!`)} );
+
+                var fight = function* () {
+                    yield makeMoney;
+                    yield kitFit;
+                    yield studyJS;
+                }
+
+                var findGF = async function(name) {
+
+                    var f = fight();
+                    for await (const x of f) {
+                      console.log(x);
+                    }
+                    // await f.next().value.then(function(val) {console.log(val);});
+                    // await f.next().value.then(function(val) {console.log(val);});
+                    // await f.next().value.then(function(val) {console.log(val);});
+                    return `I love ${name}!`;
+                }
+
+                findGF("Lily").then(function(str) {console.log(str);});
+
+                // 第一组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(10) = ${fib(10)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+
+                findGF("Llsa").then(function(str) {console.log(str);});
+
+                // 第二组 随便写点什么东西，看看是不是提前运行了
+                console.log(`fib(20) = ${fib(20)}`);
+                console.log("随便写点什么东西，看看是不是提前运行了");
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                console.log(`fib(5) = ${fib(5)}`);
+                12:20:31.201 VM630:7 I am learning JS!
+                12:20:31.202 VM630:11 I am doing some exercise!
+                12:20:31.202 VM630:15 I am earning money!
+                12:20:31.202 VM630:39 fib(10) = 55
+                12:20:31.202 VM630:40 随便写点什么东西，看看是不是提前运行了
+                12:20:31.203 VM630:41 fib(5) = 5
+                12:20:31.203 VM630:42 fib(5) = 5
+                12:20:31.203 VM630:43 fib(5) = 5
+                12:20:31.203 VM630:44 fib(5) = 5
+                12:20:31.203 VM630:45 fib(5) = 5
+                12:20:31.203 VM630:46 fib(5) = 5
+                12:20:31.203 VM630:47 fib(5) = 5
+                12:20:31.203 VM630:48 fib(5) = 5
+                12:20:31.203 VM630:49 fib(5) = 5
+                12:20:31.204 VM630:54 fib(20) = 6765
+                12:20:31.204 VM630:55 随便写点什么东西，看看是不是提前运行了
+                12:20:31.204 VM630:56 fib(5) = 5
+                12:20:31.204 VM630:57 fib(5) = 5
+                12:20:31.204 VM630:58 fib(5) = 5
+                12:20:31.204 VM630:59 fib(5) = 5
+                12:20:31.204 VM630:60 fib(5) = 5
+                12:20:31.204 VM630:61 fib(5) = 5
+                12:20:31.204 VM630:62 fib(5) = 5
+                12:20:31.205 VM630:63 fib(5) = 5
+                12:20:31.205 VM630:64 fib(5) = 5
+                12:20:31.205 VM630:28 fib(10) = 55 and I am earning money!
+                12:20:31.205 VM630:28 fib(10) = 55 and I am earning money!
+                12:20:31.205 VM630:28 fib(20) = 6765 and I am doing some exercise!
+                12:20:31.205 VM630:28 fib(20) = 6765 and I am doing some exercise!
+                12:20:31.205 VM630:28 fib(30) = 832040 and I am learning JS!
+                12:20:31.205 VM630:28 fib(30) = 832040 and I am learning JS!
+                12:20:31.206 VM630:36 I love Lily!
+                12:20:31.206 VM630:51 I love Llsa!
+#### 6) 比较各种同步异步的方法
+> - 普通函数、async 函数（异步执行，因为await返回的是promise对象）、Generator 函数（同步执行）和异步 Generator 函数(与promise对象结合，或者执行器是promise)。请注意区分每种函数的不同之处。基本上，如果是一系列按照顺序执行的异步操作（比如读取文件，然后写入新内容，再存入硬盘），可以使用 async 函数；如果是一系列产生相同数据结构的异步操作（比如一行一行读取文件），可以使用异步 Generator 函数。
 
 ------      
         
