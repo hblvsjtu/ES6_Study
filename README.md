@@ -2861,9 +2861,27 @@
                 20:35:11.688 VM193:1 Uncaught ReferenceError: Foo is not defined
                     at <anonymous>:1:1
 #### 5) 私有方法和私有属性  
-> - 第一种方法：从命名上，私有方法或者属性名字前面加上下划线。但是，这种命名是不保险的，在类的外部，还是可以调用到这个方法。
-> - 第二种方法：把私有方法移出模块，采用call,apply或者bind等方法进行调用
-> - 引入一个新的前缀#表示私有属性和私有方法
+> - 私有方法 可惜ES6并没有提供相应的方法，我们只能从民间搜集
+>> - 第一种方法：从命名上，私有方法或者属性名字前面加上下划线。但是，这种命名是不保险的，在类的外部，还是可以调用到这个方法。
+>> - 第二种方法：把私有方法移出模块，采用call,apply或者bind等方法进行调用，这时候外部便不知道该方法的具体细节
+        
+                class Widget {
+                  foo (baz) {
+                    bar.call(this, baz);
+                  }
+
+                  // ...
+                }
+
+                // 模块被移除类外
+                function bar(baz) {
+                  return this.snaf = baz;
+                }
+>> - 采用Symbol的属性
+> - 私有属性 用前缀#表示，他既属于一个操作符又属于属性名的一部分
+> - 这种写法不仅可以写私有属性，还可以用来写私有方法。
+> - 但是这个方法只是一个提案，并没有实施，并没有什么用
+
 #### 6) get和set 
 > - 属性有对应的存值函数和取值函数，因此赋值和读取行为都被自定义了。
         
@@ -2886,110 +2904,111 @@
 
                 inst.prop
                 // 'getter'     
-#### 7) Symbol 
-> - 创建一个独一无二的值，永远不用担心这个值跟别的属性的值重复
-> - ES5 的对象属性名都是字符串，这容易造成属性名的冲突，Symbol可以用来避免名字的冲突
-> - symbol是基本类型，实现唯一标识
-> - 通过调用symbol(name)创建symbol，Symbol函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分。
-> - 我们创建一个字段，仅为知道对应symbol的人能访问，使用symbol很有用
-> - symbol不会出现在for..in结果中
-> - Javascript有系统symbol，通过Symbol.*访问。我们能使用他们去修改一些内置行为。
+#### 7) this的指向
+> - 默认指向类的实例
+> - 但是，如果将这个方法提取出来单独使用，this会指向该方法运行时所在的环境，因为找不到print方法而导致报错。
+> - 一个比较简单的解决方法是，在构造方法中绑定this，这样就不会找不到print方法了。
+> - 比如：
         
-                let s = Symbol();
-                typeof s;
-                21:52:41.244 "symbol"
-
-                let s1 = Symbol('foo');
-                let s2 = Symbol('bar');
-                s1 // Symbol(foo)
-
-                21:55:05.722 Symbol(foo)
-                21:55:12.370 s2 // Symbol(bar)
-                21:55:12.372 Symbol(bar)
-                21:55:22.628 s1.toString() // "Symbol(foo)"
-                21:55:22.630 "Symbol(foo)"
-                21:55:25.162 s2.toString() // "Symbol(bar)"
-                21:55:25.164 "Symbol(bar)"
-> - Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
-        
-                // 没有参数的情况
-                let s1 = Symbol();
-                let s2 = Symbol();
-                s1 === s2 // false
-                // 有参数的情况
-                let s1 = Symbol('foo');
-                let s2 = Symbol('foo');
-                s1 === s2 // false
-> - 作为属性名的Symbol 大多需要用到方括号。保证不会出现同名的属性，防止某一个键被不小心改写或覆盖。因为点运算符后面总是字符串，所以不会读取mySymbol作为标识名所指代的那个值，导致a的属性名实际上是一个字符串，而不是一个 Symbol 值。所以不能使用.号运算符。而且对象必须先要声明。
-        
-                let mySymbol = Symbol();
-
-                // 第一种写法
-                let a = {};
-                a[mySymbol] = 'Hello!';
-
-                // 第二种写法
-                let a = {
-                  [mySymbol]: 'Hello!'
-                };
-
-                // 第三种写法
-                let a = {};
-                Object.defineProperty(a, mySymbol, { value: 'Hello!' });
-
-                // 以上写法都得到同样结果
-                a[mySymbol] // "Hello!"
-
-                let s = Symbol();
-                let obj = {
-                  [s]: function (arg) {console.log(arg);}
-                };
-                obj[s](123);
-                22:09:15.222 VM626:4 123
-> - 魔术字符串 多次出现，与代码形成“强耦合”，不利于将来的修改和维护。常用的消除魔术字符串的方法，就是把它写成一个变量。
-> - Symbol.for() 它接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。如果有，就返回这个 Symbol 值，否则就新建并返回一个以该字符串为名称的 Symbol 值。如果有，就返回这个。一般来讲使用symbol(name）创建的symbol，总是不同，即使name相同。如果希望相同名称的symbol相等，则使用全局注册 symbol.for(name)返回给定名称的全局symbol，多次调用返回相同symbol
-                
-                let s1 = Symbol.for('foo');
-                let s2 = Symbol.for('foo');
-                s1 === s2 // true
-> - Symbol.keyFor() 返回一个已全局登记的 Symbol 类型值的key，如果没有用Symbol.for()方法创建的Symbol即使name相同值也是不一样的。
-        
-                let s1 = Symbol.for("foo");
-                Symbol.keyFor(s1) // "foo"
-
-                let s2 = Symbol("foo");
-                Symbol.keyFor(s2) // undefined
-> - Symbol.isConcatSpreadable =true / false 表示该对象用于Array.prototype.concat()时，是否可以展开。
-
-> - 
-#### 8) Generator 方法 [MDN web docs](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/yield)
-> - [rv] = yield [expression];
-> - expression 定义通过迭代器协议从生成器函数返回的值。如果省略，则返回undefined。
-> - rv 返回传递给生成器的next()方法的可选值，以恢复其执行。
-> - yield关键字使生成器函数执行暂停，yield关键字后面的表达式的值返回给生成器的调用者。它可以被认为是一个基于生成器的版本的return关键字。
-> - yield关键字实际返回一个IteratorResult对象，它有两个属性，value和done。value属性是对yield表达式求值的结果，而done是false，表示生成器函数尚未完全完成。
-> - 一旦在 yield 表达式处暂停，除非外部调用生成器的 next() 方法，否则生成器的代码将不能继续执行。每次调用生成器的next()方法时，生成器都会恢复执行，直到达到以下某个值：
-> - 某个方法之前加上星号（*），就表示该方法是一个 Generator 函数。
-        
-                function* countAppleSales () {
-                    var saleList = [3, 7, 5];
-                    for (var i = 0; i < saleList.length; i++) {
-                        yield saleList[i];
+                class Logger {
+                    constructor() {
+                        this.printName = this.printName.bind(this);
                     }
+
+                    // ...
                 }
-                21:19:07.675 undefined
-                21:19:27.967 var appleStore = countAppleSales(); // Generator { }
-                21:19:27.973 undefined
-                21:19:54.048 console.log(appleStore.next()); // { value: 3, done: false }
-                21:19:54.048 VM199:1 {value: 3, done: false}
-                21:19:54.053 undefined
-                21:20:43.808 console.log(appleStore.next()); // { value: 7, done: false }
-                21:20:43.808 VM201:1 {value: 7, done: false}
-                21:20:43.811 undefined
-                21:20:50.062 console.log(appleStore.next()); // { value: 5, done: false }
-                21:20:50.062 VM203:1 {value: 5, done: false}
-                21:20:50.064 undefined
-                21:21:12.515 console.log(appleStore.next()); // { value: undefined, done: true }
-                21:21:12.514 VM205:1 {value: undefined, done: true}
-                21:21:12.516 undefined
+> - 第二种方法是使用箭头函数，利用了箭头函数自动绑定this的特性
+        
+                class Logger {
+                    constructor() {
+                        this.printName = (name = 'there') => {
+                            this.print(`Hello ${name}`);
+                        };
+                    }
+
+                  // ...
+                }
+> - 第三种方法 使用Proxy，获取方法的时候，自动绑定this。
+                
+                function selfish (target) {
+
+                    //采用弱Map的方法，用完即弃
+                    const cache = new WeakMap();
+                    const handler = {
+                        get (target, key) {
+
+                        // 先获取原来的对象属性
+                        const value = Reflect.get(target, key);
+                        if (typeof value !== 'function') {
+                            return value;
+                        }
+                        if (!cache.has(value)) {
+                            cache.set(value, value.bind(target));
+                        }
+                        return cache.get(value);
+                        }
+                    };
+                    const proxy = new Proxy(target, handler);
+                    return proxy;
+                }
+
+                    const logger = selfish(new Logger());
+#### 8) class的静态方法
+> - 
+#### 9) 其他 
+> - name 属性 
+> - Class 的 Generator 方法，某个方法之前加上星号（*）
+        
+                class FindGF {
+
+                    constructor(args) {
+                        this.args = args;
+                    };
+
+                    * generator() {
+                        for(let arg of this.args) {
+                            yield arg;
+                        };
+                    };
+
+                    /* 采用self方法进行this的绑定
+                        [Symbol.iterator]() {
+                            let self = this;
+                            self.index = 0;
+                            return { next() {
+                                return (self.index < self.args.length) ? {value: self.args[self.index++], done: false}: {value: undefined, done: true};
+                                }
+                            }
+                        };
+                     */
+
+                     //采用bind方法进行this的绑定
+                        [Symbol.iterator]() {
+                            this.index = 0;
+                            let next = function() {
+                                return (this.index < this.args.length) ? {value: this.args[this.index++], done: false}: {value: undefined, done: true};
+                            }
+                            next = next.bind(this);
+                            return {next};
+                        };
+                }
+
+                var fight = [];
+                fight.push("I am learning JS!");
+                fight.push("I am doing some exercise!");
+                fight.push("I am earning money!");
+                var f = new FindGF(fight);
+                for(let arg of f.generator()) {
+                    console.log(arg);
+                }
+                for(let arg of f) {
+                    console.log(arg);
+                }
+
+                16:46:06.734 VM1798:45 I am learning JS!
+                16:46:06.734 VM1798:45 I am doing some exercise!
+                16:46:06.734 VM1798:45 I am earning money!
+                16:46:06.734 VM1798:48 I am learning JS!
+                16:46:06.734 VM1798:48 I am doing some exercise!
+                16:46:06.734 VM1798:48 I am earning money!
 > - 
