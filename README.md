@@ -38,9 +38,10 @@
 ### [6.3 Generator 与协程与控制流管理](#6.3) 
 ### [6.4 Generator 异步应用](#6.4) 
 ### [6.5 async函数](#6.5) 
-## [七、类class](#7)
-### [7.1 继承](#7.1)
-### [7.2 class的使用](#7.2) 
+## [七、类和class](#7)
+### [7.1 类的继承](#7.1)
+### [7.2 class的使用](#7.2)
+### [7.1 class的继承](#7.1) 
 ## [八、Module](#8)
 ### [8.1 概念](#8.1)
 ### [8.2 部署Iterator接口](#8.2) 
@@ -2528,7 +2529,7 @@
 ------      
         
 
-<h2 id='7'>七、类class</h2>
+<h2 id='7'>七、类和class</h2>
 <h3 id='7.1'>7.1 继承 详细看<a href="https://www.cnblogs.com/humin/p/4556820.html">幻天芒的博客</a></h3>  
 
 #### 1) 原型链继承 
@@ -2954,9 +2955,47 @@
 
                     const logger = selfish(new Logger());
 #### 8) class的静态方法
-> - 
+> - 类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。
+> - 如果静态方法包含this关键字，这个this指的是类，而不是实例。
+> - ES6 明确规定，Class 内部只有静态方法，没有静态属性。
+        
+                class Foo {
+                  static bar () {
+                    this.baz();
+                  }
+                  static baz () {
+                    console.log('hello');
+                  }
+                  baz () {
+                    console.log('world');
+                  }
+                }
+
+                Foo.bar() // hello
+> - 目前的静态属性仍然是一个提案
+ 
 #### 9) 其他 
 > - name 属性 
+> - 类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式。只要你的代码写在类或模块之中，就只有严格模式可用。
+> - new.target 属性 表示用new方法创建的实例，比如阮老师给出的这个例子，只有通过继承才能使用
+        
+                class Shape {
+                  constructor() {
+                    if (new.target === Shape) {
+                      throw new Error('本类不能实例化');
+                    }
+                  }
+                }
+
+                class Rectangle extends Shape {
+                  constructor(length, width) {
+                    super();
+                    // ...
+                  }
+                }
+
+                var x = new Shape();  // 报错
+                var y = new Rectangle(3, 4);  // 正确
 > - Class 的 Generator 方法，某个方法之前加上星号（*）
         
                 class FindGF {
@@ -3011,4 +3050,126 @@
                 16:46:06.734 VM1798:48 I am learning JS!
                 16:46:06.734 VM1798:48 I am doing some exercise!
                 16:46:06.734 VM1798:48 I am earning money!
-> - 
+
+
+<h3 id='7.3'>7.3 class的继承</h3>
+
+#### 1) 简介 
+> - Class 可以通过extends关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。
+> - 子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类自己的this对象，必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其进行加工，加上子类自己的实例属性和方法。如果不调用super方法，子类就得不到this对象。
+> - super关键字，它在这里表示父类的构造函数
+> - 父类的静态方法，也会被子类继承。
+        
+                class Father {
+    
+                constructor(age) {
+                    this.fatherAge = age;
+                    this.height = 170;
+                    console.log(`${new.target.name} age is ${this.height}`);
+                };
+
+                static hobby(item) {
+                    console.log(`My hobby is ${item}`);
+                };
+            }
+
+            class Son extends Father {
+                
+                constructor(fatherAge,sonAge) {
+                    super(fatherAge);
+                    this.sonAge = sonAge;
+                };
+
+                add() {
+                    return this.fatherAge + this.sonAge;
+                };
+            }
+
+            Son.hobby("fishing");
+            var son = new Son(49, 25);
+            son.add();
+
+            17:54:05.909 VM2431:10 My hobby is fishing
+            17:54:05.910 VM2431:6 Son age is 170
+            17:54:05.919 74
+#### 2) super关键字 
+> - 两种含义：一种是代表父类的构造函数，另一种是当作对象被使用 
+> - 作为父类的构造函数时，super()只能用在子类的构造函数之中，用在其他地方就会报错。并且必须出现在子类的构造函数中；
+> - 此时super()相当于A.prototype.constructor.call(this)，内部的this依然指的是子类
+> - 如果super作为对象，用在静态方法之中，这时super将指向父类的静态函数对象，而不是父类的原型对象。因为构造函数也好，静态方法也好，都在一开始编译的时候就生成了，在这过程中super只指向的父类i
+> - > - 如果super作为对象，用在普通方法中，则指向父类的普通方法
+> - 如果super作为对象，用在构造函数之中，这时super将指向子类，相当于为子类属性赋值；
+> - 或者说，只有用在构造函数或者是静态方法中，super才指向父类
+        
+                class Parent {
+                    static myMethod(msg) {
+                        console.log('static', msg);
+                    }
+
+                    myMethod(msg) {
+                        console.log('instance', msg);
+                    }
+                }
+
+                class Child extends Parent {
+                    static myMethod(msg) {
+                        super.myMethod(msg);
+                    }
+
+                    myMethod(msg) {
+                        super.myMethod(msg);
+                    }
+                }
+
+                Child.myMethod(1); // static 1
+
+                var child = new Child();
+                child.myMethod(2); // instance 2
+> - 如果无法识别super()是否作为对象被使用，此时JS就会报错，比如console.log(super)；
+#### 3) 类的 prototype 属性和__proto__属性
+> - 大多数浏览器的 ES5 实现之中，每一个对象都有__proto__属性，指向对应的构造函数的prototype属性
+> - 实例对象有__proto__属性，而构造函数拥有prototype属性
+> - 实例对象的__proto__属性 == 构造函数的prototype属性
+> - __proto__是每个对象都有的一个属性，而prototype是函数才会有的属性!!! 
+> - 使用Object.getPrototypeOf()代替__proto__!!!
+> - prototype和__proto__都指向原型对象，任意一个函数（包括构造函数）都有一个prototype属性，指向该函数的原型对象，同样任意一个构造函数实例化的对象，都有一个__proto__属性（__proto__并非标准属性，ECMA-262第5版将该属性或指针称为[[Prototype]]，可通过Object.getPrototypeOf()标准方法访问该属性），指向构造函数的原型对象。
+> - 继承本质上就是以子类以父类的实例对象为原型
+        
+                Object.setPrototypeOf(B.prototype, A.prototype);
+                // 等同于
+                B.prototype.__proto__ = A.prototype;
+
+                Object.setPrototypeOf(B, A);
+                // 等同于
+                B.__proto__ = A;
+> - __proto__属性 可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。
+#### 4) Mixin 模式的实现
+> - Mixin 指的是多个对象合成一个新的对象，新对象具有各个组成成员的接口。
+> - 实质上就是复制方法和原型
+        
+                function mix(...mixins) {
+                    class Mix {}
+
+                    for (let mixin of mixins) {
+                        copyProperties(Mix, mixin); // 拷贝实例属性
+                        copyProperties(Mix.prototype, mixin.prototype); // 拷贝原型属性
+                    }
+
+                    return Mix;
+                }
+
+                function copyProperties(target, source) {
+                    for (let key of Reflect.ownKeys(source)) {
+                        if ( key !== "constructor"
+                            & key !== "prototype"
+                            && key !== "name"
+                        ) {
+                            let desc = Object.getOwnPropertyDescriptor(source, key);
+                            Object.defineProperty(target, key, desc);
+                        }
+                    }
+                }
+
+                class DistributedEdit extends mix(Loggable, Serializable) {
+                  // ...
+                }
