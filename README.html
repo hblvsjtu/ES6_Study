@@ -1,0 +1,5052 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+  max-width: 980px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 45px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAABE0AA8AAAAAHWwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABWAAAADsAAABUIIslek9TLzIAAAGUAAAAQwAAAFY3d1HZY21hcAAAAdgAAACqAAACOvWLi0FjdnQgAAAChAAAABMAAAAgBtX/BGZwZ20AAAKYAAAFkAAAC3CKkZBZZ2FzcAAACCgAAAAIAAAACAAAABBnbHlmAAAIMAAABdQAAAjkYT9TNWhlYWQAAA4EAAAAMwAAADYQ6WvNaGhlYQAADjgAAAAfAAAAJAc6A1pobXR4AAAOWAAAACAAAAA0Kmz/7mxvY2EAAA54AAAAHAAAABwQPBJubWF4cAAADpQAAAAgAAAAIAEHC/NuYW1lAAAOtAAAAYQAAALxhQT4h3Bvc3QAABA4AAAAfgAAAMS3SYh9cHJlcAAAELgAAAB6AAAAhuVBK7x4nGNgZGBg4GIwYLBjYHJx8wlh4MtJLMljkGJgYYAAkDwymzEnMz2RgQPGA8qxgGkOIGaDiAIAJjsFSAB4nGNgZHZmnMDAysDAVMW0h4GBoQdCMz5gMGRkAooysDIzYAUBaa4pDA4Pwz+yMwf9z2KIYg5imAYUZgTJAQDcoQvQAHic7ZHNDYJAFIRnBXf94cDRIiyCKkCpwFCPJ092RcKNDoYKcN4+EmMPvpdvk539zQyAPYBCXEUJhBcCrJ5SQ9YLnLJe4qF5rdb+uWPDngNHTkta101pNyWa8lMhn6xx2dqUnW4q9YOIhAOOeueMSgsR/6ry+P7O5s6xVNg4chBsHUuFnWNJ8uZYwrw7chrsHXkODo7cB0dHOYCTY8kv0VE2WJKD6gOlWjsxAAB4nGNgQAMSEMgc9D8LhAESbAPdAHicrVZpd9NGFB15SZyELCULLWphxMRpsEYmbMGACUGyYyBdnK2VoIsUO+m+8Ynf4F/zZNpz6Dd+Wu8bLySQtOdwmpOjd+fN1czbZRJaktgL65GUmy/F1NYmjew8CemGTctRfCg7eyFlisnfBVEQrZbatx2HREQiULWusEQQ+x5ZmmR86FFGy7akV03KLT3pLlvjQb1V334aOsqxO6GkZjN0aD2yJVUYVaJIpj1S0qZlqPorSSu8v8LMV81QwohOImm8GcbQSN4bZ7TKaDW24yiKbLLcKFIkmuFBFHmU1RLn5IoJDMoHzZDyyqcR5cP8iKzYo5xWsEu20/y+L3mndzk/sV9vUbbkQB/Ijuzg7HQlX4RbW2HctJPtKFQRdtd3QmzZ7FT/Zo/ymkYDtysyvdCMYKl8hRArP6HM/iFZLZxP+ZJHo1qykRNB62VO7Es+gdbjiClxzRhZ0N3RCRHU/ZIzDPaYPh788d4plgsTAngcy3pHJZwIEylhczRJ2jByYCVliyqp9a6YOOV1WsRbwn7t2tGXzmjjUHdiPFsPHVs5UcnxaFKnmUyd2knNoykNopR0JnjMrwMoP6JJXm1jNYmVR9M4ZsaERCICLdxLU0EsO7GkKQTNoxm9uRumuXYtWqTJA/Xco/f05la4udNT2g70s0Z/VqdiOtgL0+lp5C/xadrlIkXp+ukZfkziQdYCMpEtNsOUgwdv/Q7Sy9eWHIXXBtju7fMrqH3WRPCkAfsb0B5P1SkJTIWYVYhWQGKta1mWydWsFqnI1HdDmla+rNMEinIcF8e+jHH9XzMzlpgSvt+J07MjLj1z7UsI0xx8m3U9mtepxXIBcWZ5TqdZlu/rNMfyA53mWZ7X6QhLW6ejLD/UaYHlRzodY3lBC5p038GQizDkAg6QMISlA0NYXoIhLBUMYbkIQ1gWYQjLJRjC8mMYwnIZhrC8rGXV1FNJ49qZWAZsQmBijh65zEXlaiq5VEK7aFRqQ54SbpVUFM+qf2WgXjzyhjmwFkiXyJpfMc6Vj0bl+NYVLW8aO1fAsepvH472OfFS1ouFPwX/1dZUJb1izcOTq/Abhp5sJ6o2qXh0TZfPVT26/l9UVFgL9BtIhVgoyrJscGcihI86nYZqoJVDzGzMPLTrdcuan8P9NzFCFlD9+DcUGgvcg05ZSVnt4KzV19uy3DuDcjgTLEkxN/P6VvgiI7PSfpFZyp6PfB5wBYxKZdhqA60VvNknMQ+Z3iTPBHFbUTZI2tjOBIkNHPOAefOdBCZh6qoN5E7hhg34BWFuwXknXKJ6oyyH7kXs8yik/Fun4kT2qGiMwLPZG2Gv70LKb3EMJDT5pX4MVBWhqRg1FdA0Um6oBl/G2bptQsYO9CMqdsOyrOLDxxb3lZJtGYR8pIjVo6Of1l6iTqrcfmYUl++dvgXBIDUxf3vfdHGQyrtayTJHbQNTtxqVU9eaQ+NVh+rmUfW94+wTOWuabronHnpf06rbwcVcLLD2bQ7SUiYX1PVhhQ2iy8WlUOplNEnvuAcYFhjQ71CKjf+r+th8nitVhdFxJN9O1LfR52AM/A/Yf0f1A9D3Y+hyDS7P95oTn2704WyZrqIX66foNzBrrblZugbc0HQD4iFHrY64yg18pwZxeqS5HOkh4GPdFeIBwCaAxeAT3bWM5lMAo/mMOT7A58xh0GQOgy3mMNhmzhrADnMY7DKHwR5zGHzBnHWAL5nDIGQOg4g5DJ4wJwB4yhwGXzGHwdfMYfANc+4DfMscBjFzGCTMYbCv6dYwzC1e0F2gtkFVoANTT1jcw+JQU2XI/o4Xhv29Qcz+wSCm/qjp9pD6Ey8M9WeDmPqLQUz9VdOdIfU3Xhjq7wYx9Q+DmPpMvxjLZQa/jHyXCgeUXWw+5++J9w/bxUC5AAEAAf//AA94nIVVX2hbZRQ/5/t7893s5ja9f7ouzdZ0TTqz3bRJmogbWya6bG6Cq0VbSV2ddIJjFtfIQHEig80Hda8yUN/0YQz8AyriiyD+xQd92R4HCnaCb3samnpumrpsCsLlfPf7zvedc37nL3CAtc/5W/wQZGA3tOBSY/g+TMjHmwzEoM1Q8+ZjRZY4oJhmBw5/YB6Za0yC5AkhlwA1A1yCBIBOwCII0Cj0U8BAMdUCzq05sKwkP7SlUY6fcJk4Fb/RyE79/6P5hjM/F4aZiXBoeMgzcqQ4Xi1hPqfDLG5FT+lchCVU3lYMyvuwhl1mqndQL0RsuloLywHtthLXI06OblTrhfWVnpSJ5+mwu/JdbtuN3IAnkW0LLMcRwaC7ktrlzridM6kVdyf9uO1UNBByI7JhwtG2sEwab07ORBeilWhqavJCqV0qzZTOl/7ZXQ5TbTcdcFelyGhhRDAQpdqp1FEX3w3cFTc1k9pJQkmm4ySCbSikxRP2QOfN+0tHS5MrpQuTU1Mk5nw0E5Xa0WvrOwDyGax9yB9ma6DAg82wHc43SAGTI4GjBWebOePAERFE8/AHaQpZASSTy8A4WwZiLQMQ82mFKATO0ILicRAoDm9p5P99E5b/fXG+kQYY3TYUuqmERWYoT0u/GNYL2q/4WB3LaVS+VynXsVYIcWw6DkCh3nX1D+VzlYN4LClF5yexSQos8exqZ3KVP+wtrC54u4Nznq6cq+xpMpUUnZ8FUYzE86ud0g28NOIv3Gj5/rmA3ABs7S/ywzFuQ4qyd6QxfNtiQIaEgp3w/entQg4Vcbqa16M5FfpeUB8t1+qeg7mI7cUyOe79wOk86gSxkVec4KPTX69++5x68Yubn5/F+w52z7u08sJX7fZXv8ekT/d2mILJxq6sn+SC6qEJknzLJCxyZEKwWVqYmAPBxBE/9DLeZiWHu7lcr/VytrCRuHojncNuTt9h46tmacmYisnSamdN2bZptcsmSysdVsy1PrOvOzF3xN64Rb937t/og9KHxYdcjIUqFAmIAHGHNzlns+RTPgeUYAQm9DwpNxfxbhhBHPaw3/gfTcXO2L+eJVIx5nsyGkvm9X4/f+bGkH45G0PaSjcMXTjcZyTvi3UdHoCDjQd3IDUVsgwYmUoJK/gp4JJxeRI0MKHZIkgynyIBqBTOUs6rOVCojvjZ4mCQz49ZMlMcp8QoYk6NoBfsxnJtsBohpa8iGJS+ZH7gU7NxME6cmF+t7cO9vB8d3jTWSct0ycW9ranXmolNDwmVkNnxe+8JtoztwS5rKJ0xWS95tQ/1zMYzg69MzUZnNtl1ofNbsml/OJm6f9wjRjpnu2o4MzHzn77IQkRd+1DjwMQ2pqSjGMMhyjrgTbBAKksuUm0iU7hI0aN2wOKOq7WYBSH0HGihj/jkiPxAfmwsEbfYrjMG+j3ij932Db/LV7I/xruNrhnroxjR9HRMb2nTvO0ZXOoHPk8H2ZhDPx93qcE/53sH5np/dkIP7zzhTVKdR/BAY/9ElkkR+A6lJGsqpJ4oQcTxpvBT3Kn58VkaJjgHyPEIws57xkaHh9KuVpDEpJZeMbZ5w/zBHi5NMQ4r5VphsFqID7TyB9eR4pX216c3AHxpdAwoqU9qg0ZJ6yVLKmMSz1iG2z27ifx18NkY0LPx1W/wCc2l5LrznrIsiKsqbmB78A9wIGx4tI8rjihVHJyY9pgMirenVq0yWg7Iw7eogG7ZgYM3qR9959A/fZkg6MnD/exlkmc+jWV4SB15XUR+eqC6l6ZmgPtN9z5JMfik05OV8ljylunJ4J+wA/FUaQSSKotsYsCWqaPBidBLcxkWx7XKFRIb45TGaEhjlF9uUVPqXOtcIwsXbBvfoZXIyRYFdkfnqjExH98xpnPczqzjX/uNdO1Y17Wpi5+6Ts8BXtjVFasp9KZ1mOiNbH65c5w6HgmyF2jFCZywM8mWjRc7T5Pmt0lRy7Y71+jYbpGyvwG4sH0XeJxjYGRgYADiwBB/53h+m68M3MwvgCIM1z5N/g6j///9v5H5BbMnkMvBwAQSBQCIcA9gAHicY2BkYGAO+p8FJF/8//v/F/MLBqAICuAFALYQB5kAeJxjfsHAwLwAiCNB+P9fbJjJmoGBMRUo/wKCAfO2EnQAAAAAANoBXgGcAgICVALaA1IDvAPkBAYEPARyAAEAAAANAF0ABAAAAAAAAgAUACQAcwAAAG4LcAAAAAB4nHWRzWrCQBSFT+pPqUIXLXTTzayKUohGKIibCoLuhbrrYtTRxCYZmYyKyz5Fd32HvlDfoO/QkziIFJtw9bvnnpl7ZwLgBt/wcHieGAf2UGd24Atcou+4RH3kuEweO66QXx1XyaHjGh6ROa7jFp/cwStfMVvhy7GHO+/e8QWuvcBxifqz4zL5xXGF/Oa4Sn53XMPE+3Bcx4P3M9DrvYmWoRWNQVN02kFXTPdCU4pSGQu5saE2meiLhU6timPtz3SSs9ypTCdqrJabWJoT5QQnymSRTkXgt0/UkUqVkVbN807ZdtmxdiEWRidi6HqItdErNbN+aO2612qd9sYAGmvsYRBhyUu0EGhQbfK/gzYCdElTOgSdB1eEFBIxFYkNV4RFJWPeZyyYpVQVHTHZx4y/yVGX2LGWFZri51TccUOn5B7nPefVCSPvGhVVwUl9znveO2KkhV8Wk82PZ8qwZf8OVcu1+fSmWCMw/HMOwXvKaysqM+p+cVuWag8tvv+c+xdd+4+teJxtjUEOwiAURJla24KliQfhUA2g/Sl+CKXx+loNrpzVezOLEY34Ron/0WhwQoszOvQYIKFwwQiNSbSBeO2SZ0tBP4j3zVjKNng32ZmtD1VVXCuOiw/pJ8S3WOU6l+K5UOTaDC4+2TjKMtN9KQf1ezLx/Sg/00FCvABHhjDjAAB4nGPw3sFwIihiIyNjX+QGxp0cDBwMyQUbGVidNjEwMmiBGJu5mBg5ICw+BjCLzWkX0wGgNCeQze60i8EBwmZmcNmowtgRGLHBoSNiI3OKy0Y1EG8XRwMDI4tDR3JIBEhJJBBs5mFi5NHawfi/dQNL70YmBhcADHYj9AAA) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headerlink {
+  font: normal 400 16px fontawesome-mini;
+  vertical-align: middle;
+  margin-left: -16px;
+  float: left;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0;
+  color: #333;
+}
+
+.markdown-body .headerlink:focus {
+  outline: none;
+}
+
+.markdown-body h1 .headerlink {
+  margin-top: 0.8rem;
+}
+
+.markdown-body h2 .headerlink,
+.markdown-body h3 .headerlink {
+  margin-top: 0.6rem;
+}
+
+.markdown-body h4 .headerlink {
+  margin-top: 0.2rem;
+}
+
+.markdown-body h5 .headerlink,
+.markdown-body h6 .headerlink {
+  margin-top: 0;
+}
+
+.markdown-body .headerlink:hover,
+.markdown-body h1:hover .headerlink,
+.markdown-body h2:hover .headerlink,
+.markdown-body h3:hover .headerlink,
+.markdown-body h4:hover .headerlink,
+.markdown-body h5:hover .headerlink,
+.markdown-body h6:hover .headerlink {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .codehilite pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* Multimarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px fontawesome-mini;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\e157';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><style>/*github*/
+.codehilite {background-color:#fff;color:#333333;}
+.codehilite .hll {background-color:#ffffcc;}
+.codehilite .c{color:#999988;font-style:italic}
+.codehilite .err{color:#a61717;background-color:#e3d2d2}
+.codehilite .k{font-weight:bold}
+.codehilite .o{font-weight:bold}
+.codehilite .cm{color:#999988;font-style:italic}
+.codehilite .cp{color:#999999;font-weight:bold}
+.codehilite .c1{color:#999988;font-style:italic}
+.codehilite .cs{color:#999999;font-weight:bold;font-style:italic}
+.codehilite .gd{color:#000000;background-color:#ffdddd}
+.codehilite .ge{font-style:italic}
+.codehilite .gr{color:#aa0000}
+.codehilite .gh{color:#999999}
+.codehilite .gi{color:#000000;background-color:#ddffdd}
+.codehilite .go{color:#888888}
+.codehilite .gp{color:#555555}
+.codehilite .gs{font-weight:bold}
+.codehilite .gu{color:#800080;font-weight:bold}
+.codehilite .gt{color:#aa0000}
+.codehilite .kc{font-weight:bold}
+.codehilite .kd{font-weight:bold}
+.codehilite .kn{font-weight:bold}
+.codehilite .kp{font-weight:bold}
+.codehilite .kr{font-weight:bold}
+.codehilite .kt{color:#445588;font-weight:bold}
+.codehilite .m{color:#009999}
+.codehilite .s{color:#dd1144}
+.codehilite .n{color:#333333}
+.codehilite .na{color:teal}
+.codehilite .nb{color:#0086b3}
+.codehilite .nc{color:#445588;font-weight:bold}
+.codehilite .no{color:teal}
+.codehilite .ni{color:purple}
+.codehilite .ne{color:#990000;font-weight:bold}
+.codehilite .nf{color:#990000;font-weight:bold}
+.codehilite .nn{color:#555555}
+.codehilite .nt{color:navy}
+.codehilite .nv{color:teal}
+.codehilite .ow{font-weight:bold}
+.codehilite .w{color:#bbbbbb}
+.codehilite .mf{color:#009999}
+.codehilite .mh{color:#009999}
+.codehilite .mi{color:#009999}
+.codehilite .mo{color:#009999}
+.codehilite .sb{color:#dd1144}
+.codehilite .sc{color:#dd1144}
+.codehilite .sd{color:#dd1144}
+.codehilite .s2{color:#dd1144}
+.codehilite .se{color:#dd1144}
+.codehilite .sh{color:#dd1144}
+.codehilite .si{color:#dd1144}
+.codehilite .sx{color:#dd1144}
+.codehilite .sr{color:#009926}
+.codehilite .s1{color:#dd1144}
+.codehilite .ss{color:#990073}
+.codehilite .bp{color:#999999}
+.codehilite .vc{color:teal}
+.codehilite .vg{color:teal}
+.codehilite .vi{color:teal}
+.codehilite .il{color:#009999}
+.codehilite .gc{color:#999;background-color:#EAF2F5}
+</style><title>README</title></head><body><article class="markdown-body"><h1 id="es6_study">ES6_Study<a class="headerlink" href="#es6_study" title="Permanent link"></a></h1>
+<h3 id="_1">作者：冰红茶<a class="headerlink" href="#_1" title="Permanent link"></a></h3>
+<h3 id="ecmascript-6">参考博客：<a href="http://es6.ruanyifeng.com/#README">《ECMAScript 6 入门》 阮一峰</a><a class="headerlink" href="#ecmascript-6" title="Permanent link"></a></h3>
+<hr />
+<p>之前看完《JavaScript权威指南》后，觉得自己有点基础了，没曾料想世界变化得那么快，2015年6月ES6横空出世，带来了很多的新特性和语法糖，为了跟上时代的发展，上手ES6是必须的。我知道阮一峰老师是这一方面的大佬，后面就跟据阮老师的博客做一些自己的学习心得^ _^</p>
+<h2 id="_2">目录<a class="headerlink" href="#_2" title="Permanent link"></a></h2>
+<h2 id="_3"><a href="#1">一、块级作用域，变量声明，顶层对象与解构</a><a class="headerlink" href="#_3" title="Permanent link"></a></h2>
+<h3 id="11"><a href="#1.1">1.1 块级作用域</a><a class="headerlink" href="#11" title="Permanent link"></a></h3>
+<h3 id="12-letconst"><a href="#1.2">1.2 let和const</a><a class="headerlink" href="#12-letconst" title="Permanent link"></a></h3>
+<h3 id="13"><a href="#1.3">1.3 顶层对象</a><a class="headerlink" href="#13" title="Permanent link"></a></h3>
+<h3 id="14"><a href="#1.4">1.4 数组的解构</a><a class="headerlink" href="#14" title="Permanent link"></a></h3>
+<h2 id="_4"><a href="#2">二、相关拓展</a><a class="headerlink" href="#_4" title="Permanent link"></a></h2>
+<h3 id="21"><a href="#2.1">2.1 字符串的拓展</a><a class="headerlink" href="#21" title="Permanent link"></a></h3>
+<h3 id="22"><a href="#2.2">2.2 正则的拓展</a><a class="headerlink" href="#22" title="Permanent link"></a></h3>
+<h3 id="23"><a href="#2.3">2.3 数值的拓展</a><a class="headerlink" href="#23" title="Permanent link"></a></h3>
+<h3 id="24"><a href="#2.4">2.4 函数的拓展</a><a class="headerlink" href="#24" title="Permanent link"></a></h3>
+<h3 id="25"><a href="#2.5">2.5 数组的拓展</a><a class="headerlink" href="#25" title="Permanent link"></a></h3>
+<h3 id="26"><a href="#2.6">2.6 对象的拓展</a><a class="headerlink" href="#26" title="Permanent link"></a></h3>
+<h2 id="setmap"><a href="#3">三、Set和Map数据结构</a><a class="headerlink" href="#setmap" title="Permanent link"></a></h2>
+<h3 id="31-set"><a href="#3.1">3.1 Set</a><a class="headerlink" href="#31-set" title="Permanent link"></a></h3>
+<h3 id="32-map"><a href="#3.2">3.2 Map</a><a class="headerlink" href="#32-map" title="Permanent link"></a></h3>
+<h3 id="33"><a href="#3.3">3.3 数据结构的互相转换</a><a class="headerlink" href="#33" title="Permanent link"></a></h3>
+<h2 id="proxyreflect"><a href="#4">四、Proxy和Reflect</a><a class="headerlink" href="#proxyreflect" title="Permanent link"></a></h2>
+<h3 id="41-proxy"><a href="#4.1">4.1 Proxy</a><a class="headerlink" href="#41-proxy" title="Permanent link"></a></h3>
+<h3 id="42-reflect"><a href="#4.2">4.2 Reflect</a><a class="headerlink" href="#42-reflect" title="Permanent link"></a></h3>
+<h2 id="iterator"><a href="#5">五、遍历器Iterator</a><a class="headerlink" href="#iterator" title="Permanent link"></a></h2>
+<h3 id="51"><a href="#5.1">5.1 概念</a><a class="headerlink" href="#51" title="Permanent link"></a></h3>
+<h3 id="52-iterator"><a href="#5.2">5.2 部署Iterator接口</a><a class="headerlink" href="#52-iterator" title="Permanent link"></a></h3>
+<h3 id="53-iterator"><a href="#5.3">5.3 默认的Iterator接口</a><a class="headerlink" href="#53-iterator" title="Permanent link"></a></h3>
+<h2 id="promisegenerator-async"><a href="#6">六、Promise对象与Generator 函数与async函数</a><a class="headerlink" href="#promisegenerator-async" title="Permanent link"></a></h2>
+<h3 id="61-promise"><a href="#6.1">6.1 Promise对象</a><a class="headerlink" href="#61-promise" title="Permanent link"></a></h3>
+<h3 id="62-generator"><a href="#6.2">6.2 Generator 函数</a><a class="headerlink" href="#62-generator" title="Permanent link"></a></h3>
+<h3 id="63-generator"><a href="#6.3">6.3 Generator 与协程与控制流管理</a><a class="headerlink" href="#63-generator" title="Permanent link"></a></h3>
+<h3 id="64-generator"><a href="#6.4">6.4 Generator 异步应用</a><a class="headerlink" href="#64-generator" title="Permanent link"></a></h3>
+<h3 id="65-async"><a href="#6.5">6.5 async函数</a><a class="headerlink" href="#65-async" title="Permanent link"></a></h3>
+<h2 id="class"><a href="#7">七、类和class</a><a class="headerlink" href="#class" title="Permanent link"></a></h2>
+<h3 id="71"><a href="#7.1">7.1 类的继承</a><a class="headerlink" href="#71" title="Permanent link"></a></h3>
+<h3 id="72-class"><a href="#7.2">7.2 class的使用</a><a class="headerlink" href="#72-class" title="Permanent link"></a></h3>
+<h3 id="71-class"><a href="#7.1">7.1 class的继承</a><a class="headerlink" href="#71-class" title="Permanent link"></a></h3>
+<h2 id="module"><a href="#8">八、Module</a><a class="headerlink" href="#module" title="Permanent link"></a></h2>
+<h3 id="81-module"><a href="#8.1">8.1 Module简介</a><a class="headerlink" href="#81-module" title="Permanent link"></a></h3>
+<h3 id="82-iterator"><a href="#8.2">8.2 部署Iterator接口</a><a class="headerlink" href="#82-iterator" title="Permanent link"></a></h3>
+<h3 id="83-iterator"><a href="#8.3">8.3 默认的Iterator接口</a><a class="headerlink" href="#83-iterator" title="Permanent link"></a></h3>
+<hr />
+<h2 id='1'>一、块级作用域，变量声明，顶层对象与解构</h2>
+
+<h3 id='1.1'>1.1 块级作用域</h3>
+
+<h4 id="1">1) 块级作用域<a class="headerlink" href="#1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>外层代码块不受内层代码块的影响；</li>
+<li>let使得块级作用域的出现，使得用来定义作用域的立即执行函数表达式（IIFE）英雄没有用武之地了。</li>
+<li>ES5 规定，函数只能在顶层作用域和函数作用域之中声明，不能在块级作用域声明。但是浏览器为了兼容以前的老代码，还是支持在块级作用域之中声明函数，但函数的声明被提升到块级作用域上上面去了</li>
+<li>ES6明确规定，函数可以在块级作用域中声明函数，但是该函数的声明行为类似于let，不能在块级作用域之外引用。但是真正到ES6浏览器的时候，执行的时候是首先在块级作用域前面做一个不带赋值的声明（即undefined），然后再在块级作用域中进行定义</li>
+<li>如果实在要用的话，最好采用函数表达式的方式，及把声明和定义都放在一起，而且还要把大括号显式写出来</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            if(true) {
+                var f = function() {}
+            }
+</pre></div>
+
+
+<h3 id='1.2'>1.2 let和const</h3>
+
+<h4 id="1-let">1) let<a class="headerlink" href="#1-let" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>使变量作用域限制在块级作用域内，包括循环体；</li>
+<li>时间逆流，让函数作用在刚发生的瞬间；</li>
+<li>原因<a href="http://es6.ruanyifeng.com/#docs/let">“上面代码中，变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量，所以最后输出的是6。你可能会问，如果每一轮循环的变量i都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算。”</a></li>
+<li>使声明提前作用失效，变量的声明必须要在使用之前；</li>
+<li>“暂时性死区”（temporal dead zone，简称 TDZ），在块级作用域中如果改变全局变量的值，后面又把这个全局变量前面加上let，那么由于let会使得该变量绑定在该块级作用域中，那么此时改变变量的值就是错误的，究其根本还是提前声明失效的问题，在块级作用域内let声明之前都属于死区，typeof也不能提前用</li>
+<li>let不允许在相同作用域内，重复声明同一个变量。重复声明要加大括号</li>
+<li>应用场景：避免用来计数的循环变量泄露为全局变量；避免内层变量可能会覆盖外层变量。</li>
+</ul>
+</blockquote>
+<h4 id="2-const">2) const<a class="headerlink" href="#2-const" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>const的出现需要变量立即赋值，而且一旦赋值后面就再也不能改变值的大小</li>
+<li>如果只声明不赋值就会报错</li>
+<li>而且const的作用域跟let一样，只在块级作用域中起作用</li>
+<li>变量声明也不提升，存在暂时性死区</li>
+<li>const保证的不是值的不变，而是引用地址的不变</li>
+<li>所以不能通过把一个数组赋值给一个常量数组，但是赋值给一个普通数组则是可以的</li>
+</ul>
+</blockquote>
+<h3 id='1.3'>1.3 顶层对象</h3>
+
+<h4 id="1-windowglobal">1) window对象和global对象<a class="headerlink" href="#1-windowglobal" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>window对象是浏览器等用户代理的顶层对象，而global对象则是像Node等客户端的顶层对象</li>
+<li>顶层变量无法在编译时报出变量未声明的错误，理论上window对象是不应该跟global对象挂钩的</li>
+<li>ES6出现的let，const和class命令也是为了适应这种脱离顶层变量的趋势</li>
+</ul>
+</blockquote>
+<h4 id="2">2) 如何取得顶层对象<a class="headerlink" href="#2" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>浏览器里面，顶层对象是window，但 Node 和 Web Worker 没有window。</li>
+<li>浏览器和 Web Worker 里面，self也指向顶层对象，但是 Node 没有self。</li>
+<li>Node 里面，顶层对象是global，但其他环境都不支持。</li>
+<li>你说用this嘛，但是this在严格模式下会返回undefine，普通模式下在Node 模块和 ES6 模块中，this返回的是当前模块。</li>
+<li>不管是严格模式，还是普通模式，new Function(&lsquo;return this&rsquo;)()，总是会返回全局对象。但是，如果浏览器用了 CSP（Content Security Policy，内容安全政策），那么eval、new Function这些方法都可能无法使用。</li>
+<li>这就非常的awkward了</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 方法一
+            // 首先判断浏览器环境，然后判断Node环境，最后判断其他环境
+            (typeof window !== &#39;undefined&#39;
+               ? window
+               : (typeof process === &#39;object&#39; &amp;&amp;
+                  typeof require === &#39;function&#39; &amp;&amp;
+                  typeof global === &#39;object&#39;)
+                 ? global
+                 : this);
+
+            // 方法二
+            var getGlobal = function () {
+              if (typeof self !== &#39;undefined&#39;) { return self; }
+              if (typeof window !== &#39;undefined&#39;) { return window; }
+              if (typeof global !== &#39;undefined&#39;) { return global; }
+              throw new Error(&#39;unable to locate global object&#39;);
+            };
+</pre></div>
+
+
+<h3 id='1.4'>1.4 数组的解构</h3>
+
+<h4 id="1_1">1) 简介与注意事项<a class="headerlink" href="#1_1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。</li>
+<li>变量声明语句过程中避免使用圆括号，否则会报错 </li>
+<li>函数参数也属于变量声明，因此不能带有圆括号。</li>
+<li>赋值语句的模式也不能使用圆括号，所谓赋值语句的模式，其实就是等号左边的部分</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 量声明语句报错
+            let [(a)] = [1];
+            let {x: (c)} = {};
+            let ({x: c}) = {};
+            let {(x: c)} = {};
+            let {(x): c} = {};
+            let { o: ({ p: p }) } = { o: { p: 2 } };
+
+            // 函数参数报错
+            function f([(z)]) { return z; }
+            function f([z,(x)]) { return x; }
+
+            // 赋值语句的模式报错
+            ({ p: a }) = { p: 42 };
+            ([a]) = [5];
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>可以使用圆括号的情况只有一种：赋值语句的非模式部分，可以使用圆括号。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            [(b)] = [3]; // 正确
+            ({ p: (d) } = {}); // 正确
+            [(parseInt.prop)] = [3]; // 正确
+</pre></div>
+
+
+<h4 id="2_1">2) 解构数组<a class="headerlink" href="#2_1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>其实是一种遍历的变量赋值，默认值是undefined，如果赋值的是null，则默认值就不会生效</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var value = [100, 200, 300];
+            let [one, two, three] = value;
+            console.log(`${one}, ${two}, ${three}`);
+            16:20:01.337 VM1269:3 100, 200, 300
+
+            //交换变量
+            var a = &quot;A&quot;;
+            var b = &quot;B&quot;;
+            let [a,b] = [b,a];
+            16:36:57.829 (2) [&quot;B&quot;, &quot;A&quot;]
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>右边的值必须要具备Iterator接口，或者转换为对象后具备Iterator接口，否则会报错</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 报错 转换为对象后不具备Iterator接口
+            let [foo] = 1;
+            let [foo] = false;
+            let [foo] = NaN;
+            let [foo] = undefined;
+            let [foo] = null;
+            // 没有Iterator接口
+            let [foo] = {};
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>惰性求值 表达式只有在用到的时候才会生效，左括号里面赋值应该是默认值</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 完全没有赋值的效果
+            var f = function() {
+                console.log(&quot;立即生效&quot;);
+            }
+            var g = function() {
+                console.log(&quot;缓慢生效&quot;);
+            }
+            let [y=f()] = [g()];
+            console.log(y);
+            10:50:31.868 VM1788:5 缓慢生效
+            10:50:31.869 VM1788:2 立即生效
+            10:50:31.869 VM1788:8 undefined
+
+            // 函数压根不生效
+            var f = function() {
+                console.log(&quot;立即生效&quot;);
+            }
+            var g = function() {
+                console.log(&quot;缓慢生效&quot;);
+            }
+            let [y=f()] = [g];
+            console.log(y);
+            10:48:05.518 VM1701:8 ƒ () {
+                console.log(&quot;缓慢生效&quot;);
+            }
+</pre></div>
+
+
+<h4 id="3">3) 解构对象<a class="headerlink" href="#3" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>跟据同名属性赋值 默认值是undefined，如果赋值的是null，则默认值就不会生效 </li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var value = {father: &quot;lv&quot;, mother: &quot;zhong&quot;};
+            var{father, mother} = value;
+            console.log(`${father}, ${mother}`);
+            16:28:17.278 VM1376:3 lv, zhong
+</pre></div>
+
+
+<h4 id="4">4) 解构字符串<a class="headerlink" href="#4" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>字符串也相当于一个数组</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            const [a, b, c, d, e] = &#39;hello&#39;;
+            a // &quot;h&quot;
+            b // &quot;e&quot;
+            c // &quot;l&quot;
+            d // &quot;l&quot;
+            e // &quot;o&quot;
+
+            //字符串也有类似数组的length属性
+            let {length : len} = &#39;hello&#39;;
+            len // 5
+</pre></div>
+
+
+<h4 id="5">5) 解构数值和布尔值<a class="headerlink" href="#5" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var {toString: x} = 123;
+            console.log(x === Number.prototype.toString);
+
+            var {toString: y} = true;
+            console.log(y === Boolean.prototype.toString);
+
+            var {name: z} = function() {};
+            console.log(z === Function.prototype.name);
+
+            11:08:05.995 VM1923:2 true
+            11:08:05.995 VM1923:5 true
+            11:08:05.995 VM1923:8 true
+</pre></div>
+
+
+<hr />
+<h2 id='2'>二、相关拓展</h2>
+
+<h3 id='2.1'>2.1 字符串的拓展</h3>
+
+<h4 id="1-21">1) 2.1 字符串的拓展<a class="headerlink" href="#1-21" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>JavaScript 允许采用\uxxxx形式表示一个字符，其中xxxx表示字符的 Unicode 码点。但是范围仅限于\u0000~\uFFFF之间</li>
+<li>超出范围必须使用两个双字节的形式表示，比如\u20BB7</li>
+<li>ES6 对这一点做出了改进，只要将码点放入大括号，就能正确解读该字符。比如&rdquo;\u{20BB7}&rdquo;</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var a = &quot;\u20BB7&quot;;
+            10:26:45.183 undefined
+            10:26:49.199 a
+            10:26:49.202 &quot;₻7&quot;
+            10:27:27.189 var b = &quot;\u{20BB7}&quot;;
+            10:27:27.190 undefined
+            10:27:32.674 b;
+            10:27:32.675 &quot;𠮷&quot;
+</pre></div>
+
+
+<hr />
+<h2 id='3'>三、Set和Map数据结构</h2>
+
+<h3 id='3.1'>3.1 Set</h3>
+
+<h4 id="1_2">1) 基本用法<a class="headerlink" href="#1_2" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>类似与数组，但是内部元素不可重复；</li>
+<li>由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值）；</li>
+<li>通过add()方法进行构建</li>
+<li>通过new Set(数组)的方式进行构建</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var a = [1, 2, 3, 4, 1, 2, 3, 4];
+            var s = new Set();
+            a.forEach(x=&gt; s.add(x));
+            for(let i of s) {
+                console.log(i);
+            }
+
+            16:35:50.504 VM2020:5 1
+            16:35:50.504 VM2020:5 2
+            16:35:50.504 VM2020:5 3
+            16:35:50.504 VM2020:5 4
+</pre></div>
+
+
+<h4 id="2_2">2) 注意事项<a class="headerlink" href="#2_2" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>在Set中加入的两个NaN被认为是相同的值</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var set = new Set();
+            var a = NaN;
+            var b = NaN;
+            set.add(a);
+            set.add(b);
+            set // Set {NaN}
+            Set(1) {NaN}
+            size: (...)
+            __proto__ : Set
+            [[Entries]]: Array(1) 0
+            : NaN
+            length: 1
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>另外，两个对象总是不相等的。，空对象也是不相等的</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var set = new Set();
+            set.add({});
+            set.size // 1
+
+            16:48:37.005 1
+            16:48:42.525 set.add({});
+            set.size // 2
+            16:48:42.529 2
+</pre></div>
+
+
+<h4 id="3_1">3) 实例属性和方法<a class="headerlink" href="#3_1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>add(value)：添加某个值，返回 Set 结构本身。</li>
+<li>delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。</li>
+<li>has(value)：返回一个布尔值，表示该值是否为Set的成员。</li>
+<li>clear()：清除所有成员，没有返回值。</li>
+<li>Array.from方法可以将 Set 结构转为数组。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var b = Array.from(s);
+            16:52:52.746 undefined
+            16:52:54.994 b
+            16:52:54.997 (4) [1, 2, 3, 4]
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>keys()：返回键名的遍历器</li>
+<li>values()：返回键值的遍历器</li>
+<li>entries()：返回键值对的遍历器</li>
+<li>forEach()：使用回调函数遍历每个成员     </li>
+</ul>
+</blockquote>
+<h4 id="4-weakset">4) WeakSet<a class="headerlink" href="#4-weakset" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>跟Set类似，但是它的成员只能是对象</li>
+<li>WeakSet.prototype.add(value)：向 WeakSet 实例添加一个新成员。</li>
+<li>WeakSet.prototype.delete(value)：清除 WeakSet 实例的指定成员。</li>
+<li>WeakSet.prototype.has(value)：返回一个布尔值，表示某个值是否在</li>
+<li>没有size和forEach属性，所以无法进行遍历操作</li>
+<li>WeakSet 的一个用处，是储存 DOM 节点，而不用担心这些节点从文档移除时，会引发内存泄漏。</li>
+<li>这是因为垃圾回收机制依赖引用计数，如果一个值的引用次数不为0，垃圾回收机制就不会释放这块内存。结束使用该值之后，有时会忘记取消引用，导致内存无法释放，进而可能会引发内存泄漏。WeakSet 里面的引用，都不计入垃圾回收机制，所以就不存在这个问题。因此，WeakSet 适合临时存放一组对象，以及存放跟对象绑定的信息。只要这些对象在外部消失，它在 WeakSet 里面的引用就会自动消失。 </li>
+</ul>
+</blockquote>
+<h3 id='3.2'>3.2 Map</h3>
+
+<h4 id="1_3">1) 基本用法<a class="headerlink" href="#1_3" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>本质上是键值对的集合Hash集合，传统上只能用字符串作键</li>
+<li>ES6拓宽了这个限制，键不仅可以是字符串，还可以是对象，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。</li>
+<li>键值对都是以两元素数组组成的</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            const strMap = new Map()
+            for (let [k,v] of strMap) {
+                obj[k] = v;
+            }
+
+            var map = new Map;
+            var obj1 = {};
+            var obj2 = {name: &quot;lv&quot;,};
+            map.set(obj1, obj2);
+            map.get(obj1).name;
+            17:11:59.151 &quot;lv&quot;
+            map.has(obj1);
+            17:14:49.988 true
+            17:14:58.772 map.delete(obj1);
+            17:14:58.774 true
+            17:15:03.279 map.has(obj1);
+            17:15:03.282 false
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>Map的参数还可以是有两个元素的组成键值对的数组</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var map = new Map([
+              [&#39;name&#39;, &#39;张三&#39;],
+              [&#39;title&#39;, &#39;Author&#39;]
+            ]);
+            17:18:54.038 undefined
+            17:18:58.926 map;
+            17:18:58.928 Map(2) {&quot;name&quot; =&gt; &quot;张三&quot;, &quot;title&quot; =&gt; &quot;Author&quot;}
+</pre></div>
+
+
+<h4 id="2_3">2) 注意事项<a class="headerlink" href="#2_3" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>如果对同一个键多次赋值，后面的值将覆盖前面的值</li>
+<li>注意对象作为键的时候只能使用对象的引用，因为如果重新写一个对象他们的地址引用是不相同的</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var map = new Map([[{lv: &quot;lvhongbin&quot;}, {id: 116020910160}]]);
+            17:34:48.843 map.get({lv: &quot;lvhongbin&quot;});
+            17:34:48.844 undefined
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>如果 Map 的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map 将其视为一个键，比如0和-0就是一个键，布尔值true和字符串true则是两个不同的键。另外，undefined和null也是两个不同的键。虽然NaN不严格相等于自身，但 Map 将其视为同一个键。</li>
+</ul>
+</blockquote>
+<h4 id="3_2">3) 实例属性和方法<a class="headerlink" href="#3_2" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>size属性返回 Map 结构的成员总数。   </li>
+<li>set方法设置键名key对应的键值为value，然后返回整个 Map 结构。如果key已经有值，则键值会被更新，否则就新生成该键。</li>
+<li>get方法读取key对应的键值，如果找不到key，返回undefined。</li>
+<li>has方法返回一个布尔值，表示某个键是否在当前 Map 对象之中。</li>
+<li>delete方法删除某个键，返回true。如果删除失败，返回false。</li>
+<li>clear方法清除所有成员，没有返回值。</li>
+<li>keys()：返回键名的遍历器。</li>
+<li>values()：返回键值的遍历器。</li>
+<li>entries()：返回所有成员的遍历器。</li>
+<li>forEach()：遍历 Map 的所有成员。 遍历的顺序就是插入的顺序</li>
+</ul>
+</blockquote>
+<h4 id="4-weakmap">4) WeakMap<a class="headerlink" href="#4-weakmap" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>跟Map类似，但是它的键名只能是对象</li>
+<li>WeakMap的键名所指向的对象，不计入垃圾回收机制。</li>
+<li>WeakMap 就是为了解决这个问题而诞生的，它的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内。因此，只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放该对象所占用的内存。也就是说，一旦不再需要，WeakMap 里面的键名对象和所对应的键值对会自动消失，不用手动删除引用。</li>
+<li>没有遍历操作（即没有keys()、values()和entries()方法），也没有size属性</li>
+<li>WeakMap只有四个方法可用：get()、set()、has()、delete()。</li>
+<li>为了防止出现不确定性，就统一规定不能取到键名。二是无法清空，即不支持clear方法</li>
+</ul>
+</blockquote>
+<h3 id='3.3'>3.3 数据结构的互相转换</h3>
+
+<h4 id="1-map">1) Map 转为数组<a class="headerlink" href="#1-map" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>最方便的就是使用拓展运算符&hellip;</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            const myMap = new Map().set(true, 7).set({foo: 3}, [&#39;abc&#39;]);
+            17:50:20.646 var yourMap = [...myMap];
+            17:50:20.648 undefined
+            17:50:36.661 yourMap instanceof Map;
+            17:50:36.663 false
+            17:50:41.956 yourMap instanceof Array;
+            17:50:41.958 true
+            yourMap;
+                (2) [Array(2), Array(2)]
+                    0:(2) [true, 7]
+                    1:Array(2)
+                        0:{foo: 3}
+                        1:[&quot;abc&quot;]
+                        length:2
+                        __proto__:Array(0)
+                        length:2
+                    __proto__:Array(0)
+</pre></div>
+
+
+<h4 id="2-map">2) 数组转为Map<a class="headerlink" href="#2-map" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>将数组传入 Map 构造函数，就可以转为 Map。</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id='4'>四、Proxy和Reflect</h2>
+
+<h3 id='4.1'>4.1 Proxy</h3>
+
+<h4 id="1_4">1) 概述<a class="headerlink" href="#1_4" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>修改编程语言某些操作的默认行为，所以属于一种“元编程”（meta programming），即对编程语言进行编程。</li>
+<li>var proxy = new Proxy(target, handler);</li>
+<li>相当于过滤器，他是一个构造函数，其中空对象是默认过滤的目标对象，get代表访问请求时进行过滤，同样是一个函数对象，参数分别是实际过滤的目标对象和属性</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var a ={time: 40, times:41,};
+            var proxy = new Proxy(a, {
+              get: function(target, property) {
+                if(property !== &quot;time&quot;) {
+                    return target[property]+1;  
+                }else {
+                    return target[property]+2;
+                }
+              }
+            });
+
+            proxy.time;
+            21:34:29.455 42
+            21:34:40.384 proxy.times;
+            21:34:40.386 42
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>要使proxy起作用，必须针对Proxy实例，而不是针对目标对象进行操作</li>
+<li>如果handler没有设置任何拦截，那就等同于直接通向原对象。</li>
+<li>receiver指代拦截的实例对象，可选</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var target = {};
+            var handler = {};
+            var proxy = new Proxy(target, handler, receiver);
+            proxy.a = &#39;b&#39;;
+            target.a // &quot;b&quot;
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>proxy对象是obj对象的原型，obj对象本身并没有time属性，所以根据原型链，会在proxy对象上读取该属性，导致被拦截。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var proxy = new Proxy({}, {
+              get: function(target, property) {
+                return 35;
+              }
+            });
+
+            let obj = Object.create(proxy);
+            obj.time // 35
+</pre></div>
+
+
+<h4 id="2_4">2) 拦截种类<a class="headerlink" href="#2_4" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>get(target, propKey, receiver)：拦截对象属性的读取，比如proxy.foo和proxy[&lsquo;foo&rsquo;]。</li>
+<li>set(target, propKey, value, receiver)：拦截对象属性的设置，比如proxy.foo = v或proxy[&lsquo;foo&rsquo;] = v，返回一个布尔值。</li>
+<li>has(target, propKey)：拦截propKey in proxy的操作，返回一个布尔值。</li>
+<li>deleteProperty(target, propKey)：拦截delete proxy[propKey]的操作，返回一个布尔值。</li>
+<li>ownKeys(target)：拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for&hellip;in循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。</li>
+<li>getOwnPropertyDescriptor(target, propKey)：拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。</li>
+<li>defineProperty(target, propKey, propDesc)：拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。</li>
+<li>preventExtensions(target)：拦截Object.preventExtensions(proxy)，返回一个布尔值。</li>
+<li>getPrototypeOf(target)：拦截Object.getPrototypeOf(proxy)，返回一个对象。</li>
+<li>isExtensible(target)：拦截Object.isExtensible(proxy)，返回一个布尔值。</li>
+<li>setPrototypeOf(target, proto)：拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。</li>
+<li>apply(target, object, args)：拦截 Proxy 实例作为函数调用的操作，比如proxy(&hellip;args)、proxy.call(object, &hellip;args)、proxy.apply(&hellip;)。</li>
+<li>construct(target, args)：拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(&hellip;args)。</li>
+</ul>
+</blockquote>
+<h3 id='4.2'>4.2 Reflect</h3>
+
+<h4 id="1_5">1) 概述<a class="headerlink" href="#1_5" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>主要用来将一些明显属于语言内部的方法，如Object.defineProperty，放到Reflect对象中，目前来讲还没有完全转移，在Object对象和Reflect对象上共同存在，后面将完全转移到Reflect上</li>
+<li>Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。这就让Proxy对象可以方便地调用对应的Reflect方法，完成默认行为，作为修改行为的基础。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            Proxy(target, {
+              set: function(target, name, value, receiver) {
+                var success = Reflect.set(target,name, value, receiver);
+                if (success) {
+                  log(&#39;property &#39; + name + &#39; on &#39; + target + &#39; set to &#39; + value);
+                }
+                return success;
+              }
+            });
+</pre></div>
+
+
+<h4 id="2_5">2) 静态方法<a class="headerlink" href="#2_5" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Reflect.apply(target, thisArg, args)</li>
+<li>Reflect.construct(target, args)</li>
+<li>Reflect.get(target, name, receiver)</li>
+<li>Reflect.set(target, name, value, receiver)</li>
+<li>Reflect.defineProperty(target, name, desc)</li>
+<li>Reflect.deleteProperty(target, name)</li>
+<li>Reflect.has(target, name)</li>
+<li>Reflect.ownKeys(target)</li>
+<li>Reflect.isExtensible(target)</li>
+<li>Reflect.preventExtensions(target)</li>
+<li>Reflect.getOwnPropertyDescriptor(target, name)</li>
+<li>Reflect.getPrototypeOf(target)</li>
+<li>Reflect.setPrototypeOf(target, prototype) </li>
+</ul>
+</blockquote>
+<hr />
+<h2 id='5'>五、遍历器Iterator</h2>
+
+<h3 id='5.1'>5.1 概念</h3>
+
+<h4 id="1_6">1) 作用<a class="headerlink" href="#1_6" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>为数据结构提供访问接口</li>
+<li>为数据结构的成员排序</li>
+<li>新的遍历命令for &hellip;of循环</li>
+</ul>
+</blockquote>
+<h4 id="2-iterator">2) Iterator 接口<a class="headerlink" href="#2-iterator" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>ES6 规定，默认的 Iterator 接口部署在数据结构的Symbol.iterator属性，或者说，一个数据结构只要具有Symbol.iterator属性，就可以认为是“可遍历的”（iterable）。 </li>
+<li>ES6 的有些数据结构原生具备 Iterator 接口（比如数组），即不用任何处理，就可以被for&hellip;of循环遍历。原因在于，这些数据结构原生部署了Symbol.iterator属性（详见下文），另外一些数据结构没有（比如对象）。凡是部署了Symbol.iterator属性的数据结构，就称为部署了遍历器接口。调用这个接口，就会返回一个遍历器对象。</li>
+<li>遍历器对象包含很多属性，用得最多的就是next()属性，其次还有return()和throw()属性。每个属性都是函数，而且也必须返回一个对象</li>
+<li>return() 可选部署 用在提前退出的时候的处理方法，一般是用来清理或者释放资源；</li>
+</ul>
+</blockquote>
+<h4 id="3-next">3) next方法本质<a class="headerlink" href="#3-next" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>提供指针，返回数据结构当前成员的信息(包含value和done两个属性的对象，其中，value属性是当前成员的值，done属性是一个布尔值，表示遍历是否结束。)</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var it = makeIterator([&#39;a&#39;, &#39;b&#39;]);
+            it.next() // { value: &quot;a&quot;, done: false }
+            it.next() // { value: &quot;b&quot;, done: false }
+            it.next() // { value: undefined, done: true }
+
+            function makeIterator(array) {
+              var nextIndex = 0;
+              return {
+                next: function() {
+                  return nextIndex &lt; array.length ?
+                    {value: array[nextIndex++]} :
+                    {done: true};
+                }
+              };
+            }
+</pre></div>
+
+
+<h3 id='5.2'>5.2 部署Iterator接口</h3>
+
+<h4 id="1-iterator">1) 为类部署Iterator接口<a class="headerlink" href="#1-iterator" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>一个对象如果要具备可被for&hellip;of循环调用的 Iterator 接口，就必须在Symbol.iterator的属性上部署遍历器生成方法（原型链上的对象具有该方法也可）</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class myIterator {
+                constructor(start, stop) {
+                    this.start = start;
+                    this.stop = stop;
+                }
+
+                [Symbol.iterator]() {return this;}
+
+                next() {
+                    return this.start &lt; this.stop ? {value: this.start++, done: false}:{value: undefined, done: true};
+                }
+            }
+            11:32:49.291 undefined
+            11:32:52.536 var myIterator1 = new myIterator(1,4);
+            11:32:52.537 undefined
+            11:32:54.871 myIterator1.next();
+            11:32:54.875 {value: 1, done: false}
+            11:32:56.612 myIterator1.next();
+            11:32:56.615 {value: 2, done: false}
+            11:32:59.178 myIterator1.next();
+            11:32:59.181 {value: 3, done: false}
+            11:33:00.849 myIterator1.next();
+            11:33:00.850 {value: undefined, done: true}
+            11:34:31.518 var myIterator2 = new myIterator(1,4);
+            11:34:31.519 undefined
+            11:35:09.374 for (let i of myIterator2) {
+                console.log(i + &quot;; &quot;);
+            }
+            11:35:09.373 VM1493:2 1; 
+            11:35:09.374 VM1493:2 2; 
+            11:35:09.374 VM1493:2 3;
+</pre></div>
+
+
+<h4 id="2-iterator_1">2) 为普通对象部署Iterator接口<a class="headerlink" href="#2-iterator_1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>关键 暴露Symbol.iterator属性的函数接口，返回一个对象，这个对象包含属性，这个属性就是next函数</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 或者
+            var myIterator = {
+                data: [],
+                length: 0,
+                now:0,
+                get: function(i) {
+                    return this.data[i];
+                },
+                set:function(value) {
+                    this.data[this.data.length] = value; 
+                },
+                [Symbol.iterator]: function() {
+                    return this;
+                },
+                next: function() {
+                    return this.now &lt; this.length ? {value: this.data[this.now++], done: false}: {value: undefined, done: true};
+                },
+            }
+            14:38:47.650 undefined
+            14:38:56.534 myIterator.set(10);
+            14:38:56.535 undefined
+            14:39:01.548 myIterator.set(20);
+            14:39:01.549 undefined
+            14:39:07.793 myIterator.set(30);
+            14:39:07.797 undefined
+            14:39:16.889 myIterator[Symbol.interator];
+            14:39:16.891 undefined
+            14:39:32.347 for(let i of myIterator) {
+                console.log(i);
+            }
+            14:39:32.347 VM1856:2 10
+            14:39:32.348 VM1856:2 20
+            14:39:32.348 VM1856:2 30
+
+            //或者
+            var myIterator = {
+                data: [],
+                length: 0,
+                now:0,
+                get: function(i) {
+                    return this.data[i];
+                },
+                set:function(value) {
+                    this.data[this.data.length] = value; 
+                },
+                [Symbol.iterator]: function() {
+                    const self = this;
+                    return {next() {return self.now &lt; self.data.length ? {value: self.data[self.now++], done: false}: {value: undefined, done: true};}}
+                },
+            };
+            14:51:40.358 undefined
+            14:51:44.435 myIterator.set(10);
+            14:51:44.437 undefined
+            14:51:47.041 myIterator.set(20);
+            14:51:47.044 undefined
+            14:51:49.181 myIterator.set(30);
+            14:51:49.187 undefined
+            14:51:52.518 myIterator.data;
+            14:51:52.520 (3) [10, 20, 30]
+            14:52:30.770 for(let i of myIterator) {
+                console.log(i);
+            }
+            14:52:30.770 VM1929:2 10
+            14:52:30.771 VM1929:2 20
+            14:52:30.771 VM1929:2 30
+            14:52:30.777 undefined
+</pre></div>
+
+
+<h4 id="3-iterator">3) 为类数组部署Iterator接口<a class="headerlink" href="#3-iterator" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>比较简单，可以直接利用数组的Iterator接口</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+            // 或者
+            NodeList.prototype[Symbol.iterator] = [][Symbol.iterator];
+
+            [...document.querySelectorAll(&#39;div&#39;)] // 可以执行了
+
+            //其他类数组对象
+            et iterable = {
+              0: &#39;a&#39;,
+              1: &#39;b&#39;,
+              2: &#39;c&#39;,
+              length: 3,
+              [Symbol.iterator]: Array.prototype[Symbol.iterator]
+            };
+            for (let item of iterable) {
+              console.log(item); // &#39;a&#39;, &#39;b&#39;, &#39;c&#39;
+            }
+</pre></div>
+
+
+<h4 id="4-iterator">4) 调用 Iterator 接口的场合<a class="headerlink" href="#4-iterator" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>解构赋值</li>
+<li>扩展运算符（&hellip;） 必须外面有方括号形成数组或者圆括号称为函数的参数</li>
+<li>yield<em>后面跟的是一个可遍历的结构，它会调用该结构的遍历器接口。yield</em> [2,3,4];</li>
+<li>其他场合<blockquote>
+<ul>
+<li>for&hellip;of</li>
+<li>Array.from()</li>
+<li>Map(), Set(), WeakMap(), WeakSet()（比如new Map([[&lsquo;a&rsquo;,1],[&lsquo;b&rsquo;,2]])）</li>
+<li>Promise.all()</li>
+<li>Promise.race()</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h3 id='5.3'>5.3 默认的Iterator接口</h3>
+
+<h4 id="1-iterator_1">1) 数组的Iterator接口<a class="headerlink" href="#1-iterator_1" title="Permanent link"></a></h4>
+<div class="codehilite"><pre>            var arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];
+            var iter = arr[Symbol.iterator]();
+
+            iter.next() // { value: &#39;a&#39;, done: false }
+            iter.next() // { value: &#39;b&#39;, done: false }
+            10:52:34.484 {value: &quot;b&quot;, done: false}
+
+            for (let value of arr) {
+                console.log(value + &quot;; &quot;);
+            }
+            10:57:36.063 VM1197:2 a; 
+            10:57:36.063 VM1197:2 b; 
+            10:57:36.063 VM1197:2 c;
+</pre></div>
+
+
+<h4 id="2-iterator_2">2) 字符串的Iterator接口<a class="headerlink" href="#2-iterator_2" title="Permanent link"></a></h4>
+<div class="codehilite"><pre>            var str = &quot;hello&quot;;
+            for(let s of str) {
+                console.log(s);
+            }
+            15:54:31.687 VM1947:3 h
+            15:54:31.687 VM1947:3 e
+            15:54:31.687 VM1947:3 l
+            15:54:31.687 VM1947:3 l
+            15:54:31.687 VM1947:3 o
+
+            var iterator = str[Symbol.iterator]();
+            15:55:50.167 undefined
+            15:55:58.937 iterator.next();
+            15:55:58.939 {value: &quot;h&quot;, done: false}
+            15:56:01.313 iterator.next();
+            15:56:01.315 {value: &quot;e&quot;, done: false}
+            15:56:02.000 iterator.next();
+            15:56:02.004 {value: &quot;l&quot;, done: false}
+            15:56:02.548 iterator.next();
+            15:56:02.549 {value: &quot;l&quot;, done: false}
+            15:56:03.637 iterator.next();
+            15:56:03.643 {value: &quot;o&quot;, done: false}
+            15:56:08.099 iterator.next();
+            15:56:08.102 {value: undefined, done: true}
+</pre></div>
+
+
+<hr />
+<h2 id='6'>六、Promise对象与Generator 函数与async函数</h2>
+
+<h3 id='6.1'>6.1 Promise对象</h3>
+
+<h4 id="1_7">1) 概述<a class="headerlink" href="#1_7" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。</li>
+<li>Promise对象不受外界的影响。它代表的是一个异步操作，包括三种状态：pending进行中，fulfilled已成功和rejected已失败。只有异步操作的结果可以决定或者改变当前的状态，其他的操作都不能改变</li>
+<li>状态的变换只有两种情况：</li>
+<li>pending进行中 -&gt; fulfilled已成功 或者 pending进行中 -&gt; fulfilled已成功</li>
+<li>一旦状态改变后就不会再改变了，此时就称为resolved已定型</li>
+<li>如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。</li>
+<li>这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</li>
+</ul>
+</blockquote>
+<h4 id="2_6">2) 优缺点<a class="headerlink" href="#2_6" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。</li>
+<li>无法取消Promise，一旦新建它就会立即执行，无法中途取消。</li>
+<li>其次，如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。</li>
+<li>第三，当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。</li>
+</ul>
+</blockquote>
+<h4 id="3_3">3) 基本用法<a class="headerlink" href="#3_3" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>then方法的第一个参数是resolved状态的回调函数，第二个参数（可选）是rejected状态的回调函数。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 这Promise的新建主要用来存放执行条件和传递参数的
+            const promise = new Promise(function(resolve, reject) {
+                // ... some code
+                if (/* 异步操作成功 */){
+                    resolve(value);
+                } else {
+                    reject(error);
+                }
+            });
+
+            // 具体定义resolve和reject函数
+            promise.then(function(value) {
+              // success
+            }, function(error) {
+              // failure
+            });
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>Promise 新建后立即执行，所以首先输出的是Promise。然后，then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以resolved最后输出</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var findGF = function(name, height) {
+                return new Promise(function(resolve, reject) {
+                                        console.log(`I want to find a GF...`);  
+                                        if(height &gt;= 155 &amp;&amp; height &lt;= 165) {
+                                            resolve(name);
+                                        }else {
+                                            reject(name);
+                                        }
+                                    }) 
+            };
+
+            var resolve = function(name) {
+                console.log(`I have found a GF ${name} !`);
+            };
+
+            var reject = function(name) {
+                console.log(`I have refused ${name} !`);
+            };
+
+            findGF(&quot;Lily&quot;, 160).then(resolve, reject);
+            findGF(&quot;Belly&quot;, 168).then(resolve, reject);
+            console.log(`I am looking for a GF...`);
+            10:24:50.539 VM2507:3 I want to find a GF...
+            10:24:50.539 VM2507:3 I want to find a GF...
+            10:24:50.539 VM2507:22 I am looking for a GF...
+            10:24:50.539 VM2507:13 I have found a GF Lily !
+            10:24:50.539 VM2507:17 I have refused Belly !
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>then方法返回的是一个新的Promise实例（注意，不是原来那个Promise实例）。因此可以采用链式写法，即then方法后面再调用另一个then方法。 </li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            getJSON(&quot;/posts.json&quot;).then(function(json) {
+              return json.post;
+            }).then(function(post) {
+              // ...
+            });
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>then方法的链式操作</li>
+<li>奇怪的是链式操作只能返回一个参数，加入你要返回多个参数的话，需要传递一个数组或者一个对象</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 返回Promise实例版本
+            var findBeadtiful = new Promise(function(resolve, error) {
+                resolve(&quot;Beadtiful &quot;);
+            });
+            var findCute = new Promise(function(resolve, error) {
+                resolve(&quot;Cute &quot;);
+            });
+            var findWarm = new Promise(function(resolve, error) {
+                resolve([&quot;Warm&quot;, &quot;Sunny&quot;]);
+            });
+
+            var girlType = function(str) {
+                console.log(str);
+            }
+
+            var findGF = function() {
+
+                console.log(&quot;I want to find a girl who is &quot;);
+                findBeadtiful.then(function(str) {
+                                        console.log(str);
+                                        return findCute;
+                                    })
+                             .then(function(str) {
+                                        console.log(str);
+                                        return findWarm;
+                                    })
+                             .then(function(str) {
+                                        console.log(`${str[0]} and ${str[1]}`);
+                                    });
+            }
+
+            findGF();
+            21:03:41.207 VM3451:17 I want to find a girl who is 
+            21:03:41.208 VM3451:19 Beadtiful 
+            21:03:41.208 VM3451:23 Cute 
+            21:03:41.209 VM3451:27 Warm and Sunny
+
+            // 返回参数版本
+            var findBeadtiful = new Promise(function(resolve, error) {
+                resolve(&quot;Beadtiful &quot;);
+            });
+            /*
+                var findCute = new Promise(function(resolve, error) {
+                    resolve();
+                });
+                var findWarm = new Promise(function(resolve, error) {
+                    resolve();
+                });
+            */
+
+            var girlType = function(str) {
+                console.log(str);
+            }
+
+            var findGF = function() {
+
+                console.log(&quot;I want to find a girl who is &quot;);
+                findBeadtiful.then(function(str) {
+                                        console.log(str);
+                                        return &quot;Cute &quot;;
+                                    })
+                             .then(function(str) {
+                                        console.log(str);
+                                        return [&quot;Warm&quot;, &quot;Sunny&quot;];
+                                    })
+                             .then(function(str) {
+                                        console.log(`${str[0]} and ${str[1]}`);
+                                    });
+            }
+
+            findGF();
+            21:09:11.529 VM3453:19 I want to find a girl who is 
+            21:09:11.529 VM3453:21 Beadtiful 
+            21:09:11.530 VM3453:25 Cute 
+            21:09:11.531 VM3453:29 Warm and Sunny
+</pre></div>
+
+
+<h4 id="3-promiseprototypecatch">3) Promise.prototype.catch()<a class="headerlink" href="#3-promiseprototypecatch" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数。</li>
+<li>一般来说，不要在then方法里面定义 Reject 状态的回调函数（即then的第二个参数），总是使用catch方法。</li>
+<li>第二种写法要好于第一种写法，理由是第二种写法可以捕获前面then方法执行中的错误，也更接近同步的写法（try/catch）。因此，建议总是使用catch方法，而不使用then方法的第二个参数。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // bad
+            promise
+              .then(function(data) {
+                // success
+              }, function(err) {
+                // error
+              });
+
+            // good
+            promise
+              .then(function(data) { //cb
+                // success
+              })
+              .catch(function(err) {
+                // error
+              });
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>跟传统的try/catch代码块不同的是，如果没有使用catch方法指定错误处理的回调函数，Promise 对象抛出的错误不会传递到外层代码，即不会有任何反应。</li>
+<li>一般总是建议，Promise 对象后面要跟catch方法，这样可以处理 Promise 内部发生的错误。catch方法返回的还是一个 Promise 对象，因此后面还可以接着调用then方法。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            const someAsyncThing = function() {
+              return new Promise(function(resolve, reject) {
+                // 下面一行会报错，因为x没有声明
+                resolve(x + 2);
+              });
+            };
+
+            someAsyncThing()
+            .catch(function(error) {
+              console.log(&#39;oh no&#39;, error);
+            })
+            .then(function() {
+              console.log(&#39;carry on&#39;);
+            });
+            // oh no [ReferenceError: x is not defined]
+            // carry on
+</pre></div>
+
+
+<h4 id="4-promiseprototypefinally">4) Promise.prototype.finally()<a class="headerlink" href="#4-promiseprototypefinally" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>finally方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。该方法是 ES2018 引入标准的。</li>
+</ul>
+</blockquote>
+<h4 id="5-promiseall">5) Promise.all()<a class="headerlink" href="#5-promiseall" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>const p = Promise.all([p1, p2, p3]);</li>
+<li>只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。</li>
+<li>只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。</li>
+<li>相当于并运算</li>
+</ul>
+</blockquote>
+<h4 id="6-promiserace">6) Promise.race()<a class="headerlink" href="#6-promiserace" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>const p = Promise.race([p1, p2, p3]);</li>
+<li>相当于或运算</li>
+</ul>
+</blockquote>
+<h4 id="7-promiseresolve">7) Promise.resolve()<a class="headerlink" href="#7-promiseresolve" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>如果参数是 Promise 实例，那么Promise.resolve将不做任何修改、原封不动地返回这个实例。</li>
+<li>如果参数是一个数是一个thenable对象（thenable对象指的是具有then方法的对象），Promise.resolve方法会将这个对象转为 Promise 对象，然后就立即执行thenable对象的then方法。 </li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            let thenable = {
+              then: function(resolve, reject) {
+                resolve(42);
+              }
+            };
+
+            let p1 = Promise.resolve(thenable);
+            p1.then(function(value) {
+              console.log(value);  // 42
+            });
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>如果参数不是具有then方法的对象，或根本就不是对象。则Promise.resolve方法返回一个新的 Promise 对象，状态为resolved。由于字符串Hello不属于异步操作（判断方法是字符串对象不具有 then 方法），返回 Promise 实例的状态从一生成就是resolved，所以回调函数会立即执行</li>
+</ul>
+</blockquote>
+<h4 id="8-promisereject">8) Promise.reject()<a class="headerlink" href="#8-promisereject" title="Permanent link"></a></h4>
+<div class="codehilite"><pre>            const p = Promise.reject(&#39;出错了&#39;);
+            // 等同于
+            const p = new Promise((resolve, reject) =&gt; reject(&#39;出错了&#39;))
+
+            p.then(null, function (s) {
+              console.log(s)
+            });
+            // 出错了
+</pre></div>
+
+
+<h3 id='6.2'>6.2 Generator 函数</h3>
+
+<h4 id="1_8">1) 简介<a class="headerlink" href="#1_8" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Generator 函数是 ES6 提供的一种异步编程解决方案</li>
+<li>Generator 函数是一个状态机，封装了多个内部状态。</li>
+<li>执行 Generator 函数会返回一个遍历器对象，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。</li>
+<li>形式上，Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。</li>
+<li>然后，Generator 函数的调用方法与普通函数一样，也是在函数名后面加上一对圆括号。不同的是，调用 Generator 函数后，该函数并不执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象</li>
+<li>必须调用遍历器对象的next方法，使得指针移向下一个状态（这个状态是由value和done两个属性组成的对象）。Generator 函数是分段执行的，yield表达式是暂停执行的标记，而next方法可以恢复执行，到return的时，函数返回结束；</li>
+</ul>
+</blockquote>
+<h4 id="2_7">2）用法<a class="headerlink" href="#2_7" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>每次调用的时候，要确保迭代器对象的引用地址一致，否则会重新开始状态</li>
+<li>但是，函数f是一个 Generator 函数，就变成只有调用next方法时，函数f才会执行。</li>
+<li>另外需要注意，yield表达式只能用在 Generator 函数里面，用在其他地方都会报错。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function* findGF() {
+                yield &quot;Beautiful&quot;;
+                yield &quot;Heignt &gt; 155&quot;;
+                yield &quot;Female&quot;;
+                return &quot;Done!&quot;
+            }
+            16:10:55.090 undefined
+            16:12:39.543 findGF().next();
+            16:12:39.555 {value: &quot;Beautiful&quot;, done: false}
+            16:12:42.730 findGF().next();
+            16:12:42.745 {value: &quot;Beautiful&quot;, done: false}
+            16:12:49.044 findGF().next();
+            16:12:49.058 {value: &quot;Beautiful&quot;, done: false}
+            16:17:01.231 var f = findGF();
+            16:17:01.238 undefined
+            16:17:10.390 f.next();
+            16:17:10.399 {value: &quot;Beautiful&quot;, done: false}
+            16:17:12.153 f.next();
+            16:17:12.162 {value: &quot;Heignt &gt; 155&quot;, done: false}
+            16:17:13.927 f.next();
+            16:17:13.934 {value: &quot;Female&quot;, done: false}
+            16:17:15.789 f.next();
+            16:17:15.797 {value: &quot;Done!&quot;, done: true}
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>yield表达式如果用在另一个表达式之中，必须放在圆括号里面。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function* demo() {
+                console.log(&#39;Hello&#39; + yield); // SyntaxError
+                console.log(&#39;Hello&#39; + yield 123); // SyntaxError
+
+                console.log(&#39;Hello&#39; + (yield)); // OK
+                console.log(&#39;Hello&#39; + (yield 123)); // OK
+            }
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>yield表达式用作函数参数或放在赋值表达式的右边，可以不加括号。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function* demo() {
+                foo(yield &#39;a&#39;, yield &#39;b&#39;); // OK
+                let input = yield; // OK
+            }
+</pre></div>
+
+
+<h4 id="3next">3）next()方法<a class="headerlink" href="#3next" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>next()方法是有参数的，它的参数是对应于上一个yield的值，然后给出对应yield的值</li>
+<li>由于第一个next()方法没有对应于上一个yield的值，那么上一个yield的值则由generator的实例构建时所放进的参数；</li>
+<li>next()方法加入不带参数，那么对应于上一个yield的值为undefined</li>
+<li>yield的值最好不要跟上一个yield的值产生依赖，连锁依赖不能超过1个</li>
+<li>最好参数先求出来，然后在再用yield产生断点</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function fibonacci(n) {
+                    return n&lt;2 ? n: fibonacci(n-1) + fibonacci(n-2);
+            }
+
+            var f = fibonacci(10);
+</pre></div>
+
+
+<h4 id="4forof">4）for&hellip;of方法<a class="headerlink" href="#4forof" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>直接忽略return返回的值，因为return语句对应的是{value: , done: true}</li>
+<li>如果要在迭代保留yield的值，一个必要的条件是yield的参数保持不变</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 由于a[0]和a[1]需要依赖yield，然而next()方法并没有给出参数数，所以会出现NaNcy
+            function* fibonacci(n) {
+                var a = [];
+                a[0] = yield 0;
+                a[1] = yield 1;
+                for(let i = 2; i &lt; n; i++ ) {
+                    a[i] = (a[i-1] + a[i-2]);
+                    yield a[i];
+                }
+            }
+
+            for(let i of fibonacci(10)) {
+                console.log(i);
+            }
+            10:56:12.692 VM2685:2 0
+            10:56:12.693 VM2685:2 1
+            10:56:12.693 VM2685:2 NaN
+            10:56:12.693 VM2685:2 NaN
+            10:56:12.694 VM2685:2 NaN
+            10:56:12.694 VM2685:2 NaN
+            10:56:12.694 VM2685:2 NaN
+            10:56:12.694 VM2685:2 NaN
+            10:56:12.694 VM2685:2 NaN
+            10:56:12.695 VM2685:2 NaN
+
+            // yield的参数不产生依赖
+            function* fibonacci(n) {
+                var a = [];
+                for(let i = 0; i &lt; n; i++ ) {
+                    a[i] = i&lt;2 ? i: (a[i-1] + a[i-2]);
+                    yield a[i];
+                }
+            }
+            11:35:59.323 undefined
+            11:36:03.639 for(let i of fibonacci(10)) {
+                console.log(i);
+            }
+            11:36:03.640 VM2738:2 0
+            11:36:03.640 VM2738:2 1
+            11:36:03.640 VM2738:2 1
+            11:36:03.640 VM2738:2 2
+            11:36:03.640 VM2738:2 3
+            11:36:03.640 VM2738:2 5
+            11:36:03.640 VM2738:2 8
+            11:36:03.640 VM2738:2 13
+            11:36:03.640 VM2738:2 21
+            11:36:03.640 VM2738:2 34
+
+            // 把for循环解开后得到
+            function* fibonacci(n) {
+                let a = [];
+                a[0] = 0;
+                console.log(`Now a[${0}] = ${a[0]}`);
+                yield a[0];
+                a[1] = 1;
+                console.log(`Now a[${1}] = ${a[1]}`);
+                yield a[1];
+                a[2] = a[1] + a[0];
+                console.log(`Now a[${2}] = ${a[2]}`);
+                yield a[2];
+            }
+            12:22:27.859 undefined
+            12:22:30.248 var f = fibonacci(10);
+            12:22:30.258 undefined
+            12:22:39.418 f.next();
+            12:22:39.420 VM3002:4 Now a[0] = 0
+            12:22:39.434 {value: 0, done: false}
+            12:22:58.604 f.next();
+            12:22:58.606 VM3002:7 Now a[1] = 1
+            12:22:58.619 {value: 1, done: false}
+            12:23:00.630 f.next();
+            12:23:00.631 VM3002:10 Now a[2] = 1
+            12:23:00.647 {value: 1, done: false}
+</pre></div>
+
+
+<h4 id="5generatorprototypethrow">5）Generator.prototype.throw()<a class="headerlink" href="#5generatorprototypethrow" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>throw方法可以接受一个参数，该参数会被catch语句接收，建议抛出Error对象的实例。</li>
+<li>catch错误后可以继续执行下一个yield</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>           var g = function* () {
+              try {
+                yield;
+              } catch (e) {
+                console.log(e);
+              }
+            };
+
+            var i = g();
+            i.next();
+            i.throw(new Error(&#39;出错了！&#39;));
+
+            function* g() {
+                yield 1;
+                console.log(&#39;throwing an exception&#39;);
+                throw new Error(&#39;generator broke!&#39;);
+                yield 2;
+                yield 3;
+            }
+
+            // Find a perfect GF 体内捕获错误
+            function* findGF(height, color) {
+                yield &quot;start to find a GF!&quot;;
+                try {
+                    console.log(&quot;Check the girl&#39;s height&quot;);
+                    yield height;   
+                }catch(e) {
+                    if(height &lt; 155) {
+                        console.log(&quot;The girl is too short!&quot;);
+                    }
+                    if(height &gt; 165) {
+                        console.log(&quot;The girl is too high!&quot;);
+                    }
+                    yield &quot;The girl&#39;s height is not Good&quot;;
+                }
+
+                try {
+                    console.log(&quot;Check the girl&#39;s color&quot;);
+                    yield color;   
+                }catch(e) {
+                    console.log(&quot;The girl is too black!&quot;);
+                    yield &quot;The girl&#39;s color is not Good&quot;;
+                }
+
+                return height &gt; 155 &amp;&amp; height &lt; 165 &amp;&amp; color !== &quot;black&quot; ? &quot;The GF is perfect!&quot; : &quot;The girl is not perfect!&quot;
+            }
+
+            var isGFPerfect = function(f) {
+
+                // start to find a GF!
+                console.log(f.next());
+
+                let height = f.next().value;
+
+                // Check the girl&#39;s height
+                if(height &lt; 155 || height &gt; 165) {
+                    f.throw(new Error());
+                }else {
+                    console.log(&quot;The girl&#39;s height is Good&quot;);
+                }
+
+                // Check the girl&#39;s color
+                if(f.next().value == &quot;black&quot;) {
+                    f.throw(new Error());
+                }else {
+                    console.log(&quot;The girl&#39;s color is Good&quot;);
+                }
+
+                // Finish the check
+                console.log(f.next());
+            }
+            15:55:56.605 undefined
+            15:56:40.495 var Lily = findGF(153, &quot;black&quot;);
+            var Belly = findGF(156, &quot;black&quot;);
+            var Lisa = findGF(156, &quot;white&quot;);
+            15:56:40.514 undefined
+            15:57:18.226 isGFPerfect(Lily);
+
+            15:57:18.227 VM3145:30 {value: &quot;start to find a GF!&quot;, done: false}
+            15:57:18.228 VM3145:4 Check the girl&#39;s height
+            15:57:18.228 VM3145:8 The girl is too short!
+            15:57:18.228 VM3145:17 Check the girl&#39;s color
+            15:57:18.228 VM3145:20 The girl is too black!
+            15:57:18.228 VM3145:49 {value: &quot;The girl is not perfect!&quot;, done: true}
+            15:57:18.266 undefined
+            15:57:25.889 isGFPerfect(Belly);
+            15:57:25.890 VM3145:30 {value: &quot;start to find a GF!&quot;, done: false}
+            15:57:25.891 VM3145:4 Check the girl&#39;s height
+            15:57:25.891 VM3145:38 The girl&#39;s height is Good
+            15:57:25.892 VM3145:17 Check the girl&#39;s color
+            15:57:25.893 VM3145:20 The girl is too black!
+            15:57:25.893 VM3145:49 {value: &quot;The girl is not perfect!&quot;, done: true}
+            15:57:25.950 undefined
+            15:57:30.004 isGFPerfect(Lisa);
+            15:57:30.005 VM3145:30 {value: &quot;start to find a GF!&quot;, done: false}
+            15:57:30.006 VM3145:4 Check the girl&#39;s height
+            15:57:30.006 VM3145:38 The girl&#39;s height is Good
+            15:57:30.006 VM3145:17 Check the girl&#39;s color
+            15:57:30.007 VM3145:45 The girl&#39;s color is Good
+            15:57:30.007 VM3145:49 {value: &quot;The GF is perfect!&quot;, done: true}
+            15:57:30.084 undefined
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>除了体内捕获错误，还可以体外捕获错误，但是一旦 Generator 执行过程中抛出错误，且没有被内部捕获，就不会再执行下去了。如果此后还调用next方法，将返回一个value属性等于undefined、done属性等于true的对象，即 JavaScript 引擎认为这个 Generator 已经运行结束了。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // Find a perfect GF 体内捕获错误
+            function* findGF(height, color) {
+                yield &quot;start to find a GF!&quot;;
+                yield &quot;Check the girl&#39;s height&quot;; 
+                if(height &lt; 155) {
+                    throw(&quot;The girl is too short!&quot;);
+                }
+                if(height &gt; 165) {
+                    throw(&quot;The girl is too high!&quot;);
+                }
+
+                yield &quot;Check the girl&#39;s color&quot;; 
+                if(height &gt; 165) {
+                     throw(&quot;The girl is too black!&quot;);
+                }
+
+                return height &gt; 155 &amp;&amp; height &lt; 165 &amp;&amp; color !== &quot;black&quot; ? &quot;The GF is perfect!&quot; : &quot;The girl is not perfect!&quot;
+            }
+
+            var isGFPerfect = function(f) {
+
+                // start to find a GF!
+                console.log(f.next());
+
+                // Check the girl&#39;s height
+                console.log(f.next());
+                try {
+                    f.next()
+                }catch(e) {
+                     console.log(e);
+                }
+
+                // Check the girl&#39;s color
+                console.log(f.next());
+                try {
+                    f.next()
+                }catch(e) {
+                     console.log(e);
+                }
+
+                // Finish the check
+                console.log(f.next());
+            }
+            16:22:20.642 undefined
+            16:22:40.485 var Lily = findGF(153, &quot;black&quot;);
+
+            16:22:40.492 undefined
+            16:22:51.811 isGFPerfect(Lily);
+            16:22:51.813 VM3163:23 {value: &quot;start to find a GF!&quot;, done: false}
+            16:22:51.814 VM3163:26 {value: &quot;Check the girl&#39;s height&quot;, done: false}
+            16:22:51.814 VM3163:30 The girl is too short!
+            16:22:51.815 VM3163:34 {value: undefined, done: true}
+            16:22:51.815 VM3163:42 {value: undefined, done: true}done: truevalue: undefined__proto__: Object
+            16:22:51.867 undefined
+</pre></div>
+
+
+<h4 id="6generatorprototypereturn">6）Generator.prototype.return()<a class="headerlink" href="#6generatorprototypereturn" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Generator 函数返回的遍历器对象，还有一个return方法，可以返回给定的值，并且终结遍历 Generator 函数。</li>
+<li>如果return方法调用时，不提供参数，则返回值的value属性为undefined。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function* gen() {
+                yield 1;
+                yield 2;
+                yield 3;
+            }
+
+            var g = gen();
+
+            g.next()        // { value: 1, done: false }
+            g.return(&#39;foo&#39;) // { value: &quot;foo&quot;, done: true }
+            g.next()        // { value: undefined, done: true }
+</pre></div>
+
+
+<h4 id="7yield">7）yield* 表达式<a class="headerlink" href="#7yield" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>如果在 Generator 函数内部，调用另一个 Generator 函数，默认情况下是没有效果的。</li>
+<li>如果你想在一个Generator函数里面执行另一个Generator函数</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function* inner() {
+              yield &#39;hello!&#39;;
+            }
+
+            function* outer1() {
+              yield &#39;open&#39;;
+              yield inner();
+              yield &#39;close&#39;;
+            }
+
+            var gen = outer1()
+            gen.next().value // &quot;open&quot;
+            gen.next().value // 返回一个遍历器对象
+            gen.next().value // &quot;close&quot;
+
+            function* outer2() {
+              yield &#39;open&#39;
+              yield* inner()
+              yield &#39;close&#39;
+            }
+
+            var gen = outer2()
+            gen.next().value // &quot;open&quot;
+            gen.next().value // &quot;hello!&quot;
+            gen.next().value // &quot;close&quot;
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>实际上，任何数据结构只要有 Iterator 接口，就可以被yield*遍历</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var read = (function* () {
+                yield &#39;hello&#39;;
+                yield* &#39;hello&#39;;
+            })();
+
+            read.next().value // &quot;hello&quot;
+            16:43:43.955 &quot;hello&quot;
+            16:43:49.434 read.next().value // &quot;h&quot;
+            16:43:49.439 &quot;h&quot;
+            16:43:52.899 read.next().value 
+            16:43:52.911 &quot;e&quot;
+            16:43:54.450 read.next().value 
+            16:43:54.460 &quot;l&quot;
+            16:43:55.747 read.next().value 
+            16:43:55.751 &quot;l&quot;
+            16:43:56.634 read.next().value 
+            16:43:56.650 &quot;o&quot;
+            16:43:58.177 read.next().value 
+            16:43:58.184 undefined
+</pre></div>
+
+
+<h4 id="8generator">8）Generator 与状态机<a class="headerlink" href="#8generator" title="Permanent link"></a></h4>
+<div class="codehilite"><pre>            var clock = function* () {
+              while (true) {
+                console.log(&#39;Tick!&#39;);
+                yield;
+                console.log(&#39;Tock!&#39;);
+                yield;
+              }
+            };
+</pre></div>
+
+
+<h3 id='6.3'>6.3 Generator 与协程与控制流管理</h3>
+
+<h4 id="1_9">1) 协程与子例程的区别<a class="headerlink" href="#1_9" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>传统的“子例程”（subroutine）采用堆栈式“后进先出”的执行方式，只有当调用的子函数完全执行完毕，才会结束执行父函数。</li>
+<li>协程则更偏向于类似进程和线程的管理，则单核的情况下，一个线程执行到一半后暂停，然后另外一个线程接着运行一段时间后暂停，类似这样的相互运行一段时间后交出控制权，营造一种多线程执行的假象。这种可以并行执行、交换执行权的线程（或函数），就称为协程。</li>
+<li>从实现上看，在内存中，子例程只使用一个栈（stack），而协程是同时存在多个栈，但只有一个栈是在运行状态，也就是说，协程是以多占用内存为代价，实现多任务的并行。</li>
+</ul>
+</blockquote>
+<h4 id="2_8">2) 协程与普通线程的区别<a class="headerlink" href="#2_8" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>协程与普通的线程很相似，都有自己的执行上下文、可以分享全局变量。</li>
+<li>它们的不同之处在于，同一时间可以有多个线程处于运行状态，但是运行的协程只能有一个，其他协程都处于暂停状态。此外，普通的线程是抢先式的，到底哪个线程优先得到资源，必须由运行环境决定，但是协程是合作式的，执行权由协程自己分配。</li>
+</ul>
+</blockquote>
+<h4 id="3-generator">3) Generator 与上下文<a class="headerlink" href="#3-generator" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Generator执行产生的上下文环境，一旦遇到yield命令，就会暂时退出堆栈，但是并不消失，里面的所有变量和对象会冻结在当前状态。等到对它执行next命令时，这个上下文环境又会重新加入调用栈，冻结的变量和对象恢复执行。</li>
+</ul>
+</blockquote>
+<h4 id="4_1">4) 控制流管理<a class="headerlink" href="#4_1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>异步操作的同步化表达</li>
+<li>这种写法的好处是所有findGF过程的逻辑，都被封装在一个函数，按部就班非常清晰，而且可以隐藏细节；</li>
+<li>
+<div class="codehilite"><pre>        // 返回Promise实例版本
+        var findBeadtiful = new Promise(function(resolve, error) {
+            resolve(&quot;Beadtiful &quot;);
+        });
+        /*
+            var findCute = new Promise(function(resolve, error) {
+                resolve();
+            });
+            var findWarm = new Promise(function(resolve, error) {
+                resolve();
+            });
+        */
+</pre></div>
+
+
+</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var girlType = function(str) {
+                console.log(str);
+            }
+
+            var findGF = function() {
+
+                console.log(&quot;I want to find a girl who is &quot;);
+                findBeadtiful.then(function(str) {
+                                        console.log(str);
+                                        return &quot;Cute &quot;;
+                                    })
+                             .then(function(str) {
+                                        console.log(str);
+                                        return [&quot;Warm&quot;, &quot;Sunny&quot;];
+                                    })
+                             .then(function(str) {
+                                        console.log(`${str[0]} and ${str[1]}`);
+                                    });
+            }
+
+            findGF();
+            21:09:11.529 VM3453:19 I want to find a girl who is 
+            21:09:11.529 VM3453:21 Beadtiful 
+            21:09:11.530 VM3453:25 Cute 
+            21:09:11.531 VM3453:29 Warm and Sunny
+
+            // Generator版本
+            var findGF =function* () {
+                console.log(&quot;Start!&quot;);
+                yield &quot;Looking for a girl in a park!&quot;
+                yield &quot;Looking for a girl in a garden!&quot;
+                console.log(&quot;I have found a girl!&quot;);
+            }
+            18:00:18.700 undefined
+            18:00:41.939 var Lily =  findGF();
+            18:00:41.947 undefined
+            18:00:58.674 Lily.next();
+            18:00:58.678 VM3310:2 Start!
+            18:00:58.697 {value: &quot;Looking for a girl in a park!&quot;, done: false}
+            18:01:11.184 Lily.next();
+            18:01:11.200 {value: &quot;Looking for a girl in a garden!&quot;, done: false}
+            18:01:14.506 Lily.next();
+            18:01:14.508 VM3310:5 I have found a girl!
+            18:01:14.531 {value: undefined, done: true}
+</pre></div>
+
+
+<h3 id='6.4'>6.4 Generator 异步应用</h3>
+
+<h4 id="1_10">1) 异步编程简介与的传统方法<a class="headerlink" href="#1_10" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>所谓&rdquo;异步&rdquo;，简单说就是一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备，再回过头执行第二段。</li>
+<li>传统方法<blockquote>
+<ul>
+<li>回调函数</li>
+<li>事件监听</li>
+<li>发布/订阅</li>
+<li>Promise对象 </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h4 id="2_9">2) 回调函数<a class="headerlink" href="#2_9" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>上面代码中，readFile函数的第三个参数，就是回调函数，也就是任务的第二段。等到操作系统返回了/etc/passwd这个文件以后，回调函数才会执行。</li>
+<li>一个有趣的问题是，为什么 Node 约定，回调函数的第一个参数，必须是错误对象err（如果没有错误，该参数就是null）？</li>
+<li>原因是执行分成两段，第一段执行完以后，任务所在的上下文环境就已经结束了。在这以后抛出的错误，原来的上下文环境已经无法捕捉，只能当作参数，传入第二段。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            fs.readFile(&#39;/etc/passwd&#39;, &#39;utf-8&#39;, function (err, data) {
+                if (err) throw err;
+                console.log(data);
+            });
+</pre></div>
+
+
+<h4 id="3-promise">3) Promise对象<a class="headerlink" href="#3-promise" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>链式结构避免多重嵌套</li>
+<li>Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆then，原来的语义变得很不清楚。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var readFile = require(&#39;fs-readfile-promise&#39;);
+            readFile(fileA)
+            .then(function (data) {
+              console.log(data.toString());
+            })
+            .then(function () {
+              return readFile(fileB);
+            })
+            .then(function (data) {
+              console.log(data.toString());
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>Generator的同步编程</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var readFile = function* () {
+
+                // read fileA
+                try {
+                    yield fs.readFile(fileA, &#39;utf-8&#39;, function (err, data) {});
+                }catch(e) {
+                    yield e;
+                }
+
+                // read fileB
+                try {
+                    yield fs.readFile(fileB, &#39;utf-8&#39;, function (err, data) {});
+                }catch(e) {
+                    yield e;
+                }    
+            }
+
+            21:59:35.897 undefined
+            21:59:39.451 var f = readFile(); 
+            21:59:39.465 undefined
+            21:59:53.765 console.log(f.next());  
+            21:59:53.766 VM3498:1 {value: ReferenceError: fs is not defined
+                at readFile (&lt;anonymous&gt;:5:3)
+                at readFile.next (&lt;anonymous…, done: false}
+            21:59:53.781 undefined
+            21:59:59.052 console.log(f.next());
+            21:59:59.053 VM3499:1 {value: ReferenceError: fs is not defined
+                at readFile (&lt;anonymous&gt;:12:3)
+                at readFile.next (&lt;anonymou…, done: false}
+            21:59:59.059 undefined
+            22:00:07.273 console.log(f.next()); 
+            22:00:07.274 VM3501:1 {value: undefined, done: true}
+</pre></div>
+
+
+<h4 id="4-thunk">4) Thunk函数转换器<a class="headerlink" href="#4-thunk" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>参数的求职策略<blockquote>
+<ul>
+<li>传值调用（call by value） 参数传入函数之前已经求出结果 C语言便采用这种策略，JavaScript 语言是也是传值调用</li>
+<li>传名调用（call by name） 参数传入函数之后已经求出结果，即只在执行时求值，这样做的好处是不在一些不需要用到参数的情况下消耗性能，比如著名的Thunk函数</li>
+</ul>
+</blockquote>
+</li>
+<li>Array.prototype.slice.call(arguments)能将具有length属性的对象转成数组</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var a={length:2,0:&#39;first&#39;,1:&#39;second&#39;};
+            Array.prototype.slice.call(a);//  [&quot;first&quot;, &quot;second&quot;]
+
+            var a={length:2};
+            Array.prototype.slice.call(a);//  [undefined, undefined]
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>目的是将一个大函数中的参数以及回调函数分离开来    </li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // ES5版本
+            var Thunk = function(fn){
+
+                // 分离参数
+                return function (){
+                    var args = Array.prototype.slice.call(arguments);
+
+                    // 分离回调函数
+                    return function (callback){
+                        args.push(callback);
+
+                        //执行操作
+                        return fn.apply(this, args);
+                    }
+                };
+            };
+
+            // ES6版本
+            const Thunk = function(fn) {
+
+                // 分离参数
+                return function (...args) {
+
+                    // 分离回调函数
+                    return function (callback) {
+
+                        //执行操作
+                        return fn.call(this, ...args, callback);
+                    }
+                };
+            };
+
+            //检测
+            function f(a, cb) {
+              cb(a);
+            }
+            const ft = Thunk(f);
+
+            ft(1)(console.log) // 1
+</pre></div>
+
+
+<h4 id="5-generator">5) Generator 函数的流程管理<a class="headerlink" href="#5-generator" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Generator 函数gen会自动执行</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function* gen() {
+                // ...
+            }
+
+            var g = gen();
+            var res = g.next();
+
+            // 假如没有完成的话done的值为flase；
+            while(!res.done){
+                console.log(res.value);
+                res = g.next();
+            }
+</pre></div>
+
+
+<h4 id="5-thunk">5) Thunk 函数的自动流程管理<a class="headerlink" href="#5-thunk" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>上面代码的run函数，就是一个 Generator 函数的自动执行器。内部的next函数就是 Thunk 的回调函数。next函数先将指针移到 Generator 函数的下一步（gen.next方法），然后判断 Generator 函数是否结束（result.done属性），如果没结束，就将next函数再传入 Thunk 函数（result.value属性），否则就直接退出。 </li>
+<li>前提是每一个异步操作，都要是 Thunk 函数，也就是说，跟在yield命令后面的必须是 Thunk 函数。   <br />
+                function run(fn) {
+                    var gen = fn();</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>                function next(err, data) {
+                    var result = gen.next(data);
+                    if (result.done) return;
+                    result.value(next);
+                }
+
+                next();
+            }
+
+            var g = function* (){
+
+                // var readFileThunk = Thunk(fs.readFile);
+                // readFileThunk(fileA)(callback);
+                // 读完函数之后就执行callback函数
+                var f1 = yield readFileThunk(&#39;fileA&#39;);
+                var f2 = yield readFileThunk(&#39;fileB&#39;);
+                // ...
+                var fn = yield readFileThunk(&#39;fileN&#39;);
+            };
+
+            run(g);
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>generator版本执行器executor 同步执行
+                // 原始函数
+                var findGF = function* (args, callback) {
+                    yield &ldquo;Start speaking my girl&rsquo;s name!&rdquo;;
+                    console.log(<code>My girl's name is ${args};</code>);
+                    yield &ldquo;End!&rdquo;;
+                    yield callback;
+                }</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // Trump转换器
+            var translator = function() {
+                return function(args) {
+                    return function(callback) {
+                        return findGF(args, callback);
+                    }
+                }
+            }
+
+
+            // generator版本执行器executor
+            var execute = function(generator) {
+                let Generator = generator();
+                let result = Generator.next();
+                while(!result.done) {
+
+                    // 把构造器放进回调函数中
+                    let findGFGenerator = result.value(Generator);
+                    findGFGenerator.next();
+                    findGFGenerator.next();
+
+                    //回调 g函数构造器
+                    result = findGFGenerator.next().value;
+
+                    //g函数构造器指针向下一格
+                    result = result.next();
+                }
+            }
+
+            //定义generator
+            var changeGF = function*() {
+                let t = translator();
+                yield t(&quot;Lily&quot;);
+                yield t(&quot;Belly&quot;);
+                yield t(&quot;Lisa&quot;);
+                yield t(&quot;Amy&quot;);
+            }
+
+            //执行操作
+            execute(changeGF);
+
+            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            console.log(`fib(18) = ${fib(18)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            11:13:50.949 VM464:4 My girl&#39;s name is Lily;
+            11:13:50.949 VM464:4 My girl&#39;s name is Belly;
+            11:13:50.949 VM464:4 My girl&#39;s name is Lisa;
+            11:13:50.949 VM464:4 My girl&#39;s name is Amy;
+            11:13:50.949 VM464:54 fib(18) = 2584
+            11:13:50.950 VM464:55 随便写点什么东西，看看是不是提前运行了
+            11:13:50.950 VM464:56 fib(5) = 5
+            11:13:50.950 VM464:57 fib(5) = 5
+            11:13:50.950 VM464:58 fib(5) = 5
+            11:13:50.950 VM464:59 fib(5) = 5
+            11:13:50.950 VM464:60 fib(5) = 5
+            11:13:50.950 VM464:61 fib(5) = 5
+            11:13:50.950 VM464:62 fib(5) = 5
+            11:13:50.950 VM464:63 fib(5) = 5
+            11:13:50.950 VM464:64 fib(5) = 5
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>Promise版本执行器executor，关键在于把resolveF和promise.then()方法互相耦合 异步执行 </li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 原始函数
+            var findGF = function* (args, callback) {
+                yield &quot;Start speaking my girl&#39;s name!&quot;;
+                console.log(`My girl&#39;s name is ${args};`);
+                yield &quot;End!&quot;;
+                yield callback;
+            }
+
+            // Trump转换器
+            var translator = function() {
+                return function(args) {
+                    return function(callback) {
+                        return findGF(args, callback);
+                    }
+                }
+            }
+
+            // Promise版本执行器executor
+            var execute = function(generator) {
+
+                let g = generator();
+                let result = g.next();
+                let resolveF = function(Generator) {
+                     // 把构造器放进回调函数中
+                    let findGFGenerator = result.value(Generator);
+                    findGFGenerator.next();
+                    findGFGenerator.next();
+
+                    //回调 g函数构造器
+                    result = findGFGenerator.next().value;
+
+                    //g函数构造器指针向下一格
+                    result = result.next();
+                    if(result.done) {
+                        throw &quot;done&quot;;
+                    }else {
+                        next();
+                    }
+                    return Generator;
+                }
+                let promise = new Promise(function(resolve, error) {resolve(g);});
+
+                let next = function() {
+                    promise = promise.then(resolveF).catch(function(e) {console.log(&quot;done!&quot;);});        
+                };
+                resolveF(g);
+            }
+
+            //定义generator
+            var changeGF = function*() {
+                let t = translator();
+                yield t(&quot;Lily&quot;);
+                yield t(&quot;Belly&quot;);
+                yield t(&quot;Lisa&quot;);
+                yield t(&quot;Amy&quot;);
+                yield t(&quot;Janny&quot;);
+            }
+
+            execute(changeGF);
+
+            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            console.log(`fib(18) = ${fib(18)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+
+            11:11:27.685 VM462:4 My girl&#39;s name is Lily;
+            11:11:27.686 VM462:65 fib(18) = 2584
+            11:11:27.686 VM462:66 随便写点什么东西，看看是不是提前运行了
+            11:11:27.686 VM462:67 fib(5) = 5
+            11:11:27.686 VM462:68 fib(5) = 5
+            11:11:27.686 VM462:69 fib(5) = 5
+            11:11:27.686 VM462:70 fib(5) = 5
+            11:11:27.686 VM462:71 fib(5) = 5
+            11:11:27.686 VM462:72 fib(5) = 5
+            11:11:27.686 VM462:73 fib(5) = 5
+            11:11:27.686 VM462:74 fib(5) = 5
+            11:11:27.687 VM462:75 fib(5) = 5
+            11:11:27.687 VM462:4 My girl&#39;s name is Belly;
+            11:11:27.687 VM462:4 My girl&#39;s name is Lisa;
+            11:11:27.687 VM462:4 My girl&#39;s name is Amy;
+            11:11:27.687 VM462:4 My girl&#39;s name is Janny;
+            11:11:27.688 VM462:44 done!
+</pre></div>
+
+
+<h4 id="6-co">6) co处理并发的异步操作<a class="headerlink" href="#6-co" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>co 支持并发的异步操作，即允许某些操作同时进行，等到它们全部完成，才进行下一步。这时，要把并发的操作都放在数组或对象里面，跟在yield语句后面。 </li>
+<li>需要generator和promise的配合</li>
+<li>需要用到Promise.race(）或者Promise.all()的方法</li>
+<li>co模块其实就是一个执行器，以下co的源码：</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function co(gen) {
+                var ctx = this;
+
+                return new Promise(function(resolve, reject) {
+                    if (typeof gen === &#39;function&#39;) gen = gen.call(ctx);
+                    if (!gen || typeof gen.next !== &#39;function&#39;) return resolve(gen);
+
+                    onFulfilled();
+                    function onFulfilled(res) {
+                        var ret;
+                          try {
+                            ret = gen.next(res);
+                          } catch (e) {
+                            return reject(e);
+                          }
+                          next(ret);
+                    }
+                });
+            }
+
+            // toPromise到底是什么鬼？
+            function next(ret) {
+
+                // 检查当前是否为 Generator 函数的最后一步，如果是就返回。
+                if (ret.done) return resolve(ret.value);
+
+                //确保每一步的返回值，是 Promise 对象。
+                var value = toPromise.call(ctx, ret.value);
+
+                // 使用then方法，为返回值加上回调函数，然后通过onFulfilled函数再次调用next函数。
+                if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
+
+                // 在参数不符合要求的情况下（参数非 Thunk 函数和 Promise 对象），将 Promise 对象的状态改为rejected，从而终止执行。
+                return onRejected(
+                    new TypeError(
+                          &#39;You may only yield a function, promise, generator, array, or object, &#39;
+                          + &#39;but the following object was passed: &quot;&#39;
+                          + String(ret.value)
+                          + &#39;&quot;&#39;
+                        )
+                    );
+            }
+</pre></div>
+
+
+<h3 id='6.5'>6.5 async函数</h3>
+
+<h4 id="1_11">1) 简介<a class="headerlink" href="#1_11" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>ES2017 标准引入了 async 函数，使得异步操作变得更加方便。</li>
+<li>实质上是Generator 函数的语法糖。</li>
+</ul>
+</blockquote>
+<h4 id="2_10">2) 基本用法<a class="headerlink" href="#2_10" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>async函数返回一个 Promise 对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。</li>
+<li>其实async函数返回的是一个promise对象，然后async函数的返回值就是then()方法里面函数的参数； </li>
+<li>async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。</li>
+<li>正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个 Promise 对象，然后立即执行resolve()方法 ，也就是说await命令后面的命令就成为了resolve()方法并被立即执行，相当于then()方法</li>
+<li>await命令后面的 Promise 对象如果变为reject状态，则reject的参数会被catch方法的回调函数接收到。如果是里面的catch接收到，那么就会继续运行，如果是被外面的catch捕捉到，那么就会停止运行，</li>
+<li>await命令后面的 Promise 对象如果变为resolve状态，但是单纯的resolve状态并不能被接收到，需要与return配合。</li>
+<li>如果是单纯的出错，throw 前不需要await，抛出的错误将由then()方法的reject回调函数接收，此时异步操作会被中断，如果不想被中断，需要用到try&hellip;catch结构</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var findGF = async function(wealth) {
+                let a = await (function() {console.log(&quot;The girl is beautiful;&quot;);})();
+                let b = await (function() {console.log(&quot;The girl is cute;&quot;);})();
+                let c = await (function() {console.log(&quot;The girl is warm;&quot;);})();
+
+                if(wealth &lt; 0) {
+                    try{
+                        throw new Error(&quot;Oh no! 小伙子你是负资产啊，滚粗！&quot;);
+                    }catch(e) {
+                        console.log(e.toString());
+                        return &quot;问世间情为何物，直教人生死相许&quot;;
+                    }
+                }else if(wealth &lt; 100) {
+                    console.log(&quot;awkward！小伙子太穷了，被拒绝！&quot;);
+                    let d = await Promise.reject(&quot;问世间情为何物，直教人生死相许&quot;);
+                }else {
+                    let f = await Promise.resolve(&quot;窈窕淑女，君子好逑！愿有情人终成眷属&quot;);
+                    return f;
+                }
+            }
+            findGF(101).then(resolve,reject).catch(function(str) {console.log(str);});
+
+            var resolve = function(str) {
+                console.log(str);
+            }
+
+            var reject = function(str) {
+                console.log(str);
+            }
+
+            21:50:34.282 VM42960:2 The girl is beautiful;
+            21:50:34.283 VM42960:3 The girl is cute;
+            21:50:34.283 VM42960:4 The girl is warm;
+            21:50:34.283 VM42960:23 窈窕淑女，君子好逑！愿有情人终成眷属
+            21:50:34.299 Promise {&lt;resolved&gt;: undefined}
+            21:50:48.651 findGF(99).then(resolve,reject).catch(function(str) {console.log(str);});
+            21:50:48.651 VM42960:2 The girl is beautiful;
+            21:50:48.651 VM42960:3 The girl is cute;
+            21:50:48.651 VM42960:4 The girl is warm;
+            21:50:48.651 VM42960:14 awkward！小伙子太穷了，被拒绝！
+            21:50:48.652 VM42960:27 问世间情为何物，直教人生死相许
+            21:50:48.663 Promise {&lt;resolved&gt;: undefined}
+            21:50:53.571 findGF(-100).then(resolve,reject).catch(function(str) {console.log(str);});
+            21:50:53.571 VM42960:2 The girl is beautiful;
+            21:50:53.572 VM42960:3 The girl is cute;
+            21:50:53.572 VM42960:4 The girl is warm;
+            21:50:53.572 VM42960:10 Error: Oh no! 小伙子你是负资产啊，滚粗！
+            21:50:53.572 VM42960:23 问世间情为何物，直教人生死相许
+            21:50:53.583 Promise {&lt;resolved&gt;: undefined}
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>复杂的版本</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            var findGF = async function(wealth) {
+                let a = await (function() {let a = fib(10); console.log(&quot;The girl is beautiful;&quot;);return a;})();
+                let b = await (function() {let a = fib(20); console.log(&quot;The girl is cute;&quot;);return a;})();
+                let c = await (function() {let a = fib(30); console.log(&quot;The girl is warm;&quot;);return a;})();
+
+                if(wealth &lt; 0) {
+                    try{
+                        throw new Error(&quot;Oh no! 小伙子你是负资产啊，滚粗！&quot;+ a + b + c);
+                    }catch(e) {
+                        console.log(e.toString());
+                        return &quot;问世间情为何物，直教人生死相许&quot;+ a + b + c;
+                    }
+                }else if(wealth &lt; 100) {
+                    console.log(&quot;awkward！小伙子太穷了，被拒绝！&quot;);
+                    let d = await Promise.reject(&quot;问世间情为何物，直教人生死相许&quot;+ a + b + c);
+                }else {
+                    let f = await Promise.resolve(&quot;窈窕淑女，君子好逑！愿有情人终成眷属&quot;+ a + b + c);
+                    return f;
+                }
+            }
+
+            var resolve = function(str) {
+                console.log(str);
+            }
+
+            var reject = function(str) {
+                console.log(str);
+            }
+
+            findGF(101).then(resolve,reject).catch(function(str) {console.log(str);});
+
+
+            // 第一组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(10) = ${fib(10)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+            findGF(99).then(resolve,reject).catch(function(str) {console.log(str);});
+
+
+            // 第二组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(20) = ${fib(20)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+            findGF(-100).then(resolve,reject).catch(function(str) {console.log(str);});
+            12:51:41.783 VM647:6 The girl is beautiful;
+            12:51:41.783 VM647:38 fib(10) = 55
+            12:51:41.783 VM647:39 随便写点什么东西，看看是不是提前运行了
+            12:51:41.783 VM647:40 fib(5) = 5
+            12:51:41.784 VM647:41 fib(5) = 5
+            12:51:41.784 VM647:42 fib(5) = 5
+            12:51:41.784 VM647:43 fib(5) = 5
+            12:51:41.784 VM647:44 fib(5) = 5
+            12:51:41.784 VM647:45 fib(5) = 5
+            12:51:41.784 VM647:46 fib(5) = 5
+            12:51:41.784 VM647:47 fib(5) = 5
+            12:51:41.784 VM647:48 fib(5) = 5
+            12:51:41.784 VM647:6 The girl is beautiful;
+            12:51:41.786 VM647:54 fib(20) = 6765
+            12:51:41.786 VM647:55 随便写点什么东西，看看是不是提前运行了
+            12:51:41.786 VM647:56 fib(5) = 5
+            12:51:41.786 VM647:57 fib(5) = 5
+            12:51:41.786 VM647:58 fib(5) = 5
+            12:51:41.786 VM647:59 fib(5) = 5
+            12:51:41.786 VM647:60 fib(5) = 5
+            12:51:41.786 VM647:61 fib(5) = 5
+            12:51:41.786 VM647:62 fib(5) = 5
+            12:51:41.786 VM647:63 fib(5) = 5
+            12:51:41.786 VM647:64 fib(5) = 5
+            12:51:41.786 VM647:6 The girl is beautiful;
+            12:51:41.787 VM647:7 The girl is cute;
+            12:51:41.787 VM647:7 The girl is cute;
+            12:51:41.787 VM647:7 The girl is cute;
+            12:51:41.801 VM647:8 The girl is warm;
+            12:51:41.815 VM647:8 The girl is warm;
+            12:51:41.829 VM647:8 The girl is warm;
+            12:51:41.829 VM647:18 awkward！小伙子太穷了，被拒绝！
+            12:51:41.829 VM647:14 Error: Oh no! 小伙子你是负资产啊，滚粗！556765832040
+            12:51:41.829 VM647:27 问世间情为何物，直教人生死相许556765832040
+            12:51:41.830 VM647:27 窈窕淑女，君子好逑！愿有情人终成眷属556765832040
+            12:51:41.830 VM647:31
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>体现异步的版本</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            var studyJS = function() {
+                let a = fib(3);
+                console.log(&quot;I am learning JS!&quot;);
+                return a;
+            }
+
+            var kitFit = function() {
+                let a = fib(2);
+                console.log(&quot;I am doing some exercise!&quot;);
+                return a;
+            }
+
+            var makeMoney = function() {
+                let a = fib(1);
+                console.log(&quot;I am earning money!&quot;);
+                return a;
+            }
+
+            var fight = function* () {
+                yield makeMoney;
+                yield kitFit;
+                yield studyJS;
+            }
+
+            var findGF = async function(name) {
+
+                var f = fight();
+                await f.next().value();
+                await f.next().value();
+                await f.next().value();
+                return `I love ${name}!`;
+            }
+
+            findGF(&quot;Lily&quot;).then(function(str) {console.log(str);});
+
+            console.log(`fib(18) = ${fib(18)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+
+            11:08:25.087 VM460:19 I am earning money!
+            11:08:25.087 VM460:40 fib(18) = 2584
+            11:08:25.088 VM460:41 随便写点什么东西，看看是不是提前运行了
+            11:08:25.088 VM460:42 fib(5) = 5
+            11:08:25.088 VM460:43 fib(5) = 5
+            11:08:25.088 VM460:44 fib(5) = 5
+            11:08:25.088 VM460:45 fib(5) = 5
+            11:08:25.088 VM460:46 fib(5) = 5
+            11:08:25.088 VM460:47 fib(5) = 5
+            11:08:25.088 VM460:48 fib(5) = 5
+            11:08:25.088 VM460:49 fib(5) = 5
+            11:08:25.088 VM460:50 fib(5) = 5
+            11:08:25.088 VM460:13 I am doing some exercise!
+            11:08:25.088 VM460:7 I am learning JS!
+            11:08:25.088 VM460:38 I love Lily!
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li></li>
+</ul>
+</blockquote>
+<h4 id="3_4">3) 并发异步执行<a class="headerlink" href="#3_4" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Promise.all([{}, {}, {}])版本 </li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            var studyJS = function() {
+                let a = fib(10);
+                console.log(&quot;I am learning JS!&quot;);
+                return a;
+            }
+
+            var kitFit = function() {
+                let a = fib(20);
+                console.log(&quot;I am doing some exercise!&quot;);
+                return a;
+            }
+
+            var makeMoney = function() {
+                let a = fib(30);
+                console.log(&quot;I am earning money!&quot;);
+                return a;
+            }
+
+            var findGF = async function(name) {
+                let a = await Promise.all([ kitFit(), makeMoney(), studyJS()]);
+                await console.log(&quot;finghting~&quot; + &quot; &quot; + a[0] + &quot; &quot; + a[1] + &quot; &quot; + a[2]);
+                return Promise.resolve(`${name} I love you!`);
+            }
+
+            findGF(&quot;Lily&quot;).then(function(str) {console.log(str);});
+
+            // 第一组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(10) = ${fib(10)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+            findGF(&quot;Llsa&quot;).then(function(str) {console.log(str);});
+
+            // 第二组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(20) = ${fib(20)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+
+            12:07:11.467 VM620:13 I am doing some exercise!
+            12:07:11.481 VM620:19 I am earning money!
+            12:07:11.481 VM620:7 I am learning JS!
+            12:07:11.481 VM620:32 fib(10) = 55
+            12:07:11.481 VM620:33 随便写点什么东西，看看是不是提前运行了
+            12:07:11.481 VM620:34 fib(5) = 5
+            12:07:11.482 VM620:35 fib(5) = 5
+            12:07:11.482 VM620:36 fib(5) = 5
+            12:07:11.482 VM620:37 fib(5) = 5
+            12:07:11.482 VM620:38 fib(5) = 5
+            12:07:11.482 VM620:39 fib(5) = 5
+            12:07:11.482 VM620:40 fib(5) = 5
+            12:07:11.482 VM620:41 fib(5) = 5
+            12:07:11.482 VM620:42 fib(5) = 5
+            12:07:11.482 VM620:13 I am doing some exercise!
+            12:07:11.497 VM620:19 I am earning money!
+            12:07:11.497 VM620:7 I am learning JS!
+            12:07:11.498 VM620:47 fib(20) = 6765
+            12:07:11.498 VM620:48 随便写点什么东西，看看是不是提前运行了
+            12:07:11.498 VM620:49 fib(5) = 5
+            12:07:11.498 VM620:50 fib(5) = 5
+            12:07:11.498 VM620:51 fib(5) = 5
+            12:07:11.498 VM620:52 fib(5) = 5
+            12:07:11.498 VM620:53 fib(5) = 5
+            12:07:11.498 VM620:54 fib(5) = 5
+            12:07:11.498 VM620:55 fib(5) = 5
+            12:07:11.498 VM620:56 fib(5) = 5
+            12:07:11.498 VM620:57 fib(5) = 5
+            12:07:11.498 VM620:25 finghting~ 6765 832040 55
+            12:07:11.498 VM620:25 finghting~ 6765 832040 55
+            12:07:11.499 VM620:29 Lily I love you!
+            12:07:11.499 VM620:44 Llsa I love you!
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>for&hellip;of版本，本质上跟Promise.all([{}, {}, {}])版本相同，for&hellip;of是进行一部异步的通用方法；</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            var studyJS = function() {
+                let a = fib(10);
+                console.log(&quot;I am learning JS!&quot;);
+                return a;
+            }
+
+            var kitFit = function() {
+                let a = fib(20);
+                console.log(&quot;I am doing some exercise!&quot;);
+                return a;
+            }
+
+            var makeMoney = function() {
+                let a = fib(30);
+                console.log(&quot;I am earning money!&quot;);
+                return a;
+            }
+
+            var findGF = async function(name) {
+                let func = [kitFit, makeMoney, studyJS];
+                let a = [];
+                for(let f of func) {
+                    a.push(await f());
+                }
+                await console.log(&quot;finghting~&quot; + &quot; &quot; + a[0] + &quot; &quot; + a[1] + &quot; &quot; + a[2]);
+                return Promise.resolve(`${name} I love you!`);
+            }
+
+            findGF(&quot;Lily&quot;).then(function(str) {console.log(str);});
+
+            // 第一组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(10) = ${fib(10)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+            findGF(&quot;Llsa&quot;).then(function(str) {console.log(str);});
+
+            // 第二组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(20) = ${fib(20)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+
+            12:09:28.366 VM621:13 I am doing some exercise!
+            12:09:28.366 VM621:36 fib(10) = 55
+            12:09:28.366 VM621:37 随便写点什么东西，看看是不是提前运行了
+            12:09:28.366 VM621:38 fib(5) = 5
+            12:09:28.366 VM621:39 fib(5) = 5
+            12:09:28.366 VM621:40 fib(5) = 5
+            12:09:28.366 VM621:41 fib(5) = 5
+            12:09:28.366 VM621:42 fib(5) = 5
+            12:09:28.366 VM621:43 fib(5) = 5
+            12:09:28.366 VM621:44 fib(5) = 5
+            12:09:28.366 VM621:45 fib(5) = 5
+            12:09:28.366 VM621:46 fib(5) = 5
+            12:09:28.367 VM621:13 I am doing some exercise!
+            12:09:28.367 VM621:51 fib(20) = 6765
+            12:09:28.367 VM621:52 随便写点什么东西，看看是不是提前运行了
+            12:09:28.367 VM621:53 fib(5) = 5
+            12:09:28.367 VM621:54 fib(5) = 5
+            12:09:28.367 VM621:55 fib(5) = 5
+            12:09:28.367 VM621:56 fib(5) = 5
+            12:09:28.367 VM621:57 fib(5) = 5
+            12:09:28.367 VM621:58 fib(5) = 5
+            12:09:28.367 VM621:59 fib(5) = 5
+            12:09:28.367 VM621:60 fib(5) = 5
+            12:09:28.367 VM621:61 fib(5) = 5
+            12:09:28.381 VM621:19 I am earning money!
+            12:09:28.397 VM621:19 I am earning money!
+            12:09:28.397 VM621:7 I am learning JS!
+            12:09:28.397 VM621:7 I am learning JS!
+            12:09:28.397 VM621:29 finghting~ 6765 832040 55
+            12:09:28.397 VM621:29 finghting~ 6765 832040 55
+            12:09:28.397 VM621:33 Lily I love you!
+            12:09:28.397 VM621:48 Llsa I love you!
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>Promise.race()版本</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            var studyJS = function() {
+                let a = fib(10);
+                console.log(&quot;I am learning JS!&quot;);
+                return a;
+            }
+
+            var kitFit = function() {
+                let a = fib(20);
+                console.log(&quot;I am doing some exercise!&quot;);
+                return a;
+            }
+
+            var makeMoney = function() {
+                let a = fib(30);
+                console.log(&quot;I am earning money!&quot;);
+                return a;
+            }
+
+            var findGF = async function(name) {
+                let a = await Promise.race([makeMoney(), kitFit(), studyJS()]);
+                await console.log(&quot;finghting~&quot; + &quot; &quot; + a);
+                return Promise.resolve(`${name} I love you!`);
+            }
+
+            findGF(&quot;Lily&quot;).then(function(str) {console.log(str);});
+
+            // 第一组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(10) = ${fib(10)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+            findGF(&quot;Llsa&quot;).then(function(str) {console.log(str);});
+
+            // 第二组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(20) = ${fib(20)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+
+            12:11:10.941 VM622:19 I am earning money!
+            12:11:10.942 VM622:13 I am doing some exercise!
+            12:11:10.942 VM622:7 I am learning JS!
+            12:11:10.942 VM622:32 fib(10) = 55
+            12:11:10.942 VM622:33 随便写点什么东西，看看是不是提前运行了
+            12:11:10.942 VM622:34 fib(5) = 5
+            12:11:10.942 VM622:35 fib(5) = 5
+            12:11:10.942 VM622:36 fib(5) = 5
+            12:11:10.942 VM622:37 fib(5) = 5
+            12:11:10.942 VM622:38 fib(5) = 5
+            12:11:10.942 VM622:39 fib(5) = 5
+            12:11:10.942 VM622:40 fib(5) = 5
+            12:11:10.942 VM622:41 fib(5) = 5
+            12:11:10.942 VM622:42 fib(5) = 5
+            12:11:10.956 VM622:19 I am earning money!
+            12:11:10.956 VM622:13 I am doing some exercise!
+            12:11:10.956 VM622:7 I am learning JS!
+            12:11:10.956 VM622:47 fib(20) = 6765
+            12:11:10.956 VM622:48 随便写点什么东西，看看是不是提前运行了
+            12:11:10.957 VM622:49 fib(5) = 5
+            12:11:10.957 VM622:50 fib(5) = 5
+            12:11:10.957 VM622:51 fib(5) = 5
+            12:11:10.957 VM622:52 fib(5) = 5
+            12:11:10.957 VM622:53 fib(5) = 5
+            12:11:10.957 VM622:54 fib(5) = 5
+            12:11:10.957 VM622:55 fib(5) = 5
+            12:11:10.957 VM622:56 fib(5) = 5
+            12:11:10.957 VM622:57 fib(5) = 5
+            12:11:10.957 VM622:25 finghting~ 832040
+            12:11:10.957 VM622:25 finghting~ 832040
+            12:11:10.957 VM622:29 Lily I love you!
+            12:11:10.957 VM622:44 Llsa I love you!
+</pre></div>
+
+
+<h4 id="4_2">4) 异步遍历器<a class="headerlink" href="#4_2" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>一般来讲，generator的next方法必须是同步的，只要调用就必须立刻返回值。也就是说，一旦执行next方法，就必须同步地得到value和done这两个属性。</li>
+<li>如果遍历指针正好指向同步操作当然没有问题，但对于异步操作，就不太合适了。</li>
+<li>目前的解决方法是，Generator 函数里面的异步操作，返回一个 Thunk 函数或者 Promise 对象，即value属性是一个 Thunk 函数或者 Promise 对象，等待以后返回真正的值，而done属性则还是同步产生的。</li>
+<li>为了做到这一点，关键是让next()方法返回Promise对象，并把它放在await命令后面。</li>
+<li>由于next方法用await处理，就不必使用then方法了，整个流程已经很接近同步处理了。</li>
+<li>同步遍历器是部署在Symbol.iterator属性上的</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            var studyJS = new Promise(function(resolve, reject) {
+                                        let a = fib(30);
+                                        console.log(&quot;I am learning JS!&quot;);
+                                        resolve(`fib(30) = ${a} and I am learning JS!`)} );
+            var kitFit = new Promise(function(resolve, reject) {
+                                        let a = fib(20);
+                                        console.log(&quot;I am doing some exercise!&quot;);
+                                        resolve(`fib(20) = ${a} and I am doing some exercise!`)} );
+            var makeMoney = new Promise(function(resolve, reject) {
+                                        let a = fib(10);
+                                        console.log(&quot;I am earning money!&quot;);
+                                        resolve(`fib(10) = ${a} and I am earning money!`)} );
+
+            var fight = function* () {
+                yield makeMoney;
+                yield kitFit;
+                yield studyJS;
+            }
+
+            var findGF = async function(name) {
+
+                var f = fight();
+                //for await (const x of f) {
+                //  console.log(x);
+                //}
+                await f.next().value.then(function(val) {console.log(val);});
+                await f.next().value.then(function(val) {console.log(val);});
+                await f.next().value.then(function(val) {console.log(val);});
+                return `I love ${name}!`;
+            }
+
+            findGF(&quot;Lily&quot;).then(function(str) {console.log(str);});
+
+            // 第一组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(10) = ${fib(10)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+            findGF(&quot;Llsa&quot;).then(function(str) {console.log(str);});
+
+            // 第二组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(20) = ${fib(20)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            12:18:54.884 VM629:7 I am learning JS!
+            12:18:54.884 VM629:11 I am doing some exercise!
+            12:18:54.884 VM629:15 I am earning money!
+            12:18:54.884 VM629:39 fib(10) = 55
+            12:18:54.885 VM629:40 随便写点什么东西，看看是不是提前运行了
+            12:18:54.885 VM629:41 fib(5) = 5
+            12:18:54.885 VM629:42 fib(5) = 5
+            12:18:54.885 VM629:43 fib(5) = 5
+            12:18:54.885 VM629:44 fib(5) = 5
+            12:18:54.885 VM629:45 fib(5) = 5
+            12:18:54.885 VM629:46 fib(5) = 5
+            12:18:54.885 VM629:47 fib(5) = 5
+            12:18:54.885 VM629:48 fib(5) = 5
+            12:18:54.885 VM629:49 fib(5) = 5
+            12:18:54.885 VM629:54 fib(20) = 6765
+            12:18:54.885 VM629:55 随便写点什么东西，看看是不是提前运行了
+            12:18:54.885 VM629:56 fib(5) = 5
+            12:18:54.885 VM629:57 fib(5) = 5
+            12:18:54.885 VM629:58 fib(5) = 5
+            12:18:54.885 VM629:59 fib(5) = 5
+            12:18:54.886 VM629:60 fib(5) = 5
+            12:18:54.886 VM629:61 fib(5) = 5
+            12:18:54.886 VM629:62 fib(5) = 5
+            12:18:54.886 VM629:63 fib(5) = 5
+            12:18:54.886 VM629:64 fib(5) = 5
+            12:18:54.886 VM629:30 fib(10) = 55 and I am earning money!
+            12:18:54.886 VM629:30 fib(10) = 55 and I am earning money!
+            12:18:54.886 VM629:31 fib(20) = 6765 and I am doing some exercise!
+            12:18:54.886 VM629:31 fib(20) = 6765 and I am doing some exercise!
+            12:18:54.886 VM629:32 fib(30) = 832040 and I am learning JS!
+            12:18:54.886 VM629:32 fib(30) = 832040 and I am learning JS!
+            12:18:54.886 VM629:36 I love Lily!
+            12:18:54.887 VM629:51 I love Llsa!
+</pre></div>
+
+
+<h4 id="5-for-awaitof">5) for await&hellip;of<a class="headerlink" href="#5-for-awaitof" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>for&hellip;of循环用于遍历同步的 Iterator 接口。新引入的for await&hellip;of循环，则是用于遍历异步的 Iterator 接口。</li>
+<li>每个子值代表的是迭代器的值实现方法后返回参数，如果没有方法直接返回该数值；</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var fib = function(n) {
+                return n&lt;2 ? n : fib(n-1)+fib(n-2);
+            }
+
+            var studyJS = new Promise(function(resolve, reject) {
+                                        let a = fib(30);
+                                        console.log(&quot;I am learning JS!&quot;);
+                                        resolve(`fib(30) = ${a} and I am learning JS!`)} );
+            var kitFit = new Promise(function(resolve, reject) {
+                                        let a = fib(20);
+                                        console.log(&quot;I am doing some exercise!&quot;);
+                                        resolve(`fib(20) = ${a} and I am doing some exercise!`)} );
+            var makeMoney = new Promise(function(resolve, reject) {
+                                        let a = fib(10);
+                                        console.log(&quot;I am earning money!&quot;);
+                                        resolve(`fib(10) = ${a} and I am earning money!`)} );
+
+            var fight = function* () {
+                yield makeMoney;
+                yield kitFit;
+                yield studyJS;
+            }
+
+            var findGF = async function(name) {
+
+                var f = fight();
+                for await (const x of f) {
+                  console.log(x);
+                }
+                // await f.next().value.then(function(val) {console.log(val);});
+                // await f.next().value.then(function(val) {console.log(val);});
+                // await f.next().value.then(function(val) {console.log(val);});
+                return `I love ${name}!`;
+            }
+
+            findGF(&quot;Lily&quot;).then(function(str) {console.log(str);});
+
+            // 第一组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(10) = ${fib(10)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+
+            findGF(&quot;Llsa&quot;).then(function(str) {console.log(str);});
+
+            // 第二组 随便写点什么东西，看看是不是提前运行了
+            console.log(`fib(20) = ${fib(20)}`);
+            console.log(&quot;随便写点什么东西，看看是不是提前运行了&quot;);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            console.log(`fib(5) = ${fib(5)}`);
+            12:20:31.201 VM630:7 I am learning JS!
+            12:20:31.202 VM630:11 I am doing some exercise!
+            12:20:31.202 VM630:15 I am earning money!
+            12:20:31.202 VM630:39 fib(10) = 55
+            12:20:31.202 VM630:40 随便写点什么东西，看看是不是提前运行了
+            12:20:31.203 VM630:41 fib(5) = 5
+            12:20:31.203 VM630:42 fib(5) = 5
+            12:20:31.203 VM630:43 fib(5) = 5
+            12:20:31.203 VM630:44 fib(5) = 5
+            12:20:31.203 VM630:45 fib(5) = 5
+            12:20:31.203 VM630:46 fib(5) = 5
+            12:20:31.203 VM630:47 fib(5) = 5
+            12:20:31.203 VM630:48 fib(5) = 5
+            12:20:31.203 VM630:49 fib(5) = 5
+            12:20:31.204 VM630:54 fib(20) = 6765
+            12:20:31.204 VM630:55 随便写点什么东西，看看是不是提前运行了
+            12:20:31.204 VM630:56 fib(5) = 5
+            12:20:31.204 VM630:57 fib(5) = 5
+            12:20:31.204 VM630:58 fib(5) = 5
+            12:20:31.204 VM630:59 fib(5) = 5
+            12:20:31.204 VM630:60 fib(5) = 5
+            12:20:31.204 VM630:61 fib(5) = 5
+            12:20:31.204 VM630:62 fib(5) = 5
+            12:20:31.205 VM630:63 fib(5) = 5
+            12:20:31.205 VM630:64 fib(5) = 5
+            12:20:31.205 VM630:28 fib(10) = 55 and I am earning money!
+            12:20:31.205 VM630:28 fib(10) = 55 and I am earning money!
+            12:20:31.205 VM630:28 fib(20) = 6765 and I am doing some exercise!
+            12:20:31.205 VM630:28 fib(20) = 6765 and I am doing some exercise!
+            12:20:31.205 VM630:28 fib(30) = 832040 and I am learning JS!
+            12:20:31.205 VM630:28 fib(30) = 832040 and I am learning JS!
+            12:20:31.206 VM630:36 I love Lily!
+            12:20:31.206 VM630:51 I love Llsa!
+</pre></div>
+
+
+<h4 id="6">6) 比较各种同步异步的方法<a class="headerlink" href="#6" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>普通函数、async 函数（异步执行，因为await返回的是promise对象）、Generator 函数（同步执行）和异步 Generator 函数(与promise对象结合，或者执行器是promise)。请注意区分每种函数的不同之处。基本上，如果是一系列按照顺序执行的异步操作（比如读取文件，然后写入新内容，再存入硬盘），可以使用 async 函数；如果是一系列产生相同数据结构的异步操作（比如一行一行读取文件），可以使用异步 Generator 函数。</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id='7'>七、类和class</h2>
+
+<h3 id='7.1'>7.1 继承 详细看<a href="https://www.cnblogs.com/humin/p/4556820.html">幻天芒的博客</a></h3>
+
+<h4 id="1_12">1) 原型链继承<a class="headerlink" href="#1_12" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>原型链继承 核心： 将父类的实例作为子类的原型</li>
+<li>特点：<blockquote>
+<ul>
+<li>非常纯粹的继承关系，实例是子类的实例，也是父类的实例</li>
+<li>父类新增原型方法/原型属性，子类都能访问到</li>
+<li>简单，易于实现</li>
+</ul>
+</blockquote>
+</li>
+<li>缺点<blockquote>
+<ul>
+<li>要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中</li>
+<li>无法实现多继承</li>
+<li>来自原型对象的引用属性是所有实例共享的（详细请看附录代码： 示例1）</li>
+<li>创建子类实例时，无法向父类构造函数传参</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var _prototype_ = {
+                constructor: _construct_,
+                toString: function() {
+                    console.log(&quot;name: &quot; + this.name + &quot;id: &quot; + this.id);
+                },
+            };
+            var _construct_ = function(name, id) {
+                this.name = name;
+                this.id = id;
+
+                // Static method
+                this.sing = function() {
+                    console.log(this.name + &quot; sing a song!&quot;);
+                };
+            }
+            _construct_.prototype = _prototype_;
+
+            // 原型链继承 核心： 将父类的实例作为子类的原型
+            var boy = new _construct_(&quot;lvhongbin&quot;, 116020910160);
+            boy.toString();
+            boy.sing();
+
+            var son = function(sex) {
+                this.sex = sex;
+                //static method
+                this.mySex = function() {
+                    console.log( &quot;My sex is &quot; + this.sex);
+                }
+            }
+
+            son.prototype = new _construct_(&quot;lvhongchao&quot;, 10);
+            var jack = new son(&quot;male&quot;);
+            jack.toString();
+            jack.sing();
+            jack.mySex();
+            son.prototype = new _construct_(&quot;lvhongbin&quot;, 10);
+            var lily = new son(&quot;female&quot;);
+            lily.toString();
+            lily.sing();
+            lily.mySex();
+
+            //结果
+            14:50:50.932 VM97:4 name: lvhongbinid: 116020910160
+            14:50:50.932 VM97:13 lvhongbin sing a song!
+            14:50:50.932 VM97:4 name: lvhongchaoid: 10
+            14:50:50.933 VM97:13 lvhongchao sing a song!
+            14:50:50.933 VM97:26 My sex is male
+            14:50:50.944 undefined
+            14:53:46.569 jack instanceof son;
+            14:53:46.571 true
+            14:54:18.001 jack instanceof _construct_;
+            14:54:18.004 true
+            14:54:39.756 jack instanceof Array;
+            14:54:39.757 false
+            jack instanceof _prototype_;
+            14:55:13.831 VM122:1 Uncaught TypeError: Right-hand side of &#39;instanceof&#39; is not callable
+                at &lt;anonymous&gt;:1:6              
+            16:43:08.160 VM149:4 name: lvhongbinid: 10
+            16:43:08.160 VM149:13 lvhongbin sing a song!
+            16:43:08.160 VM149:27 My sex is female
+            console.log(jack.sing() == lily.sing());
+            16:45:14.047 VM149:13 lvhongchao sing a song!
+            16:45:14.047 VM149:13 lvhongbin sing a song!
+            16:45:14.047 VM163:1 true
+            16:45:14.053 undefined
+            16:46:32.184 console.log(jack.sing == lily.sing);
+            16:46:32.184 VM169:1 false
+            16:46:32.189 undefined
+            16:46:43.463 console.log(jack.toString == lily.toString);
+            16:46:43.463 VM175:1 true
+</pre></div>
+
+
+<h4 id="2_11">2) 类继承/构造继承<a class="headerlink" href="#2_11" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）</li>
+<li>特点：<blockquote>
+<ul>
+<li>解决了1中，子类实例共享父类引用属性的问题</li>
+<li>创建子类实例时，可以向父类传递参数</li>
+<li>可以实现多继承（call多个父类对象）</li>
+</ul>
+</blockquote>
+</li>
+<li>缺点：<blockquote>
+<ul>
+<li>实例并不是父类的实例，只是子类的实例</li>
+<li>只能继承父类的实例属性和方法，不能继承原型属性/方法</li>
+<li>无法实现函数复用，每个子类都有父类实例函数的副本，影响性能</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var _prototype_ = {
+                constructor: _construct_,
+                toString: function() {
+                    console.log(&quot;name: &quot; + this.name + &quot;id: &quot; + this.id);
+                },
+            };
+            var _construct_ = function(name, id) {
+                this.name = name;
+                this.id = id;
+
+                // Static method
+                this.sing = function() {
+                    console.log(this.name + &quot; sing a song!&quot;);
+                };
+            }
+            _construct_.prototype = _prototype_;
+
+            // 构造继承
+            var boy = new _construct_(&quot;lvhongbin&quot;, 116020910160);
+            boy.toString();
+            boy.sing();
+
+            var son = function(name, id, sex) {
+                _construct_.call(this, name, id);
+                this.sex = sex;
+                //static method
+                this.mySex = function() {
+                    console.log( &quot;My sex is &quot; + this.sex);
+                }
+            }
+
+            var jack = new son(&quot;lvhongchao&quot;, 10,&quot;male&quot;);
+            jack.toString();
+            jack.sing();
+            jack.mySex();
+
+            15:26:06.952 VM129:13 name: lvhongbinid: 116020910160
+            15:26:06.952 VM129:13 lvhongbin sing a song!
+            15:28:24.199 &quot;[object Object]&quot; //父类原型的方法无法继承
+            15:26:06.952 VM129:13 lvhongchao sing a song!
+            15:26:06.952 VM129:28 My sex is male
+            15:26:06.968 undefined
+            15:26:46.851 jack instanceof son;
+            15:26:46.853 true
+            15:27:01.446 jack instanceof _construct_;
+            15:27:01.448 false
+            15:27:09.249 jack instanceof _prototype_;
+            15:27:09.250 VM135:1 Uncaught TypeError: Right-hand side of &#39;instanceof&#39; is not callable
+                at &lt;anonymous&gt;:1:6
+</pre></div>
+
+
+<h4 id="3_5">3) 实例继承<a class="headerlink" href="#3_5" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>为父类实例添加新特性，作为子类实例返回</li>
+<li>特点：<blockquote>
+<ul>
+<li>不限制调用方式，不管是new 子类()还是子类(),返回的对象具有相同的效果</li>
+</ul>
+</blockquote>
+</li>
+<li>缺点：<blockquote>
+<ul>
+<li>实例是父类的实例，不是子类的实例</li>
+<li>不支持多继承</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            var _prototype_ = {
+                constructor: _construct_,
+                toString: function() {
+                    console.log(&quot;name: &quot; + this.name + &quot;id: &quot; + this.id);
+                },
+            };
+            var _construct_ = function(name, id) {
+                this.name = name;
+                this.id = id;
+
+                // Static method
+                this.sing = function() {
+                    console.log(this.name + &quot; sing a song!&quot;);
+                };
+            }
+            _construct_.prototype = _prototype_;
+
+            var boy = new _construct_(&quot;lvhongbin&quot;, 116020910160);
+            boy.toString();
+            boy.sing();
+
+            // 实例继承
+            var boy = function(name, id, sex) {
+                var instance = new _construct_(name, id); 
+                instance.sex = sex;
+                //static method
+                instance.mySex = function() {
+                    console.log( &quot;My sex is &quot; + this.sex);
+                }
+                return instance;
+            }
+
+            var jack = new boy(&quot;lvhongchao&quot;, 10,&quot;male&quot;);
+            jack.toString();
+            jack.sing();
+            jack.mySex();
+
+            //结果
+            name: lvhongbinid: 116020910160
+            15:42:59.082 VM139:13 lvhongbin sing a song!
+            15:42:59.082 VM139:4 name: lvhongchaoid: 10
+            15:42:59.082 VM139:13 lvhongchao sing a song!
+            15:42:59.083 VM139:28 My sex is male
+            15:42:59.093 undefined
+            15:43:27.109 jack instanceof son;
+            15:43:27.111 false
+            15:43:58.535 jack instanceof _construct_;
+            15:43:58.538 true
+            15:44:07.190 jack instanceof _prototype_;
+            15:44:07.193 VM145:1 Uncaught TypeError: Right-hand side of &#39;instanceof&#39; is not callable
+                at &lt;anonymous&gt;:1:6
+</pre></div>
+
+
+<h4 id="4_3">4) 拷贝继承<a class="headerlink" href="#4_3" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>特点：<blockquote>
+<ul>
+<li>支持多继承</li>
+</ul>
+</blockquote>
+</li>
+<li>缺点：<blockquote>
+<ul>
+<li>效率较低，内存占用高（因为要拷贝父类的属性）</li>
+<li>无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function Cat(name){
+              var animal = new Animal();
+              for(var p in animal){
+                Cat.prototype[p] = animal[p];
+              }
+              Cat.prototype.name = name || &#39;Tom&#39;;
+            }
+
+            // Test Code
+            var cat = new Cat();
+            console.log(cat.name);
+            console.log(cat.sleep());
+            console.log(cat instanceof Animal); // false
+            console.log(cat instanceof Cat); // true
+</pre></div>
+
+
+<h4 id="5_1">5) 组合继承<a class="headerlink" href="#5_1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用</li>
+<li>特点：<blockquote>
+<ul>
+<li>弥补了方式2的缺陷，可以继承实例属性/方法，也可以继承原型属性/方法</li>
+<li>既是子类的实例，也是父类的实例</li>
+<li>不存在引用属性共享问题</li>
+<li>可传参</li>
+<li>函数可复用</li>
+</ul>
+</blockquote>
+</li>
+<li>缺点：<blockquote>
+<ul>
+<li>调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）会比较好性能</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function Cat(name){
+              Animal.call(this);
+              this.name = name || &#39;Tom&#39;;
+            }
+
+            // 参数为空 代表 父类的实例和父类的原型对象的关系了  
+            Cat.prototype = new Animal();
+
+            // 感谢 @学无止境c 的提醒，组合继承也是需要修复构造函数指向的。
+
+            Cat.prototype.constructor = Cat;
+
+            // Test Code
+            var cat = new Cat();
+            console.log(cat.name);
+            console.log(cat.sleep());
+            console.log(cat instanceof Animal); // true
+            console.log(cat instanceof Cat); // true
+</pre></div>
+
+
+<h4 id="6_1">6) 寄生组合继承<a class="headerlink" href="#6_1" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function Cat(name){
+              Animal.call(this);
+              this.name = name || &#39;Tom&#39;;
+            }
+            (function(){
+              // 创建一个没有实例方法的类
+              var Super = function(){};
+              Super.prototype = Animal.prototype;
+              //将实例作为子类的原型
+              Cat.prototype = new Super();
+            })();
+
+            // Test Code
+            var cat = new Cat();
+            console.log(cat.name);
+            console.log(cat.sleep());
+            console.log(cat instanceof Animal); // true
+            console.log(cat instanceof Cat); //true
+</pre></div>
+
+
+<h3 id='7.2'>7.2 class的使用</h3>
+
+<h4 id="1-class">1) class模板<a class="headerlink" href="#1-class" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>toString方法是Point类内部定义的方法，它是不可枚举
+        class Person {
+            constructor(name, id) {
+                this.name = name;
+                this.id = id;
+            }</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>        toString() {
+            console.log(&quot;name: &quot; + this.name + &quot;id: &quot; + this.id);
+        }
+
+        sing() {
+            console.log(this.name + &quot; sing a song!&quot;);
+        }
+    }
+
+    var boy = new Person(&quot;lvhongbin&quot;, 116020910160);
+    boy.toString();
+    boy.sing();
+    16:58:31.072 VM177:8 name: lvhongbinid: 116020910160
+    16:58:31.072 VM177:12 lvhongbin sing a song!
+    16:58:31.085 undefined
+    16:59:07.335 boy instanceof Person;
+    16:59:07.337 true
+    Object.keys(Person.prototype)
+    // []
+    17:03:09.890 []
+    17:03:15.278 Object.getOwnPropertyNames(Person.prototype)
+    // [&quot;constructor&quot;,&quot;toString&quot;]
+    17:03:15.282 (3) [&quot;constructor&quot;, &quot;toString&quot;, &quot;sing&quot;]
+</pre></div>
+
+
+<h4 id="2-object">2) 关于Object的相关用法<a class="headerlink" href="#2-object" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Object.getOwnPropertyNames(Person.prototype) 自家的所有属性</li>
+<li>Object.keys(Person.prototype) 自家的不可配置属性</li>
+<li>Object.getPrototypeOf 获取实例对象的原型</li>
+</ul>
+</blockquote>
+<h4 id="3-class">3) class关键字<a class="headerlink" href="#3-class" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>需要注意的是，这个类的名字是MyClass而不是Me，Me只在 Class 的内部代码可用，指代当前类。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            const Person = class Me {
+              getClassName() {
+                return Me.name;
+              }
+            };
+            let Lv = new Person();
+            Lv.getClassName();
+            20:31:17.631 &quot;Me&quot;
+</pre></div>
+
+
+<h4 id="4_4">4) 不存在变量提升<a class="headerlink" href="#4_4" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>字类必须在父类后面进行定义</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            new Foo(); // ReferenceError
+            class Foo {}
+            20:35:11.688 VM193:1 Uncaught ReferenceError: Foo is not defined
+                at &lt;anonymous&gt;:1:1
+</pre></div>
+
+
+<h4 id="5_2">5) 私有方法和私有属性<a class="headerlink" href="#5_2" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>私有方法 可惜ES6并没有提供相应的方法，我们只能从民间搜集<blockquote>
+<ul>
+<li>第一种方法：从命名上，私有方法或者属性名字前面加上下划线。但是，这种命名是不保险的，在类的外部，还是可以调用到这个方法。</li>
+<li>第二种方法：把私有方法移出模块，采用call,apply或者bind等方法进行调用，这时候外部便不知道该方法的具体细节</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class Widget {
+              foo (baz) {
+                bar.call(this, baz);
+              }
+
+              // ...
+            }
+
+            // 模块被移除类外
+            function bar(baz) {
+              return this.snaf = baz;
+            }
+</pre></div>
+
+
+<blockquote>
+<blockquote>
+<ul>
+<li>采用Symbol的属性</li>
+<li>私有属性 用前缀#表示，他既属于一个操作符又属于属性名的一部分</li>
+<li>这种写法不仅可以写私有属性，还可以用来写私有方法。</li>
+<li>但是这个方法只是一个提案，并没有实施，并没有什么用</li>
+</ul>
+</blockquote>
+</blockquote>
+<h4 id="6-getset">6) get和set<a class="headerlink" href="#6-getset" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>属性有对应的存值函数和取值函数，因此赋值和读取行为都被自定义了。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class MyClass {
+                constructor() {
+                    // ...
+                }
+                get prop() {
+                    return &#39;getter&#39;;
+                }
+                set prop(value) {
+                    console.log(&#39;setter: &#39;+value);
+                }
+            }
+
+            let inst = new MyClass();
+
+            inst.prop = 123;
+            // setter: 123
+
+            inst.prop
+            // &#39;getter&#39;
+</pre></div>
+
+
+<h4 id="7-this">7) this的指向<a class="headerlink" href="#7-this" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>默认指向类的实例</li>
+<li>但是，如果将这个方法提取出来单独使用，this会指向该方法运行时所在的环境，因为找不到print方法而导致报错。</li>
+<li>一个比较简单的解决方法是，在构造方法中绑定this，这样就不会找不到print方法了。</li>
+<li>比如：</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class Logger {
+                constructor() {
+                    this.printName = this.printName.bind(this);
+                }
+
+                // ...
+            }
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>第二种方法是使用箭头函数，利用了箭头函数自动绑定this的特性</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class Logger {
+                constructor() {
+                    this.printName = (name = &#39;there&#39;) =&gt; {
+                        this.print(`Hello ${name}`);
+                    };
+                }
+
+              // ...
+            }
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>第三种方法 使用Proxy，获取方法的时候，自动绑定this。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function selfish (target) {
+
+                //采用弱Map的方法，用完即弃
+                const cache = new WeakMap();
+                const handler = {
+                    get (target, key) {
+
+                    // 先获取原来的对象属性
+                    const value = Reflect.get(target, key);
+                    if (typeof value !== &#39;function&#39;) {
+                        return value;
+                    }
+                    if (!cache.has(value)) {
+                        cache.set(value, value.bind(target));
+                    }
+                    return cache.get(value);
+                    }
+                };
+                const proxy = new Proxy(target, handler);
+                return proxy;
+            }
+
+                const logger = selfish(new Logger());
+</pre></div>
+
+
+<h4 id="8-class">8) class的静态方法<a class="headerlink" href="#8-class" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。</li>
+<li>如果静态方法包含this关键字，这个this指的是类，而不是实例。</li>
+<li>ES6 明确规定，Class 内部只有静态方法，没有静态属性。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class Foo {
+              static bar () {
+                this.baz();
+              }
+              static baz () {
+                console.log(&#39;hello&#39;);
+              }
+              baz () {
+                console.log(&#39;world&#39;);
+              }
+            }
+
+            Foo.bar() // hello
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>目前的静态属性仍然是一个提案</li>
+</ul>
+</blockquote>
+<h4 id="9">9) 其他<a class="headerlink" href="#9" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>name 属性 </li>
+<li>类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式。只要你的代码写在类或模块之中，就只有严格模式可用。</li>
+<li>new.target 属性 表示用new方法创建的实例，比如阮老师给出的这个例子，只有通过继承才能使用</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class Shape {
+              constructor() {
+                if (new.target === Shape) {
+                  throw new Error(&#39;本类不能实例化&#39;);
+                }
+              }
+            }
+
+            class Rectangle extends Shape {
+              constructor(length, width) {
+                super();
+                // ...
+              }
+            }
+
+            var x = new Shape();  // 报错
+            var y = new Rectangle(3, 4);  // 正确
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>Class 的 Generator 方法，某个方法之前加上星号（*）</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class FindGF {
+
+                constructor(args) {
+                    this.args = args;
+                };
+
+                * generator() {
+                    for(let arg of this.args) {
+                        yield arg;
+                    };
+                };
+
+                /* 采用self方法进行this的绑定
+                    [Symbol.iterator]() {
+                        let self = this;
+                        self.index = 0;
+                        return { next() {
+                            return (self.index &lt; self.args.length) ? {value: self.args[self.index++], done: false}: {value: undefined, done: true};
+                            }
+                        }
+                    };
+                 */
+
+                 //采用bind方法进行this的绑定
+                    [Symbol.iterator]() {
+                        this.index = 0;
+                        let next = function() {
+                            return (this.index &lt; this.args.length) ? {value: this.args[this.index++], done: false}: {value: undefined, done: true};
+                        }
+                        next = next.bind(this);
+                        return {next};
+                    };
+            }
+
+            var fight = [];
+            fight.push(&quot;I am learning JS!&quot;);
+            fight.push(&quot;I am doing some exercise!&quot;);
+            fight.push(&quot;I am earning money!&quot;);
+            var f = new FindGF(fight);
+            for(let arg of f.generator()) {
+                console.log(arg);
+            }
+            for(let arg of f) {
+                console.log(arg);
+            }
+
+            16:46:06.734 VM1798:45 I am learning JS!
+            16:46:06.734 VM1798:45 I am doing some exercise!
+            16:46:06.734 VM1798:45 I am earning money!
+            16:46:06.734 VM1798:48 I am learning JS!
+            16:46:06.734 VM1798:48 I am doing some exercise!
+            16:46:06.734 VM1798:48 I am earning money!
+</pre></div>
+
+
+<h3 id='7.3'>7.3 class的继承</h3>
+
+<h4 id="1_13">1) 简介<a class="headerlink" href="#1_13" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Class 可以通过extends关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。</li>
+<li>子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类自己的this对象，必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其进行加工，加上子类自己的实例属性和方法。如果不调用super方法，子类就得不到this对象。</li>
+<li>super关键字，它在这里表示父类的构造函数</li>
+<li>父类的静态方法，也会被子类继承。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class Father {
+
+            constructor(age) {
+                this.fatherAge = age;
+                this.height = 170;
+                console.log(`${new.target.name} age is ${this.height}`);
+            };
+
+            static hobby(item) {
+                console.log(`My hobby is ${item}`);
+            };
+        }
+
+        class Son extends Father {
+
+            constructor(fatherAge,sonAge) {
+                super(fatherAge);
+                this.sonAge = sonAge;
+            };
+
+            add() {
+                return this.fatherAge + this.sonAge;
+            };
+        }
+
+        Son.hobby(&quot;fishing&quot;);
+        var son = new Son(49, 25);
+        son.add();
+
+        17:54:05.909 VM2431:10 My hobby is fishing
+        17:54:05.910 VM2431:6 Son age is 170
+        17:54:05.919 74
+</pre></div>
+
+
+<h4 id="2-super">2) super关键字<a class="headerlink" href="#2-super" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>两种含义：一种是代表父类的构造函数，另一种是当作对象被使用 </li>
+<li>作为父类的构造函数时，super()只能用在子类的构造函数之中，用在其他地方就会报错。并且必须出现在子类的构造函数中；</li>
+<li>此时super()相当于A.prototype.constructor.call(this)，内部的this依然指的是子类</li>
+<li>如果super作为对象，用在静态方法之中，这时super将指向父类的静态函数对象，而不是父类的原型对象。因为构造函数也好，静态方法也好，都在一开始编译的时候就生成了，在这过程中super只指向的父类i</li>
+<li>
+<blockquote>
+<ul>
+<li>如果super作为对象，用在普通方法中，则指向父类的普通方法</li>
+</ul>
+</blockquote>
+</li>
+<li>如果super作为对象，用在构造函数之中，这时super将指向子类，相当于为子类属性赋值；</li>
+<li>或者说，只有用在构造函数或者是静态方法中，super才指向父类</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            class Parent {
+                static myMethod(msg) {
+                    console.log(&#39;static&#39;, msg);
+                }
+
+                myMethod(msg) {
+                    console.log(&#39;instance&#39;, msg);
+                }
+            }
+
+            class Child extends Parent {
+                static myMethod(msg) {
+                    super.myMethod(msg);
+                }
+
+                myMethod(msg) {
+                    super.myMethod(msg);
+                }
+            }
+
+            Child.myMethod(1); // static 1
+
+            var child = new Child();
+            child.myMethod(2); // instance 2
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>如果无法识别super()是否作为对象被使用，此时JS就会报错，比如console.log(super)；</li>
+</ul>
+</blockquote>
+<h4 id="3-prototype-__proto__">3) 类的 prototype 属性和__proto__属性<a class="headerlink" href="#3-prototype-__proto__" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>大多数浏览器的 ES5 实现之中，每一个对象都有__proto__属性，指向对应的构造函数的prototype属性</li>
+<li>实例对象有__proto__属性，而构造函数拥有prototype属性</li>
+<li>实例对象的__proto__属性 == 构造函数的prototype属性</li>
+<li>__proto__是每个对象都有的一个属性，而prototype是函数才会有的属性!!! </li>
+<li>使用Object.getPrototypeOf()代替__proto__!!!</li>
+<li>prototype和__proto__都指向原型对象，任意一个函数（包括构造函数）都有一个prototype属性，指向该函数的原型对象，同样任意一个构造函数实例化的对象，都有一个__proto__属性（__proto__并非标准属性，ECMA-262第5版将该属性或指针称为<a class="wikilink" href="/Prototype/">Prototype</a>，可通过Object.getPrototypeOf()标准方法访问该属性），指向构造函数的原型对象。</li>
+<li>继承本质上就是以子类以父类的实例对象为原型</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            Object.setPrototypeOf(B.prototype, A.prototype);
+            // 等同于
+            B.prototype.__proto__ = A.prototype;
+
+            Object.setPrototypeOf(B, A);
+            // 等同于
+            B.__proto__ = A;
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>__proto__属性 可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</li>
+</ul>
+</blockquote>
+<h4 id="4-mixin">4) Mixin 模式的实现<a class="headerlink" href="#4-mixin" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>Mixin 指的是多个对象合成一个新的对象，新对象具有各个组成成员的接口。</li>
+<li>实质上就是复制方法和原型</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            function mix(...mixins) {
+                class Mix {}
+
+                for (let mixin of mixins) {
+                    copyProperties(Mix, mixin); // 拷贝实例属性
+                    copyProperties(Mix.prototype, mixin.prototype); // 拷贝原型属性
+                }
+
+                return Mix;
+            }
+
+            function copyProperties(target, source) {
+                for (let key of Reflect.ownKeys(source)) {
+                    if ( key !== &quot;constructor&quot;
+                        &amp; key !== &quot;prototype&quot;
+                        &amp;&amp; key !== &quot;name&quot;
+                    ) {
+                        let desc = Object.getOwnPropertyDescriptor(source, key);
+                        Object.defineProperty(target, key, desc);
+                    }
+                }
+            }
+
+            class DistributedEdit extends mix(Loggable, Serializable) {
+              // ...
+            }
+</pre></div>
+
+
+<hr />
+<h2 id='8'>八、Module</h2>
+
+<h3 id='8.1'>8.1 Module简介</h3>
+
+<h4 id="1_14">1) 概述<a class="headerlink" href="#1_14" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>历史上JavaScript 一直没有模块（module）体系</li>
+<li>尽量静态化实现，因为可以编译时就能确定模块的依赖关系，以及输入和输出的变量</li>
+</ul>
+</blockquote>
+<h4 id="2_12">2) 严格模式<a class="headerlink" href="#2_12" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>ES6模块自动执行严格模式</li>
+<li>不管你有没有采用“use strict”</li>
+</ul>
+</blockquote>
+<h4 id="3_6">3) 用法<a class="headerlink" href="#3_6" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>export {} 输出模块，函数或者变量，如果输出的是一个整体的声明＋定义，可以不用大括号{}，否则如果引用的是一个引用，那么需要用{}</li>
+<li>关键字as 重命名 a as b 为输出模块a 重命名为 b</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 写法一
+            export var m = 1;
+
+            // 写法二
+            var m = 1;
+            export {m};
+
+            // 写法三
+            var n = 1;
+            export {n as m};
+
+            // 报错
+            export 1;
+
+            // 报错
+            var m = 1;
+            export m;
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>另外，export语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            export var foo = &#39;bar&#39;;
+            setTimeout(() =&gt; foo = &#39;baz&#39;, 500);
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错</li>
+<li>export 面对一些匿名的函数的时候，用户可以选择使用default关键字代替该函数的名字。对于一些非匿名函数，也可以使用default关键字，同样在import的时候就可以再起一个新的名字</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // export-default.js
+            export default function () {
+              console.log(&#39;foo&#39;);
+            }
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>import {} from &ldquo;文件路径+名字&rdquo;; 从文件中输入模块，函数或者变量</li>
+<li>import命令具有提升效果，会提升到整个模块的头部，首先执行。</li>
+<li>模块的整体加载 用星号（*）指定一个对象，所有输出值都加载在这个对象上面。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            import * as circle from &#39;./circle&#39;;
+
+            console.log(&#39;圆面积：&#39; + circle.area(4));
+            console.log(&#39;圆周长：&#39; + circle.circumference(14));
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>import匿名函数的时候(default) import命令可以为该匿名函数指定任意名字。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // import-default.js
+            import customName from &#39;./export-default&#39;;
+            customName(); // &#39;foo&#39;
+</pre></div>
+
+
+<h4 id="4-export-import">4) export 与 import 的复合写法<a class="headerlink" href="#4-export-import" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li>在一个模块之中，先输入后输出同一个模块，import语句可以与export语句写在一起。</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            export { foo, bar } from &#39;my_module&#39;;
+
+            // 可以简单理解为
+            import { foo, bar } from &#39;my_module&#39;;
+            export { foo, bar };
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>但需要注意的是，写成一行以后，foo和bar实际上并没有被导入当前模块，只是相当于对外转发了这两个接口，导致当前模块不能直接使用foo和bar。</li>
+<li>模块的接口改名</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 接口改名
+            export { foo as myFoo } from &#39;my_module&#39;;
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>整体输出 注意export <em>，表示再输出circle模块的所有属性和方法。注意，export </em>命令会忽略circle模块的default方法</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            // 整体输出
+            export * from &#39;my_module&#39;;
+</pre></div>
+
+
+<blockquote>
+<ul>
+<li>默认接口</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre>            export { default } from &#39;foo&#39;;
+</pre></div>
+
+
+<h4 id="5_3">5) 跨模块常量<a class="headerlink" href="#5_3" title="Permanent link"></a></h4>
+<div class="codehilite"><pre>            // constants.js 模块
+            export const A = 1;
+            export const B = 3;
+            export const C = 4;
+
+            // test1.js 模块
+            import * as constants from &#39;./constants&#39;;
+            console.log(constants.A); // 1
+            console.log(constants.B); // 3
+
+            // test2.js 模块
+            import {A, B} from &#39;./constants&#39;;
+            console.log(A); // 1
+            console.log(B); // 3
+</pre></div>
+
+
+<h3 id='8.2'>8.2 Module加载规则</h3>
+
+<h4 id="1_15">1) 浏览器中<a class="headerlink" href="#1_15" title="Permanent link"></a></h4>
+<blockquote>
+<ul>
+<li></li>
+</ul>
+</blockquote></article></body></html>

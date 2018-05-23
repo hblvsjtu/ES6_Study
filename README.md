@@ -43,7 +43,7 @@
 ### [7.2 class的使用](#7.2)
 ### [7.1 class的继承](#7.1) 
 ## [八、Module](#8)
-### [8.1 概念](#8.1)
+### [8.1 Module简介](#8.1)
 ### [8.2 部署Iterator接口](#8.2) 
 ### [8.3 默认的Iterator接口](#8.3) 
 ------ 		
@@ -2525,13 +2525,13 @@
                 12:20:31.206 VM630:51 I love Llsa!
 #### 6) 比较各种同步异步的方法
 > - 普通函数、async 函数（异步执行，因为await返回的是promise对象）、Generator 函数（同步执行）和异步 Generator 函数(与promise对象结合，或者执行器是promise)。请注意区分每种函数的不同之处。基本上，如果是一系列按照顺序执行的异步操作（比如读取文件，然后写入新内容，再存入硬盘），可以使用 async 函数；如果是一系列产生相同数据结构的异步操作（比如一行一行读取文件），可以使用异步 Generator 函数。
-
+        
 ------      
         
 
 <h2 id='7'>七、类和class</h2>
 <h3 id='7.1'>7.1 继承 详细看<a href="https://www.cnblogs.com/humin/p/4556820.html">幻天芒的博客</a></h3>  
-
+        
 #### 1) 原型链继承 
 > - 原型链继承 核心： 将父类的实例作为子类的原型
 > - 特点：
@@ -3053,7 +3053,7 @@
 
 
 <h3 id='7.3'>7.3 class的继承</h3>
-
+        
 #### 1) 简介 
 > - Class 可以通过extends关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。
 > - 子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类自己的this对象，必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其进行加工，加上子类自己的实例属性和方法。如果不调用super方法，子类就得不到this对象。
@@ -3173,3 +3173,116 @@
                 class DistributedEdit extends mix(Loggable, Serializable) {
                   // ...
                 }
+
+        
+------      
+        
+        
+<h2 id='8'>八、Module</h2>
+<h3 id='8.1'>8.1 Module简介</h3>  
+         
+#### 1) 概述
+> - 历史上JavaScript 一直没有模块（module）体系
+> - 尽量静态化实现，因为可以编译时就能确定模块的依赖关系，以及输入和输出的变量
+#### 2) 严格模式
+> - ES6模块自动执行严格模式
+> - 不管你有没有采用“use strict”
+#### 3) 用法
+> - export {} 输出模块，函数或者变量，如果输出的是一个整体的声明＋定义，可以不用大括号{}，否则如果引用的是一个引用，那么需要用{}
+> - 关键字as 重命名 a as b 为输出模块a 重命名为 b
+        
+                // 写法一
+                export var m = 1;
+
+                // 写法二
+                var m = 1;
+                export {m};
+
+                // 写法三
+                var n = 1;
+                export {n as m};
+
+                // 报错
+                export 1;
+
+                // 报错
+                var m = 1;
+                export m;
+> - 另外，export语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。
+        
+                export var foo = 'bar';
+                setTimeout(() => foo = 'baz', 500);
+> - export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错
+> - export 面对一些匿名的函数的时候，用户可以选择使用default关键字代替该函数的名字。对于一些非匿名函数，也可以使用default关键字，同样在import的时候就可以再起一个新的名字
+        
+                // export-default.js
+                export default function () {
+                  console.log('foo');
+                }
+> - import {} from "文件路径+名字"; 从文件中输入模块，函数或者变量
+> - import命令具有提升效果，会提升到整个模块的头部，首先执行。
+> - 模块的整体加载 用星号（*）指定一个对象，所有输出值都加载在这个对象上面。
+        
+                import * as circle from './circle';
+
+                console.log('圆面积：' + circle.area(4));
+                console.log('圆周长：' + circle.circumference(14));
+
+> - import匿名函数的时候(default) import命令可以为该匿名函数指定任意名字。
+        
+                // import-default.js
+                import customName from './export-default';
+                customName(); // 'foo'
+
+#### 4) export 与 import 的复合写法
+> - 在一个模块之中，先输入后输出同一个模块，import语句可以与export语句写在一起。
+        
+                export { foo, bar } from 'my_module';
+
+                // 可以简单理解为
+                import { foo, bar } from 'my_module';
+                export { foo, bar };
+> - 但需要注意的是，写成一行以后，foo和bar实际上并没有被导入当前模块，只是相当于对外转发了这两个接口，导致当前模块不能直接使用foo和bar。
+> - 模块的接口改名
+        
+                // 接口改名
+                export { foo as myFoo } from 'my_module';
+> - 整体输出 注意export *，表示再输出circle模块的所有属性和方法。注意，export *命令会忽略circle模块的default方法
+        
+                // 整体输出
+                export * from 'my_module';    
+> - 默认接口
+        
+                export { default } from 'foo';
+#### 5) 跨模块常量
+                // constants.js 模块
+                export const A = 1;
+                export const B = 3;
+                export const C = 4;
+
+                // test1.js 模块
+                import * as constants from './constants';
+                console.log(constants.A); // 1
+                console.log(constants.B); // 3
+
+                // test2.js 模块
+                import {A, B} from './constants';
+                console.log(A); // 1
+                console.log(B); // 3           
+
+
+<h3 id='8.2'>8.2 Module加载规则</h3>  
+                 
+#### 1) 浏览器中                     
+> - 使用script标签，但是要加入type="module"属性
+        
+                <script type="module" src="./foo.js"></script>
+> - 浏览器对于带有type="module"的script，都是异步加载，不会造成堵塞浏览器，即等到整个页面渲染完，再执行模块脚本，等同于打开了script标签的defer属性。
+        
+                <script type="module" src="./foo.js"></script>
+                <!-- 等同于 -->
+                <script type="module" src="./foo.js" defer></script>
+> - script标签的async属性也可以打开，这时只要加载完成，渲染引擎就会中断渲染立即执行。执行完成后，再恢复渲染。
+            
+                <script type="module" src="./foo.js" async></script>
+> -  
